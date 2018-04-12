@@ -1,1 +1,1 @@
-# sensorlabio-javascript-sdk
+# sensorlabio-sdk-javascript

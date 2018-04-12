@@ -1,0 +1,11 @@
+{
+  "name": "sensorlabio-sdk-javascript",
+  "version": "1.0.0",
+  "description": "Javascript SDK for Sensorlab.io REST API",
+  "main": "server.js",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
