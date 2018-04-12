@@ -32,5 +32,14 @@ describe('Get profile endpoint', () => {
                     done();
                 });
         });
+
+        it('should get a profile', (done) => {
+            api.profile.get()
+                .then(function(profile) {
+                    console.log(profile);
+                    response.email.should.eq(test_email);
+                    done();
+                });
+        });
     });
 });
