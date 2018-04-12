@@ -24,26 +24,7 @@ class UsersEndpoint {
             'password': password,
         }
         var response = await this.api._makeApiRequest('/auth/token', 'POST', data);
-        return this._prepareApiResponse(response);
-    }
-
-    /**
-     * Return response for auth/token
-     *
-     * @param response
-     * @returns {ApiResponse}
-     * @private
-     */
-    _prepareSensorResponse(response) {
-        if (response.status == 200) { //normal response
-            var user = new User(this.api, response.data);
-            this.api.setToken(user.token);
-            return user;
-        } else if (response.status == 401) { //401 Unauthorized error
-            return new ApiResponse(false, response.status, 0, response.data);
-        } else {
-            return new ApiResponse(false, response.status, 0, response.data.message);
-        }
+        return this.api._prepareApiResponse(response);
     }
 }
 

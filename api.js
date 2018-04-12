@@ -15,7 +15,7 @@ class Api {
     /**
      * Constructor.
      */
-    constructor(rest_api_url = 'http://localhost:3000/api/v1', jwt_token = null) {
+    constructor(rest_api_url = 'http://staging.sensorlab.io/api/v1', jwt_token = null) {
         this.rest_api_url = rest_api_url;
 
         this.users = new UsersEndpoint(this);
