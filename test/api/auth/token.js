@@ -24,6 +24,26 @@ describe('Authorization endpoints', () => {
                 });
         });
 
+        it('should get an 401 status error with correct email but wrong password', (done) => {
+            api.auth.token(test_email, 'someuknownpasswordverylongbutitdoesntexits')
+                .then(function(response) {
+                    response.success.should.eq(false);
+                    response.status.should.eq(401);
+                    expect(response.token).eq(null);
+                    done();
+                });
+        });
+
+        it('passwords should work correctly', (done) => {
+            api.auth.token(test_email, test_passw.toUpperCase())
+                .then(function(response) {
+                    response.success.should.eq(false);
+                    response.status.should.eq(401);
+                    expect(response.token).eq(null);
+                    done();
+                });
+        });
+
         it('should authorize correctly', (done) => {
             api.auth.token(test_email, test_passw)
                 .then(function(response) {
