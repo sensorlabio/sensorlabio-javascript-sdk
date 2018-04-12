@@ -16,7 +16,8 @@ describe('Authorization endpoints', () => {
     describe('Get token', () => {
         it('should get an 401 status error with wrong email/password', (done) => {
             api.auth.token('somegibberishemail@someotherlongstring.com', 'someuknownpasswordverylongbutitdoesntexits')
-                .then(function(response) {
+                .catch(function(response) {
+                    //console.log(response);
                     response.success.should.eq(false);
                     response.status.should.eq(401);
                     expect(response.token).eq(null);
@@ -26,7 +27,7 @@ describe('Authorization endpoints', () => {
 
         it('should get an 401 status error with correct email but wrong password', (done) => {
             api.auth.token(test_email, 'someuknownpasswordverylongbutitdoesntexits')
-                .then(function(response) {
+                .catch(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(401);
                     expect(response.token).eq(null);
@@ -36,7 +37,7 @@ describe('Authorization endpoints', () => {
 
         it('passwords should work correctly', (done) => {
             api.auth.token(test_email, test_passw.toUpperCase())
-                .then(function(response) {
+                .catch(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(401);
                     expect(response.token).eq(null);

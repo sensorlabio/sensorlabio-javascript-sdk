@@ -51,9 +51,9 @@ class ProfileEndpoint {
         if (response.status == 200) { //normal response
             return new Profile(this.api, response.data);
         } else if (response.status == 401) { //401 Unauthorized error
-            return new ApiResponse(false, response.status, 0, response.data);
+            throw new ApiResponse(false, response.status, 0, response.data);
         } else {
-            return new ApiResponse(false, response.status, 0, response.data.message);
+            throw new ApiResponse(false, response.status, 0, response.data.message);
         }
     }
 }
