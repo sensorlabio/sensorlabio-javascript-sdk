@@ -4,7 +4,7 @@
 class Profile {
     constructor(api, data) {
         this.api = api;
-        this.email = email;
+        this.email = data.email;
     }
 
     /**

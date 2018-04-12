@@ -18,8 +18,15 @@ class ProfileEndpoint {
      * @returns {Promise.<ApiResponse>}
      */
     async get() {
-        var response = await this.api._makeApiRequest('/profile', 'GET', null, null, true);
-        return this._prepareApiResponse(response);
+        let response = await this.api._makeApiRequest('/profile', 'GET', null, null, true);
+        let result = null;
+        try {
+            result = this._prepareApiResponse(response);
+        } catch (e) {
+            throw e;
+        }
+        return result;
+
     }
 
     /**
@@ -31,13 +38,19 @@ class ProfileEndpoint {
      * @returns {Promise.<ApiResponse>}
      */
     async change_password(old_password, new_password, new_password_check) {
-        var data = {
+        let data = {
             'old_password': old_password,
             'new_password': new_password,
             'new_password_check': new_password_check,
         };
-        var response = await this.api._makeApiRequest('/profile/change_password', 'POST', data, null, true);
-        return this.api._prepareApiResponse(response);
+        let response = await this.api._makeApiRequest('/profile/change_password', 'POST', data, null, true);
+        let result = null;
+        try {
+            result = this.api._prepareApiResponse(response);
+        } catch (e) {
+            throw e;
+        }
+        return result
     }
 
     /**

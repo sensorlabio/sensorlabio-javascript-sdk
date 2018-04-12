@@ -9,13 +9,17 @@ let api = new Api('http://localhost:3000/api/v1'); //we must test on test server
 let test_email = 'test@sensorlab.io';
 let test_passw = 'test';
 
-describe('Get profile endpoint', () => {
+describe('Profile password change endpoint', () => {
     /**
      * Get user token.
      */
-    describe('Get profile', () => {
+    describe('Profile change password', () => {
         it('should get 401 error without token', (done) => {
-            api.profile.get()
+            api.profile.change_password()
+                .then(function(response) {
+                    console.log(response);
+                    done();
+                })
                 .catch(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(401);
@@ -33,10 +37,13 @@ describe('Get profile endpoint', () => {
                 });
         });
 
-        it('should get a profile', (done) => {
-            api.profile.get()
-                .then(function(profile) {
-                    profile.email.should.eq(test_email);
+        it('should return error if there is empty data sent', (done) => {
+            api.profile.change_password()
+                .then(function(response) {
+                    response.success.should.eq(false);
+                    response.status.should.eq(200);
+                    response.code.should.eq(1);
+                    expect(response.message).not.empty;
                     done();
                 });
         });
