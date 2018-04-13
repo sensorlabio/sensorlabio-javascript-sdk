@@ -1,4 +1,4 @@
-class Measurement {
+export default class Measurement {
     constructor(api, data) {
         this.api = api;
 
@@ -20,5 +20,3 @@ class Measurement {
         return this.api.sensors.one(this.sensor_id);
     }
 }
-
-module.exports = Measurement;

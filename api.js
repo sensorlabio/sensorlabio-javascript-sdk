@@ -1,12 +1,13 @@
-var axios = require('axios');
+import 'babel-polyfill';
+let axios = require('axios');
 
-var UsersEndpoint = require('./src/endpoints/users');
-var AuthEndpoint = require('./src/endpoints/auth');
-var ProfileEndpoint = require('./src/endpoints/profile');
-var SensorsEndpoint = require('./src/endpoints/sensors');
-var MeasurementsEndpoint = require('./src/endpoints/measurements');
+import UsersEndpoint from './src/endpoints/users';
+import AuthEndpoint from './src/endpoints/auth';
+import ProfileEndpoint from './src/endpoints/profile';
+import SensorsEndpoint from './src/endpoints/sensors';
+import MeasurementsEndpoint from './src/endpoints/measurements';
 
-var ApiResponse = require('./src/responses/api');
+import ApiResponse from './src/responses/api';
 
 /**
  * Sensorlab.io API.
@@ -47,14 +48,15 @@ class Api {
      * @private
      */
     async _makeApiRequest(endpoint_url, method = 'GET', data = {}, params = {}, use_jwt_token = true) {
-        var headers = { 'Content-Type': 'application/json' };
-        var request_url = this.rest_api_url + endpoint_url;
+        let headers = { 'Content-Type': 'application/json' };
+        let request_url = this.rest_api_url + endpoint_url;
         if (use_jwt_token) {
             headers['Authorization'] = 'Bearer ' + this.jwt_token;
         };
 
+        let response = null;
         try {
-            var response = await axios({
+            response = await axios({
                 params: params,
                 method: method,
                 url: request_url,
@@ -62,7 +64,7 @@ class Api {
                 headers: headers,
             });
         } catch (error) {
-            var response = error.response;
+            response = error.response;
         }
 
         return response;

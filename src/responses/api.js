@@ -1,4 +1,7 @@
-class ApiResponse {
+/**
+ * Default api response for errors
+ */
+export default class ApiResponse {
     constructor(success, status, code, message = null, token = null) {
         this.success = success;
         this.status = status;
@@ -7,5 +10,3 @@ class ApiResponse {
         this.token = token;
     }
 }
-
-module.exports = ApiResponse;

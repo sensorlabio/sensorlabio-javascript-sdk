@@ -1,6 +1,6 @@
-var Measurement = require('../models/measurement');
+import Measurement from '../models/measurement';
 
-class MeasurementsResponse {
+export default class MeasurementsResponse {
     constructor(api, data) {
         this.api = api;
 
@@ -9,11 +9,9 @@ class MeasurementsResponse {
 
         this.measurements = [];
 
-        var self = this;
+        let self = this;
         data.result.forEach(function(measurement_data) {
             self.measurements.push(new Measurement(self.api, measurement_data));
         });
     }
 }
-
-module.exports = MeasurementsResponse;

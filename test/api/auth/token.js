@@ -47,10 +47,8 @@ describe('Authorization endpoints', () => {
 
         it('should authorize correctly', (done) => {
             api.auth.token(test_email, test_passw)
-                .then(function(response) {
-                    response.success.should.eq(true);
-                    response.status.should.eq(200);
-                    response.token.should.not.be.empty;
+                .then(function(user) {
+                    user.token.should.not.be.empty;
                     done();
                 });
         });

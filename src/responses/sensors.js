@@ -1,6 +1,6 @@
-var Sensor = require('../models/sensor');
+import Sensor from '../models/sensor';
 
-class SensorsResponse {
+export default class SensorsResponse {
     constructor(api, data) {
         this.api = api;
 
@@ -9,11 +9,9 @@ class SensorsResponse {
 
         this.sensors = [];
 
-        var self = this;
+        let self = this;
         data.result.forEach(function(sensor_data) {
             self.sensors.push(new Sensor(self.api, sensor_data));
         });
     }
 }
-
-module.exports = SensorsResponse;

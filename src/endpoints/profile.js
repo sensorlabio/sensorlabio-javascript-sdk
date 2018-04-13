@@ -1,10 +1,10 @@
-var ApiResponse = require('../responses/api');
-var Profile = require('../models/profile');
+import ApiResponse from '../responses/api';
+import Profile from '../models/profile';
 
 /**
  * Class for /profile/* endpoints.
  */
-class ProfileEndpoint {
+export default class ProfileEndpoint {
     /**
      * @param api
      */
@@ -44,13 +44,7 @@ class ProfileEndpoint {
             'new_password_check': new_password_check,
         };
         let response = await this.api._makeApiRequest('/profile/change_password', 'POST', data, null, true);
-        let result = null;
-        try {
-            result = this.api._prepareApiResponse(response);
-        } catch (e) {
-            throw e;
-        }
-        return result
+        return this.api._prepareApiResponse(response);
     }
 
     /**
@@ -70,5 +64,3 @@ class ProfileEndpoint {
         }
     }
 }
-
-module.exports = ProfileEndpoint;

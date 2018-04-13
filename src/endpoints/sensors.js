@@ -1,11 +1,11 @@
-var ApiResponse = require('../responses/api');
-var SensorsResponse = require('../responses/sensors');
-var Sensor = require('../models/sensor');
+import ApiResponse from '../responses/api';
+import SensorsResponse from '../responses/sensors';
+import Sensor from '../models/sensor';
 
 /**
  * Class for /sensors/* endpoints.
  */
-class SensorsEndpoint {
+export default class SensorsEndpoint {
     /**
      * @param api
      */
@@ -26,13 +26,13 @@ class SensorsEndpoint {
         if (options.uniqueid === undefined) options.uniqueid = null;
         if (options.imei === undefined) options.imei = null;
 
-        var params = {
+        let params = {
             page: options.page,
             name: options.name,
             uniqueid: options.uniqueid,
             imei: options.imei,
         }
-        var response = await this.api._makeApiRequest('/sensors', 'GET', {}, params, true);
+        let response = await this.api._makeApiRequest('/sensors', 'GET', {}, params, true);
         return this._prepareSensorListResponse(response);
     }
 
@@ -43,7 +43,7 @@ class SensorsEndpoint {
      * @returns {Promise.<ApiResponse>}
      */
     async one(sensor_id) {
-        var response = await this.api._makeApiRequest('/sensors/' + sensor_id, 'GET', {}, {}, true);
+        let response = await this.api._makeApiRequest('/sensors/' + sensor_id, 'GET', {}, {}, true);
         return this._prepareSensorResponse(response);
     }
 
@@ -81,5 +81,3 @@ class SensorsEndpoint {
         }
     }
 }
-
-module.exports = SensorsEndpoint;

@@ -24,10 +24,8 @@ describe('Measurements endpoint', () => {
 
         it('should authorize with correct email/password and get a token', (done) => {
             api.auth.token(test_email, test_passw)
-                .then(function(response) {
-                    response.success.should.eq(true);
-                    response.status.should.eq(200);
-                    response.token.should.not.be.empty;
+                .then(function(user) {
+                    user.token.should.not.be.empty;
                     done();
                 });
         });

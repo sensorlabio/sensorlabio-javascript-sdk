@@ -1,4 +1,7 @@
-class Sensor {
+/**
+ * Sensor model
+ */
+export default class Sensor {
     constructor(api, data) {
         this.api = api;
 
@@ -7,7 +10,7 @@ class Sensor {
         this.imei = data.imei;
         this.name = data.name;
 
-        var self = this;
+        let self = this;
         this.measurements = {
             'list': function(options) {
                 return self.api.measurements.list(options);
@@ -19,5 +22,3 @@ class Sensor {
 
     }
 }
-
-module.exports = Sensor;

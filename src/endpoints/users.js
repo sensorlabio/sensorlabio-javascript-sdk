@@ -1,7 +1,7 @@
 /**
  * Class for /users/* endpoints.
  */
-class UsersEndpoint {
+export default class UsersEndpoint {
     /**
      * @param api
      */
@@ -17,12 +17,12 @@ class UsersEndpoint {
      * @param password_check
      */
     async signup(email, password, password_check) {
-        var data = {
+        let data = {
             'email': email,
             'password': password,
             'password_check': password_check,
         }
-        var response = await this.api._makeApiRequest('/users/signup', 'POST', data);
+        let response = await this.api._makeApiRequest('/users/signup', 'POST', data);
         return this.api._prepareApiResponse(response);
     }
 
@@ -33,10 +33,10 @@ class UsersEndpoint {
      * @returns {Promise.<ApiResponse>}
      */
     async verify_email(verification_token) {
-        var data = {
+        let data = {
             verification_token: verification_token,
         };
-        var response = await this.api._makeApiRequest('/users/verify_email', 'POST', data);
+        let response = await this.api._makeApiRequest('/users/verify_email', 'POST', data);
         return this.api._prepareApiResponse(response);
     }
 
@@ -46,10 +46,10 @@ class UsersEndpoint {
      * @returns {Promise.<ApiResponse>}
      */
     async reset_password_request(email) {
-        var data = {
+        let data = {
             'email': email,
         }
-        var response = await this.api._makeApiRequest('/users/reset_password/request', 'POST', data);
+        let response = await this.api._makeApiRequest('/users/reset_password/request', 'POST', data);
         return this.api._prepareApiResponse(response);
     }
 
@@ -59,10 +59,10 @@ class UsersEndpoint {
      * @returns {Promise.<ApiResponse>}
      */
     async reset_password_check_token(token) {
-        var data = {
+        let data = {
             'token': token,
         }
-        var response = await this.api._makeApiRequest('/users/reset_password/check', 'POST', data);
+        let response = await this.api._makeApiRequest('/users/reset_password/check', 'POST', data);
         return this.api._prepareApiResponse(response);
     }
 
@@ -72,14 +72,12 @@ class UsersEndpoint {
      * @returns {Promise.<ApiResponse>}
      */
     async reset_password(token, password, password_check) {
-        var data = {
+        let data = {
             'token': token,
             'password': password,
             'password_check': password_check,
         }
-        var response = await this.api._makeApiRequest('/users/reset_password', 'POST', data);
+        let response = await this.api._makeApiRequest('/users/reset_password', 'POST', data);
         return this.api._prepareApiResponse(response);
     }
 }
-
-module.exports = UsersEndpoint;

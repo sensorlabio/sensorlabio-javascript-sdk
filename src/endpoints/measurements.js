@@ -1,11 +1,11 @@
-var ApiResponse = require('../responses/api');
-var MeasurementsResponse = require('../responses/measurements');
-var Measurment = require('../models/measurement');
+import ApiResponse from '../responses/api';
+import MeasurementsResponse from '../responses/measurements';
+import Measurment from '../models/measurement';
 
 /**
  * Class for /measurements/* endpoints.
  */
-class SensorsEndpoint {
+export default class SensorsEndpoint {
     /**
      * @param api
      */
@@ -25,7 +25,7 @@ class SensorsEndpoint {
         if (options.type === undefined) options.type = null;
         if (options.page === undefined) options.page = 1;
 
-        var params = {
+        let params = {
             page: options.page,
         }
         if (options.type) {
@@ -49,14 +49,14 @@ class SensorsEndpoint {
         if (options.sensor_id === undefined) options.sensor_id = null;
         if (options.type === undefined) options.type = null;
 
-        var params = {};
+        let params = {};
         if (options.type) {
             params['type'] = options.type;
         }
         if (options.sensor_id) {
             params['sensor_id'] = options.sensor_id;
         }
-        var response = await this.api._makeApiRequest('/measurements/last', 'GET', {}, params, true);
+        let response = await this.api._makeApiRequest('/measurements/last', 'GET', {}, params, true);
         return this._prepareMeasurementResponse(response);
     }
 
@@ -94,5 +94,3 @@ class SensorsEndpoint {
         }
     }
 }
-
-module.exports = SensorsEndpoint;

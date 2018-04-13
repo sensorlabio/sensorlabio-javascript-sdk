@@ -1,7 +1,7 @@
 /**
  * User profile
  */
-class Profile {
+export default class Profile {
     constructor(api, data) {
         this.api = api;
         this.email = data.email;
@@ -19,5 +19,3 @@ class Profile {
         return this.api.profile.change_password(old_password, new_password, new_password_check)
     }
 }
-
-module.exports = Profile;

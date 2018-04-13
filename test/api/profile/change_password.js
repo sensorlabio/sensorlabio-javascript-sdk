@@ -25,10 +25,8 @@ describe('Profile password change endpoint', () => {
 
         it('should authorize with correct email/password and get a token', (done) => {
             api.auth.token(test_email, test_passw)
-                .then(function(response) {
-                    response.success.should.eq(true);
-                    response.status.should.eq(200);
-                    response.token.should.not.be.empty;
+                .then(function(user) {
+                    user.token.should.not.be.empty;
                     done();
                 });
         });
@@ -122,10 +120,8 @@ describe('Profile password change endpoint', () => {
 
         it('sshould authorize with new password', (done) => {
             api.auth.token(test_email, 'newpass')
-                .then(function(response) {
-                    response.success.should.eq(true);
-                    response.status.should.eq(200);
-                    response.token.should.not.be.empty;
+                .then(function(user) {
+                    user.token.should.not.be.empty;
                     done();
                 });
         });
