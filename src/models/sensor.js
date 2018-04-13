@@ -9,11 +9,11 @@ class Sensor {
 
         var self = this;
         this.measurements = {
-            'list': function(type) {
-                return self.api.measurements.list(self.id, type);
+            'list': function(options) {
+                return self.api.measurements.list(options);
             },
-            'last': function(type) {
-                return self.api.measurements.last(self.id, type);
+            'last': function(options) {
+                return self.api.measurements.last(options);
             }
         }
 

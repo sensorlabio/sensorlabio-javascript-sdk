@@ -5,3 +5,5 @@ require('./api/sensors/list');
 require('./api/sensors/get');
 require('./api/measurements/list');
 require('./api/measurements/last');
+require('./api/measurements/list_sensor');
+require('./api/measurements/last_sensor');
