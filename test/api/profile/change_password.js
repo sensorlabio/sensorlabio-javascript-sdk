@@ -16,10 +16,6 @@ describe('Profile password change endpoint', () => {
     describe('Profile change password', () => {
         it('should get 401 error without token', (done) => {
             api.profile.change_password()
-                .then(function(response) {
-                    console.log(response);
-                    done();
-                })
                 .catch(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(401);

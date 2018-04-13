@@ -19,12 +19,21 @@ class SensorsEndpoint {
      * @param page
      * @returns {Promise.<ApiResponse>}
      */
-    async list(page = 1) {
+    async list(page = 1, name = null, uniqueid = null, imei = null) {
         var params = {
             page: page,
+            name: name,
+            uniqueid: uniqueid,
+            imei: imei,
         }
         var response = await this.api._makeApiRequest('/sensors', 'GET', {}, params, true);
-        return this._prepareSensorListResponse(response);
+        let result = null;
+        try {
+            result = this._prepareSensorListResponse(response);
+        } catch (e) {
+            throw e;
+        }
+        return result;
     }
 
     /**
@@ -35,7 +44,13 @@ class SensorsEndpoint {
      */
     async one(sensor_id) {
         var response = await this.api._makeApiRequest('/sensors/' + sensor_id, 'GET', {}, {}, true);
-        return this._prepareSensorResponse(response);
+        let result = null;
+        try {
+            result = this._prepareSensorResponse(response);
+        } catch (e) {
+            throw e;
+        }
+        return result;
     }
 
     /**
@@ -49,9 +64,9 @@ class SensorsEndpoint {
         if (response.status == 200) { //normal response
             return new SensorsResponse(this.api, response.data);
         } else if (response.status == 401) { //401 Unauthorized error
-            return new ApiResponse(false, response.status, 0, response.data);
+            throw new ApiResponse(false, response.status, 0, response.data);
         } else {
-            return new ApiResponse(false, response.status, 0, response.data.message);
+            throw new ApiResponse(false, response.status, 0, response.data.message);
         }
     }
 
@@ -66,9 +81,9 @@ class SensorsEndpoint {
         if (response.status == 200) { //normal response
             return new Sensor(this.api, response.data);
         } else if (response.status == 401) { //401 Unauthorized error
-            return new ApiResponse(false, response.status, 0, response.data);
+            throw new ApiResponse(false, response.status, 0, response.data);
         } else {
-            return new ApiResponse(false, response.status, 0, response.data.message);
+            throw new ApiResponse(false, response.status, 0, response.data.message);
         }
     }
 }
