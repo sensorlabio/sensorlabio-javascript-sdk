@@ -1,7 +1,7 @@
 let chai = require('chai');
 let should = chai.should();
 let expect = chai.expect;
-let Api = require('../../../api');
+import Api from '../../..';
 
 //@todo change url to real public test server
 let api = new Api('http://localhost:3000/api/v1'); //we must test on test server only
