@@ -19,17 +19,22 @@ class SensorsEndpoint {
      * @param page
      * @returns {Promise.<ApiResponse>}
      */
-    async list(sensor_id = null, type = null, page = 1) {
+    async list(options) {
+        if (options === undefined) options = {};
+        if (options.sensor_id === undefined) options.sensor_id = null;
+        if (options.type === undefined) options.type = null;
+        if (options.page === undefined) options.page = 1;
+
         var params = {
-            page: page,
+            page: options.page,
         }
-        if (type) {
-            params['type'] = type;
+        if (options.type) {
+            params['type'] = options.type;
         }
-        if (sensor_id) {
-            params['sensor_id'] = sensor_id;
+        if (options.sensor_id) {
+            params['sensor_id'] = options.sensor_id;
         }
-        var response = await this.api._makeApiRequest('/measurements', 'GET', {}, params, true);
+        let response = await this.api._makeApiRequest('/measurements', 'GET', {}, params, true);
         return this._prepareMeasurementsListResponse(response);
     }
 
@@ -39,13 +44,17 @@ class SensorsEndpoint {
      * @param sensor_id
      * @returns {Promise.<ApiResponse>}
      */
-    async last(sensor_id = null, type = null) {
+    async last(options) {
+        if (options === undefined) options = {};
+        if (options.sensor_id === undefined) options.sensor_id = null;
+        if (options.type === undefined) options.type = null;
+
         var params = {};
         if (type) {
-            params['type'] = type;
+            options['type'] = type;
         }
         if (sensor_id) {
-            params['sensor_id'] = sensor_id;
+            options['sensor_id'] = sensor_id;
         }
         var response = await this.api._makeApiRequest('/measurements/last', 'GET', {}, params, true);
         return this._prepareMeasurementResponse(response);
@@ -62,9 +71,9 @@ class SensorsEndpoint {
         if (response.status == 200) { //normal response
             return new MeasurementsResponse(this.api, response.data);
         } else if (response.status == 401) { //401 Unauthorized error
-            return new ApiResponse(false, response.status, 0, response.data);
+            throw new ApiResponse(false, response.status, 0, response.data);
         } else {
-            return new ApiResponse(false, response.status, 0, response.data.message);
+            throw new ApiResponse(false, response.status, 0, response.data.message);
         }
     }
 
@@ -79,9 +88,9 @@ class SensorsEndpoint {
         if (response.status == 200) { //normal response
             return new Measurment(this.api, response.data);
         } else if (response.status == 401) { //401 Unauthorized error
-            return new ApiResponse(false, response.status, 0, response.data);
+            throw new ApiResponse(false, response.status, 0, response.data);
         } else {
-            return new ApiResponse(false, response.status, 0, response.data.message);
+            throw new ApiResponse(false, response.status, 0, response.data.message);
         }
     }
 }
