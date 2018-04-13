@@ -11,7 +11,7 @@ import ApiResponse from './src/responses/api';
 /**
  * Sensorlab.io API.
  */
-class Api {
+export default class SensorlabApi {
     /**
      * Constructor.
      */
@@ -96,5 +96,3 @@ class Api {
         }
     }
 }
-
-module.exports = Api;

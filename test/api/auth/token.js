@@ -1,10 +1,10 @@
 let chai = require('chai');
 let should = chai.should();
 let expect = chai.expect;
-import Api from '../../..';
+import SensorlabApi from '../../..';
 
 //@todo change url to real public test server
-let api = new Api('http://localhost:3000/api/v1'); //we must test on test server only
+let api = new SensorlabApi('http://localhost:3000/api/v1'); //we must test on test server only
 
 let test_email = 'test@sensorlab.io';
 let test_passw = 'test';
