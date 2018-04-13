@@ -50,11 +50,11 @@ class SensorsEndpoint {
         if (options.type === undefined) options.type = null;
 
         var params = {};
-        if (type) {
-            options['type'] = type;
+        if (options.type) {
+            params['type'] = options.type;
         }
-        if (sensor_id) {
-            options['sensor_id'] = sensor_id;
+        if (options.sensor_id) {
+            params['sensor_id'] = options.sensor_id;
         }
         var response = await this.api._makeApiRequest('/measurements/last', 'GET', {}, params, true);
         return this._prepareMeasurementResponse(response);
