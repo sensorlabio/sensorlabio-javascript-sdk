@@ -19,21 +19,21 @@ class SensorsEndpoint {
      * @param page
      * @returns {Promise.<ApiResponse>}
      */
-    async list(page = 1, name = null, uniqueid = null, imei = null) {
+    async list(options) {
+        if (options === undefined) options = {};
+        if (options.page === undefined) options.page = 1;
+        if (options.name === undefined) options.name = null;
+        if (options.uniqueid === undefined) options.uniqueid = null;
+        if (options.imei === undefined) options.imei = null;
+
         var params = {
-            page: page,
-            name: name,
-            uniqueid: uniqueid,
-            imei: imei,
+            page: options.page,
+            name: options.name,
+            uniqueid: options.uniqueid,
+            imei: options.imei,
         }
         var response = await this.api._makeApiRequest('/sensors', 'GET', {}, params, true);
-        let result = null;
-        try {
-            result = this._prepareSensorListResponse(response);
-        } catch (e) {
-            throw e;
-        }
-        return result;
+        return this._prepareSensorListResponse(response);
     }
 
     /**
@@ -44,13 +44,7 @@ class SensorsEndpoint {
      */
     async one(sensor_id) {
         var response = await this.api._makeApiRequest('/sensors/' + sensor_id, 'GET', {}, {}, true);
-        let result = null;
-        try {
-            result = this._prepareSensorResponse(response);
-        } catch (e) {
-            throw e;
-        }
-        return result;
+        return this._prepareSensorResponse(response);
     }
 
     /**

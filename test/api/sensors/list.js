@@ -48,7 +48,7 @@ describe('Sensors endpoint', () => {
         });
 
         it('should get list of sensors by name', (done) => {
-            api.sensors.list(null, first_sensor_name)
+            api.sensors.list({ name: first_sensor_name })
                 .then((response) => {
                     response.sensors.should.be.a('array');
                     expect(response.sensors.length).at.least(1);
@@ -66,7 +66,7 @@ describe('Sensors endpoint', () => {
         });
 
         it('should get list of sensors by imei', (done) => {
-            api.sensors.list(null, null, null, first_sensor_imei)
+            api.sensors.list({ imei: first_sensor_imei })
                 .then((response) => {
                     response.sensors.should.be.a('array');
                     expect(response.sensors.length).at.least(1);
@@ -84,7 +84,7 @@ describe('Sensors endpoint', () => {
         });
 
         it('should get list of sensors by uniqueid', (done) => {
-            api.sensors.list(null, null, first_sensor_uniqueid)
+            api.sensors.list({ uniqueid: first_sensor_uniqueid })
                 .then((response) => {
                     response.sensors.should.be.a('array');
                     expect(response.sensors.length).at.least(1);
@@ -102,8 +102,11 @@ describe('Sensors endpoint', () => {
         });
 
         it('should get list of sensors by all search params', (done) => {
-            api.sensors.list(null, first_sensor_name, first_sensor_uniqueid, first_sensor_imei)
-                .then((response) => {
+            api.sensors.list({
+                    name: first_sensor_name,
+                    uniqueid: first_sensor_uniqueid,
+                    imei: first_sensor_imei
+                }).then((response) => {
                     response.sensors.should.be.a('array');
                     expect(response.sensors.length).at.least(1);
                     response.sensors.forEach((sensor) => {
