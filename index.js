@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 let axios = require('axios');
 
 import UsersEndpoint from './src/endpoints/users';
