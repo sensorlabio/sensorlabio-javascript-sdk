@@ -9,6 +9,8 @@ let api = new SensorlabApi('http://localhost:3000/api/v1'); //we must test on te
 let test_email = 'test@sensorlab.io';
 let test_passw = 'test';
 
+let test_user = null;
+
 describe('Get profile endpoint', () => {
     /**
      * Get user token.
@@ -27,12 +29,21 @@ describe('Get profile endpoint', () => {
             api.auth.token(test_email, test_passw)
                 .then(function(user) {
                     user.token.should.not.be.empty;
+                    test_user = user;
                     done();
                 });
         });
 
         it('should get a profile', (done) => {
             api.profile.get()
+                .then(function(profile) {
+                    profile.email.should.eq(test_email);
+                    done();
+                });
+        });
+
+        it('should get a profile too', (done) => {
+            test_user.profile()
                 .then(function(profile) {
                     profile.email.should.eq(test_email);
                     done();

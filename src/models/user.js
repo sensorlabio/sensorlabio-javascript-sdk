@@ -6,4 +6,8 @@ export default class User {
         this.api = api;
         this.token = data.token;
     }
+
+    profile() {
+        return this.api.profile.get();
+    }
 }

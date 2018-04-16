@@ -9,6 +9,9 @@ let api = new SensorlabApi('http://localhost:3000/api/v1'); //we must test on te
 let test_email = 'test@sensorlab.io';
 let test_passw = 'test';
 
+let test_user = null;
+let test_profile = null;
+
 describe('Profile password change endpoint', () => {
     /**
      * Get user token.
@@ -25,14 +28,16 @@ describe('Profile password change endpoint', () => {
 
         it('should authorize with correct email/password and get a token', (done) => {
             api.auth.token(test_email, test_passw)
-                .then(function(user) {
+                .then(async function(user) {
                     user.token.should.not.be.empty;
+                    test_user = user;
+                    test_profile = await user.profile();
                     done();
                 });
         });
 
         it('should return error if there is empty data sent', (done) => {
-            api.profile.change_password()
+            test_profile.change_password()
                 .then(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(200);
@@ -43,7 +48,7 @@ describe('Profile password change endpoint', () => {
         });
 
         if('should return error if old password is incorrect', (done) => {
-            api.profile.change_password('verywrongpassword')
+                test_profile.change_password('verywrongpassword')
                 .then(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(200);
@@ -54,7 +59,7 @@ describe('Profile password change endpoint', () => {
         });
 
         it('should return error if old password is correct but no new passwords provided', (done) => {
-            api.profile.change_password(test_passw)
+            test_profile.change_password(test_passw)
                 .then(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(200);
@@ -65,7 +70,7 @@ describe('Profile password change endpoint', () => {
         });
 
         it('should return error if old password is correct but no password_check', (done) => {
-            api.profile.change_password(test_passw, 'newpass')
+            test_profile.change_password(test_passw, 'newpass')
                 .then(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(200);
@@ -76,7 +81,7 @@ describe('Profile password change endpoint', () => {
         });
 
         it('should return error if old password is correct but no password', (done) => {
-            api.profile.change_password(test_passw, null, 'newpass')
+            test_profile.change_password(test_passw, null, 'newpass')
                 .then(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(200);
@@ -87,7 +92,7 @@ describe('Profile password change endpoint', () => {
         });
 
         it('should return error if old password is correct but new passwords are not equal', (done) => {
-            api.profile.change_password(test_passw, 'Newpass', 'newpass')
+            test_profile.change_password(test_passw, 'Newpass', 'newpass')
                 .then(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(200);
@@ -98,7 +103,7 @@ describe('Profile password change endpoint', () => {
         });
 
         it('should return success if data is correct', (done) => {
-            api.profile.change_password(test_passw, 'newpass', 'newpass')
+            test_profile.change_password(test_passw, 'newpass', 'newpass')
                 .then(function(response) {
                     response.success.should.eq(true);
                     response.status.should.eq(200);
@@ -127,7 +132,7 @@ describe('Profile password change endpoint', () => {
         });
 
         it('should change password back', (done) => {
-            api.profile.change_password('newpass', test_passw, test_passw)
+            test_profile.change_password('newpass', test_passw, test_passw)
                 .then(function(response) {
                     response.success.should.eq(true);
                     response.status.should.eq(200);
