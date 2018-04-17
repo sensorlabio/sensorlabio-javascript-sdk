@@ -10,7 +10,7 @@ module.exports = {
         path: path.resolve(__dirname, 'build'),
         filename: 'index.min.js',
         libraryTarget: 'umd',
-        library: 'sensorlab-javascript-sdk'
+        library: 'sensorlabio-javascript-sdk'
     },
     module: {
         loaders: [
