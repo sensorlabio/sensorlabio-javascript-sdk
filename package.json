@@ -2,7 +2,7 @@
   "name": "sensorlabio-sdk-javascript",
   "version": "1.0.0",
   "description": "Javascript SDK for Sensorlab.io REST API",
-  "main": "build/index.js",
+  "main": "build/index.min.js",
   "scripts": {
     "test": "mocha --require babel-register --timeout 10000  --exit",
     "start": "webpack --watch",
