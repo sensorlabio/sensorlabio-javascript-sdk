@@ -84,7 +84,7 @@ export default class SensorlabApi {
             } else if (response.data.success) {
                 return new ApiResponse(response.data.success, response.status, response.data.code, response.data.message);
             } else {
-                return new ApiResponse(response.data.success, response.status, response.data.code, response.data.message);
+                throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message);
             }
         } else if (response.status == 401) { //401 Unauthorized error
             throw new ApiResponse(false, response.status, 0, response.data);
