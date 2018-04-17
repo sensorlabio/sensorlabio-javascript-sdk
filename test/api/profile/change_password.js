@@ -38,7 +38,7 @@ describe('Profile password change endpoint', () => {
 
         it('should return error if there is empty data sent', (done) => {
             test_profile.change_password()
-                .then(function(response) {
+                .catch(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(200);
                     response.code.should.eq(1);
@@ -49,7 +49,7 @@ describe('Profile password change endpoint', () => {
 
         if('should return error if old password is incorrect', (done) => {
                 test_profile.change_password('verywrongpassword')
-                .then(function(response) {
+                .catch(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(200);
                     response.code.should.eq(2);
@@ -60,7 +60,7 @@ describe('Profile password change endpoint', () => {
 
         it('should return error if old password is correct but no new passwords provided', (done) => {
             test_profile.change_password(test_passw)
-                .then(function(response) {
+                .catch(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(200);
                     response.code.should.eq(3);
@@ -71,7 +71,7 @@ describe('Profile password change endpoint', () => {
 
         it('should return error if old password is correct but no password_check', (done) => {
             test_profile.change_password(test_passw, 'newpass')
-                .then(function(response) {
+                .catch(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(200);
                     response.code.should.eq(3);
@@ -82,7 +82,7 @@ describe('Profile password change endpoint', () => {
 
         it('should return error if old password is correct but no password', (done) => {
             test_profile.change_password(test_passw, null, 'newpass')
-                .then(function(response) {
+                .catch(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(200);
                     response.code.should.eq(3);
@@ -93,7 +93,7 @@ describe('Profile password change endpoint', () => {
 
         it('should return error if old password is correct but new passwords are not equal', (done) => {
             test_profile.change_password(test_passw, 'Newpass', 'newpass')
-                .then(function(response) {
+                .catch(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(200);
                     response.code.should.eq(4);

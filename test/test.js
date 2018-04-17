@@ -1,5 +1,4 @@
-import 'babel-polyfill';
-
+require('./api/users/reset_password');
 require('./api/auth/token');
 require('./api/profile/get');
 require('./api/profile/change_password');
