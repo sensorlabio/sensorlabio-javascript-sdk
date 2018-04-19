@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 module.exports = {
     target: 'web',
-    entry: ['babel-polyfill', './index.js'],
+    entry: ['babel-polyfill', './src/index.js'],
     devtool: 'source-map',
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -16,7 +16,10 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: [
+                    /(node_modules|bower_components|test|build)/,
+                    path.resolve(__dirname, 'index.js'),
+                ],
                 loader: 'babel-loader',
                 query: {
                     presets: ['env']
