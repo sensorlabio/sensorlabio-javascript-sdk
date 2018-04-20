@@ -12,10 +12,11 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
+import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # -- Project information -----------------------------------------------------
 
@@ -186,8 +187,10 @@ epub_exclude_files = ['search.html']
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
 
-js_source_path = './../src/'
+print(dir_path);
 
-jsdoc_config_path = './../jsdoc.conf'
+js_source_path = dir_path + '/../../src/'
+
+jsdoc_config_path = dir_path + '/../../jsdoc.conf'
 
 primary_domain = 'js'
