@@ -188,6 +188,6 @@ todo_include_todos = True
 
 js_source_path = '../../src/'
 
-jsdoc_config_path = 'doc/jsdoc.conf'
+jsdoc_config_path = './doc/jsdoc.conf'
 
 primary_domain = 'js'
