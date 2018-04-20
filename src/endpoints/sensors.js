@@ -7,16 +7,22 @@ import Sensor from '../models/sensor';
  */
 export default class SensorsEndpoint {
     /**
-     * @param api
+     * @constructor SensorsEndpoint
+     * @param {SensorlabApi} api - parent api
      */
     constructor(api) {
         this.api = api;
     }
 
     /**
-     * Get sensors list
+     * Get sensors list.
      *
-     * @param page
+     * @method SensorsEndpoint#list
+     * @param {object} options - method options
+     * @param {number} options.page - page number to display. Default is `1`.
+     * @param {string} options.name - filter by name.
+     * @param {string} options.uniqueid - filter by uniqueid.
+     * @param {string} options.imei - filter by imei.
      * @returns {Promise.<ApiResponse>}
      */
     async list(options) {
@@ -37,9 +43,10 @@ export default class SensorsEndpoint {
     }
 
     /**
-     * Get sensor by id
+     * Get sensor by id.
      *
-     * @param sensor_id
+     * @method SensorsEndpoint#one
+     * @param {string} sensor_id - sensor's id
      * @returns {Promise.<ApiResponse>}
      */
     async one(sensor_id) {

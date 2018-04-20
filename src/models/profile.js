@@ -2,14 +2,27 @@
  * User profile
  */
 export default class Profile {
+    /**
+     * @constructor Profile
+     * @param {SensorlabApi} api - parent api
+     * @param {Object} data - data from response
+     */
     constructor(api, data) {
         this.api = api;
+
+        /**
+         * User's email
+         *
+         * @member Profile#email
+         * @type {string}
+         */
         this.email = data.email;
     }
 
     /**
      * Change password for profile/user.
      *
+     * @method Profile#change_password
      * @param old_password
      * @param new_password
      * @param new_password_check

@@ -9,44 +9,102 @@ import MeasurementsEndpoint from './endpoints/measurements';
 import ApiResponse from './responses/api';
 
 /**
- * Sensorlab.io API.
+ * @classdesc Main class that connects all the endpoints.
  */
 export default class SensorlabApi {
     /**
-     * Constructor.
-     *
-     * @param rest_api_url API's url.
-     * @param jwt_token Provide saved token.
+     * @constructor SensorlabApi
+     * @param {string} rest_api_url API's url.
+     * @param {string} jwt_token Provide saved token.
      */
     constructor(rest_api_url = 'http://staging.sensorlab.io/api/v1', jwt_token = null) {
-        this.rest_api_url = rest_api_url;
+        /**
+         * REST API url.
+         *
+         * @type {string}
+         * @member SensorlabApi#rest_api_url
+         * @private
+         */
+        this._rest_api_url = rest_api_url;
 
+        /**
+         * Users endpoint.
+         *
+         * @member SensorlabApi#users
+         * @type {UsersEndpoint}
+         */
         this.users = new UsersEndpoint(this);
+
+        /**
+         * Auth endpoints.
+         *
+         * @member SensorlabApi#auth
+         * @type {AuthEndpoint}
+         */
         this.auth = new AuthEndpoint(this);
+
+        /**
+         * Profile endpoints.
+         *
+         * @member SensorlabApi#profile
+         * @type {ProfileEndpoint}
+         */
         this.profile = new ProfileEndpoint(this);
+
+        /**
+         * Sensor endpoint.
+         *
+         * @member SensorlabApi#sensors
+         * @type {SensorsEndpoint}
+         */
         this.sensors = new SensorsEndpoint(this);
+
+        /**
+         * Measurements endpoints.
+         *
+         * @member SensorlabApi#measurements
+         * @type {MeasurementsEndpoint}
+         */
         this.measurements = new MeasurementsEndpoint(this);
 
+        /**
+         * Saved JWT token
+         *
+         * @member SensorlabApi#jwt_token
+         * @type {string}
+         */
         this.jwt_token = jwt_token;
     }
 
     /**
-     * Set authentication jwt_token
+     * Set authentication jwt token.
      *
-     * @param jwt_token
+     * @method SensorlabApi#setToken
+     * @param {string} jwt_token saved token
      */
     setToken(jwt_token) {
         this.jwt_token = jwt_token;
     }
 
     /**
+     * Get authentication jwt token.
+     *
+     * @method SensorlabApi#getToken
+     * @returns {string}
+     */
+    getToken() {
+        return this.jwt_token;
+    }
+
+    /**
      * Make requests to API with axios.
      *
-     * @param endpoint_url
-     * @param method
-     * @param data
-     * @param jwt_token
+     * @param {string} endpoint_url endpoint to send request to
+     * @param {string} method method type
+     * @param {object} data data to send with request
+     * @param {boolean} jwt_token use request with token or not
      * @returns {Promise.<*|InterceptorManager|AxiosResponse|AxiosInterceptorManager<AxiosResponse>|Object>}
+     * @method SensorlabApi#_makeApiRequest
      * @private
      */
     async _makeApiRequest(endpoint_url, method = 'GET', data = {}, params = {}, use_jwt_token = true) {
@@ -75,9 +133,10 @@ export default class SensorlabApi {
     /**
      * Create ApiResponse from axios response data.
      *
-     * @param response
+     * @param {object} response response from axios
      * @returns {ApiResponse}
      * @throws {ApiResponse}
+     * @method SensorlabApi#_prepareApiResponse
      * @private
      */
     _prepareApiResponse(response) {

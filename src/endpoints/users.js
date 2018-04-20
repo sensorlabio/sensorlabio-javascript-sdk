@@ -1,20 +1,26 @@
 /**
- * Class for /users/* endpoints.
+ * @classdesc Class for /users/* endpoints.
  */
 export default class UsersEndpoint {
     /**
-     * @param api
+     * @constructor UsersEndpoint
+     * @param {SensorlabApi} api - parent API class
      */
     constructor(api) {
+        /**
+         * @member UsersEndpoint#api
+         * @type {SensorlabApi}
+         */
         this.api = api;
     }
 
     /**
      * Signup users endpoint.
      *
-     * @param email
-     * @param password
-     * @param password_check
+     * @method UsersEndpoint#signup
+     * @param {string} email - users's email
+     * @param {string} password - users's password
+     * @param {string} password_check - password check field value
      */
     async signup(email, password, password_check) {
         let data = {
@@ -29,7 +35,8 @@ export default class UsersEndpoint {
     /**
      * Email verification endpoint.
      *
-     * @param verification_token
+     * @method UsersEndpoint#verify_email
+     * @param {string} verification_token - verification token from email
      * @returns {Promise.<ApiResponse>}
      */
     async verify_email(verification_token) {
@@ -43,6 +50,8 @@ export default class UsersEndpoint {
     /**
      * Request password reset endpoint.
      *
+     * @method UsersEndpoint#reset_password_request
+     * @param {string} email - user's email
      * @returns {Promise.<ApiResponse>}
      */
     async reset_password_request(email) {
@@ -54,8 +63,10 @@ export default class UsersEndpoint {
     }
 
     /**
-     * Request password reset endpoint.
+     * Request password reset check token endpoint.
      *
+     * @method UsersEndpoint#reset_password_check_token
+     * @param {string} token - verification token to check
      * @returns {Promise.<ApiResponse>}
      */
     async reset_password_check_token(token) {
@@ -67,8 +78,12 @@ export default class UsersEndpoint {
     }
 
     /**
-     * Request password reset endpoint.
+     * Reset password endpoint.
      *
+     * @method UsersEndpoint#reset_password
+     * @param {string} token - verification token from email.
+     * @param {string} password - new user's password
+     * @param {string} password_check - password check field value
      * @returns {Promise.<ApiResponse>}
      */
     async reset_password(token, password, password_check) {

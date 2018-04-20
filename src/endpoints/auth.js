@@ -4,19 +4,21 @@ import ApiResponse from '../responses/api';
 /**
  * Class for /auth/* endpoints.
  */
-export default class UsersEndpoint {
+export default class AuthEndpoint {
     /**
-     * @param api
+     * @constructor AuthEndpoint
+     * @param {SensorlabApi} api - parent api
      */
     constructor(api) {
         this.api = api;
     }
 
     /**
-     * Get authentication token.
+     * Authorize with email and password and get authentication token.
      *
-     * @param email
-     * @param password
+     * @method AuthEndpoint#token
+     * @param {string} email user's email
+     * @param {string} password user's password
      * @returns {Promise.<ApiResponse>}
      */
     async token(email, password) {
@@ -33,8 +35,10 @@ export default class UsersEndpoint {
     /**
      * Return ApiResponse or throw it
      *
+     * @method AuthEndpoint#_prepareApiResponse
      * @param response
-     * @returns {ApiResponse}
+     * @returns {User}
+     * @throws {ApiResponse}
      * @private
      */
     _prepareApiResponse(response) {

@@ -5,9 +5,10 @@ import Measurment from '../models/measurement';
 /**
  * Class for /measurements/* endpoints.
  */
-export default class SensorsEndpoint {
+export default class MeasurementsEndpoint {
     /**
-     * @param api
+     * @constructor MeasurementsEndpoint
+     * @param {SensorlabApi} api - parent api
      */
     constructor(api) {
         this.api = api;
@@ -16,7 +17,11 @@ export default class SensorsEndpoint {
     /**
      * Get sensors list
      *
-     * @param page
+     * @method MeasurementsEndpoint#list
+     * @param {object} options - method options
+     * @param {number} options.page - page number to display. Default is `1`.
+     * @param {string} options.sensor_id - show measurements for sensor with specified id.
+     * @param {string} options.type - get measurements with specified type only.
      * @returns {Promise.<ApiResponse>}
      */
     async list(options) {
@@ -41,7 +46,10 @@ export default class SensorsEndpoint {
     /**
      * Get sensor by id
      *
-     * @param sensor_id
+     * @method MeasurementsEndpoint#last
+     * @param {object} options - method options
+     * @param {string} options.sensor_id - get measurement for sensor with specified id.
+     * @param {string} type - get measurement with specified type only.
      * @returns {Promise.<ApiResponse>}
      */
     async last(options) {
@@ -65,6 +73,7 @@ export default class SensorsEndpoint {
      *
      * @param response
      * @returns {ApiResponse}
+     * @throws {ApiResponse}
      * @private
      */
     _prepareMeasurementsListResponse(response) {
@@ -81,7 +90,8 @@ export default class SensorsEndpoint {
      * Return measurement response
      *
      * @param response
-     * @returns {*}
+     * @returns {Measurement}
+     * @throws ApiResponse
      * @private
      */
     _prepareMeasurementResponse(response) {
