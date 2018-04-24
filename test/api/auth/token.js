@@ -17,10 +17,8 @@ describe('Authorization endpoints', () => {
         it('should get an 401 status error with wrong email/password', (done) => {
             api.auth.token('somegibberishemail@someotherlongstring.com', 'someuknownpasswordverylongbutitdoesntexits')
                 .catch(function(response) {
-                    //console.log(response);
                     response.success.should.eq(false);
                     response.status.should.eq(401);
-                    expect(response.token).eq(null);
                     done();
                 });
         });
@@ -30,7 +28,6 @@ describe('Authorization endpoints', () => {
                 .catch(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(401);
-                    expect(response.token).eq(null);
                     done();
                 });
         });
@@ -40,7 +37,6 @@ describe('Authorization endpoints', () => {
                 .catch(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(401);
-                    expect(response.token).eq(null);
                     done();
                 });
         });
@@ -50,6 +46,9 @@ describe('Authorization endpoints', () => {
                 .then(function(user) {
                     user.token.should.not.be.empty;
                     done();
+                })
+                .catch((response) => {
+                    console.log(response);
                 });
         });
 

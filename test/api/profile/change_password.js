@@ -118,7 +118,6 @@ describe('Profile password change endpoint', () => {
                 .catch(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(401);
-                    expect(response.token).eq(null);
                     done();
                 });
         });

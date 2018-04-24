@@ -109,7 +109,7 @@ export default class SensorlabApi {
      */
     async _makeApiRequest(endpoint_url, method = 'GET', data = {}, params = {}, use_jwt_token = true) {
         let headers = { 'Content-Type': 'application/json' };
-        let request_url = this.rest_api_url + endpoint_url;
+        let request_url = this._rest_api_url + endpoint_url;
         if (use_jwt_token) {
             headers['Authorization'] = 'Bearer ' + this.jwt_token;
         };
