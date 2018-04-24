@@ -95,4 +95,19 @@ export default class UsersEndpoint {
         let response = await this.api._makeApiRequest('/users/reset_password', 'POST', data);
         return this.api._prepareApiResponse(response);
     }
+
+    /**
+     * Resend verification email.
+     *
+     * @method UsersEndpoint#verify_email_resend
+     * @param {string} email
+     * @returns {Promise.<ApiResponse>}
+     */
+    async verify_email_resend(email) {
+        let data = {
+            'email': email,
+        }
+        let response = await this.api._makeApiRequest('/users/verify_email/resend', 'POST', data);
+        return this.api._prepareApiResponse(response);
+    }
 }
