@@ -100,7 +100,7 @@ export default class UsersEndpoint {
      * Resend verification email.
      *
      * @method UsersEndpoint#verify_email_resend
-     * @param {string} email
+     * @param {string} email - user's email
      * @returns {Promise.<ApiResponse>}
      */
     async verify_email_resend(email) {

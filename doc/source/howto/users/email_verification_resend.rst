@@ -61,4 +61,4 @@ Messages for codes:
     - `code=2` - `"Please, provide correct email."`
     - `code=3` - `"User with this email does not exist."`
     - `code=4` - `"This email is verified already."`
-    - `code-5` - `"Too much requests for this email. Please try again later."`
+    - `code=5` - `"Too much requests for this email. Please try again later."`
