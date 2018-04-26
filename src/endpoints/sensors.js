@@ -23,6 +23,7 @@ export default class SensorsEndpoint {
      * @param {string} options.name - filter by name.
      * @param {string} options.uniqueid - filter by uniqueid.
      * @param {string} options.imei - filter by imei.
+     * @param {string} options.sort - sorting parameter
      * @returns {Promise.<ApiResponse>}
      */
     async list(options) {
@@ -31,12 +32,14 @@ export default class SensorsEndpoint {
         if (options.name === undefined) options.name = null;
         if (options.uniqueid === undefined) options.uniqueid = null;
         if (options.imei === undefined) options.imei = null;
+        if (options.sort === undefined) options.sort = null;
 
         let params = {
             page: options.page,
             name: options.name,
             uniqueid: options.uniqueid,
             imei: options.imei,
+            sort: options.sort,
         }
         let response = await this.api._makeApiRequest('/sensors', 'GET', {}, params, true);
         return this._prepareSensorListResponse(response);

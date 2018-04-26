@@ -22,6 +22,7 @@ export default class MeasurementsEndpoint {
      * @param {number} options.page - page number to display. Default is `1`.
      * @param {string} options.sensor_id - show measurements for sensor with specified id.
      * @param {string} options.type - get measurements with specified type only.
+     * @param {string} options.sort - sorting parameter
      * @returns {Promise.<ApiResponse>}
      */
     async list(options) {
@@ -29,15 +30,13 @@ export default class MeasurementsEndpoint {
         if (options.sensor_id === undefined) options.sensor_id = null;
         if (options.type === undefined) options.type = null;
         if (options.page === undefined) options.page = 1;
+        if (options.sort === undefined) options.sort = null;
 
         let params = {
             page: options.page,
-        }
-        if (options.type) {
-            params['type'] = options.type;
-        }
-        if (options.sensor_id) {
-            params['sensor_id'] = options.sensor_id;
+            type: options.type,
+            sensor_id: options.sensor_id,
+            sort: options.sort,
         }
         let response = await this.api._makeApiRequest('/measurements', 'GET', {}, params, true);
         return this._prepareMeasurementsListResponse(response);
