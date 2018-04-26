@@ -43,7 +43,7 @@ export default class Sensor {
         this.name = data.name;
 
         /**
-         * Date created
+         * Date/time created.
          *
          * @member Sensor#created
          * @type {*}

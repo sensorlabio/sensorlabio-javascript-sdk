@@ -38,6 +38,13 @@ You can provide `options` as an object with this parameters:
     - `name` - filter sensors by name.
     - `uniqueid` - filter by uniqueid.
     - `imei` - filter by imei.
+    - `sort` - sorting parameter, looks like "`fieldname,order`". Example: "`name,asc`"
+        Possible sort fields:
+            - `name`
+            - `created`
+        Possible order types:
+            - `asc`
+            - `desc`
 
 All options filter parameters can be used at the same time, but it will search with "AND" condition.
 
