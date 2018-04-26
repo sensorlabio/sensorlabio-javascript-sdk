@@ -42,6 +42,14 @@ export default class Sensor {
          */
         this.name = data.name;
 
+        /**
+         * Date created
+         *
+         * @member Sensor#created
+         * @type {*}
+         */
+        this.created = data.created;
+
         let self = this;
 
         /**
