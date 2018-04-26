@@ -29,6 +29,7 @@ describe('Reset passwords endpoint', () => {
         it('must return error if no data is provided', (done) => {
             api.users.reset_password_request()
                 .catch(function(response) {
+                    console.log(response);
                     response.success.should.eq(false);
                     response.status.should.eq(200);
                     response.code.should.eq(1);

@@ -65,6 +65,9 @@ export default class SensorsEndpoint {
      * @private
      */
     _prepareSensorListResponse(response) {
+        if (!response) {
+            throw new ApiResponse(false, 0, 0, 'Connection refused');
+        }
         if (response.status == 200) { //normal response
             return new SensorsResponse(this.api, response.data);
         } else if (response.status == 401) { //401 Unauthorized error
@@ -82,6 +85,9 @@ export default class SensorsEndpoint {
      * @private
      */
     _prepareSensorResponse(response) {
+        if (!response) {
+            throw new ApiResponse(false, 0, 0, 'Connection refused');
+        }
         if (response.status == 200) { //normal response
             return new Sensor(this.api, response.data);
         } else if (response.status == 401) { //401 Unauthorized error

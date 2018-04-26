@@ -42,6 +42,9 @@ export default class AuthEndpoint {
      * @private
      */
     _prepareApiResponse(response) {
+        if (!response) {
+            throw new ApiResponse(false, 0, 0, 'Connection refused');
+        }
         if (response.status == 200) { //normal response
             return new User(this.api, response.data);
         } else if (response.status == 401) { //401 Unauthorized error

@@ -124,7 +124,9 @@ export default class SensorlabApi {
                 headers: headers,
             });
         } catch (error) {
-            response = error.response;
+            if (response in error) {
+                response = error.response;
+            }
         }
 
         return response;
@@ -140,6 +142,9 @@ export default class SensorlabApi {
      * @private
      */
     _prepareApiResponse(response) {
+        if (!response) {
+            throw new ApiResponse(false, 0, 0, 'Connection refused');
+        }
         if (response.status == 200) { //normal response
             if (response.data.token) {
                 return new ApiResponse(true, response.status, 100, null, response.data.token);

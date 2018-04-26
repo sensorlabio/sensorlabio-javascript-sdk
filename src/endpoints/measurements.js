@@ -76,6 +76,9 @@ export default class MeasurementsEndpoint {
      * @private
      */
     _prepareMeasurementsListResponse(response) {
+        if (!response) {
+            throw new ApiResponse(false, 0, 0, 'Connection refused');
+        }
         if (response.status == 200) { //normal response
             return new MeasurementsResponse(this.api, response.data);
         } else if (response.status == 401) { //401 Unauthorized error
@@ -94,6 +97,9 @@ export default class MeasurementsEndpoint {
      * @private
      */
     _prepareMeasurementResponse(response) {
+        if (!response) {
+            throw new ApiResponse(false, 0, 0, 'Connection refused');
+        }
         if (response.status == 200) { //normal response
             return new Measurment(this.api, response.data);
         } else if (response.status == 401) { //401 Unauthorized error
