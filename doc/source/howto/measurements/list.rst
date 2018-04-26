@@ -35,6 +35,14 @@ You can provide `options` as an object with this parameters:
     - `page` - by default will 1.
     - `type` - filter by measurement type.
     - `sensor_id` - filter by sensor id.
+    - `sort` - sorting parameter, looks like "`fieldname,order`". Example: "`name,asc`"
+        Possible sort fields:
+            - `created`
+            - `type`
+            - `value`
+        Possible order types:
+            - `asc`
+            - `desc`
 
 Method will throw ApiResponse as exception on any error.
 
