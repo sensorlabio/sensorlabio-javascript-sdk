@@ -14,15 +14,9 @@ import ApiResponse from './responses/api';
 export default class SensorlabApi {
     /**
      * @constructor SensorlabApi
-     * @param {Object} options - method options
-     * @param {string} options.rest_api_url - API's url.
-     * @param {string} options.jwt_token Provide saved token.
+     * @param {string} api_url - API's url.
      */
-    constructor(options) {
-        if (options === undefined) options = {};
-        if (options.rest_api_url === undefined) options.rest_api_url = 'http://staging.sensorlab.io/api/v1';
-        if (options.jwt_token === undefined) options.jwt_token = null;
-
+    constructor(api_url = 'http://staging.sensorlab.io/api/v1') {
         /**
          * REST API url.
          *
@@ -30,7 +24,7 @@ export default class SensorlabApi {
          * @member SensorlabApi#rest_api_url
          * @private
          */
-        this._rest_api_url = options.rest_api_url;
+        this._rest_api_url = api_url;
 
         /**
          * Users endpoint.
@@ -78,7 +72,7 @@ export default class SensorlabApi {
          * @member SensorlabApi#jwt_token
          * @type {string}
          */
-        this.jwt_token = options.jwt_token;
+        this.jwt_token = null;
     }
 
     /**

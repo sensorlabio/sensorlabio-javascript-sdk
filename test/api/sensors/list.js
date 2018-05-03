@@ -4,7 +4,7 @@ let expect = chai.expect;
 import SensorlabApi from '../../../src';
 
 //@todo change url to real public test server
-let api = new SensorlabApi({rest_api_url: process.env.TEST_REST_API_URL}); //we must test on test server only
+let api = new SensorlabApi(process.env.TEST_REST_API_URL); //we must test on test server only
 
 let test_email = 'test@sensorlab.io';
 let test_passw = 'test';
