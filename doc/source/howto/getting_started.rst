@@ -26,8 +26,9 @@ You can specify another url to REST API like this:
 
    let api = new SensorlabApi('http://staging.sensorlab.io/api/v1/');
 
-You can also provide saved JWT token in constructor:
+You can also provide saved JWT using `setToken` method:
 
 .. code-block:: javascript
 
-   let api = new SensorlabApi('http://staging.sensorlab.io/api/v1/', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJqdGkiOiI1MmYyNjE3My1iMzFjLTQ5OWYtYTczOS03NGVjNzMxZWU3ZmIiLCJpYXQiOjE1MjQxNDA0MTcsImV4cCI6MTUyNDE0NDAxN30.WOfKYQLX9hUl4_yW3Rd9sts0MzLlHG6j7KEAeK918lI');
+    let api = new SensorlabApi('http://staging.sensorlab.io/api/v1/');
+    api.setToken(token);
