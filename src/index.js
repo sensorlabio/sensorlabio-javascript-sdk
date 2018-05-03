@@ -14,10 +14,15 @@ import ApiResponse from './responses/api';
 export default class SensorlabApi {
     /**
      * @constructor SensorlabApi
-     * @param {string} rest_api_url API's url.
-     * @param {string} jwt_token Provide saved token.
+     * @param {Object} options - method options
+     * @param {string} options.rest_api_url - API's url.
+     * @param {string} options.jwt_token Provide saved token.
      */
-    constructor(rest_api_url = 'http://staging.sensorlab.io/api/v1', jwt_token = null) {
+    constructor(options) {
+        if (options === undefined) options = {};
+        if (options.rest_api_url === undefined) options.rest_api_url = 'http://staging.sensorlab.io/api/v1';
+        if (options.jwt_token === undefined) options.jwt_token = null;
+
         /**
          * REST API url.
          *
@@ -25,7 +30,7 @@ export default class SensorlabApi {
          * @member SensorlabApi#rest_api_url
          * @private
          */
-        this._rest_api_url = rest_api_url;
+        this._rest_api_url = options.rest_api_url;
 
         /**
          * Users endpoint.
@@ -73,7 +78,7 @@ export default class SensorlabApi {
          * @member SensorlabApi#jwt_token
          * @type {string}
          */
-        this.jwt_token = jwt_token;
+        this.jwt_token = options.jwt_token;
     }
 
     /**
@@ -115,6 +120,7 @@ export default class SensorlabApi {
         };
 
         let response = null;
+
         try {
             response = await axios({
                 params: params,
@@ -123,12 +129,11 @@ export default class SensorlabApi {
                 data: data,
                 headers: headers,
             });
-        } catch (error) {
-            if (response in error) {
-                response = error.response;
+        } catch (e) {
+            if ('response' in e) {
+                response = e.response;
             }
         }
-
         return response;
     }
 

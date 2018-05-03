@@ -4,7 +4,7 @@ let expect = chai.expect;
 import SensorlabApi from '../../../src';
 
 //@todo change url to real public test server
-let api = new SensorlabApi('http://localhost:3000/api/v1'); //we must test on test server only
+let api = new SensorlabApi({rest_api_url: process.env.TEST_REST_API_URL}); //we must test on test server only
 
 let test_email = 'test@sensorlab.io';
 let test_passw = 'test';
@@ -14,7 +14,6 @@ let test_profile = null;
 
 describe('Reset passwords endpoint', () => {
     describe('Profile change password', () => {
-        /*
         it('should authorize with correct email/password and get a token', (done) => {
             api.auth.token(test_email, test_passw)
                 .then(async function(user) {
@@ -24,12 +23,10 @@ describe('Reset passwords endpoint', () => {
                     done();
                 });
         });
-        */
 
         it('must return error if no data is provided', (done) => {
             api.users.reset_password_request()
                 .catch(function(response) {
-                    console.log(response);
                     response.success.should.eq(false);
                     response.status.should.eq(200);
                     response.code.should.eq(1);
