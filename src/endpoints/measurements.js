@@ -38,7 +38,7 @@ export default class MeasurementsEndpoint {
             sensor_id: options.sensor_id,
             sort: options.sort,
         }
-        let response = await this.api._makeApiRequest('/measurements', 'GET', {}, params, true);
+        let response = await this.api._makeApiRequest('/v1/measurements', 'GET', {}, params, true);
         return this._prepareMeasurementsListResponse(response);
     }
 
@@ -63,7 +63,7 @@ export default class MeasurementsEndpoint {
         if (options.sensor_id) {
             params['sensor_id'] = options.sensor_id;
         }
-        let response = await this.api._makeApiRequest('/measurements/last', 'GET', {}, params, true);
+        let response = await this.api._makeApiRequest('/v1/measurements/last', 'GET', {}, params, true);
         return this._prepareMeasurementResponse(response);
     }
 

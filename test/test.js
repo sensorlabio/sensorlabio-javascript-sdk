@@ -1,4 +1,4 @@
-process.env.TEST_REST_API_URL = 'http://localhost:3000/api/v1';
+process.env.TEST_REST_API_URL = 'http://localhost:3000/api';
 
 require('./api/users/reset_password');
 require('./api/auth/token');

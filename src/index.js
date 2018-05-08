@@ -16,7 +16,7 @@ export default class SensorlabApi {
      * @constructor SensorlabApi
      * @param {string} api_url - API's url.
      */
-    constructor(api_url = 'http://staging.sensorlab.io/api/v1') {
+    constructor(api_url = 'http://staging.sensorlab.io/api') {
         /**
          * REST API url.
          *
@@ -30,9 +30,10 @@ export default class SensorlabApi {
          * Users endpoint.
          *
          * @member SensorlabApi#users
+         * @private
          * @type {UsersEndpoint}
          */
-        this.users = new UsersEndpoint(this);
+        this._users = new UsersEndpoint(this);
 
         /**
          * Auth endpoints.
@@ -109,6 +110,7 @@ export default class SensorlabApi {
     async _makeApiRequest(endpoint_url, method = 'GET', data = {}, params = {}, use_jwt_token = true) {
         let headers = { 'Content-Type': 'application/json' };
         let request_url = this._rest_api_url + endpoint_url;
+
         if (use_jwt_token) {
             headers['Authorization'] = 'Bearer ' + this.jwt_token;
         };

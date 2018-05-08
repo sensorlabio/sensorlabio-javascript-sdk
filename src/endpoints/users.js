@@ -28,7 +28,7 @@ export default class UsersEndpoint {
             'password': password,
             'password_check': password_check,
         }
-        let response = await this.api._makeApiRequest('/users/signup', 'POST', data);
+        let response = await this.api._makeApiRequest('/basic/users/signup', 'POST', data);
         return this.api._prepareApiResponse(response);
     }
 
@@ -43,7 +43,7 @@ export default class UsersEndpoint {
         let data = {
             verification_token: verification_token,
         };
-        let response = await this.api._makeApiRequest('/users/verify_email', 'POST', data);
+        let response = await this.api._makeApiRequest('/basic/users/verify_email', 'POST', data);
         return this.api._prepareApiResponse(response);
     }
 
@@ -58,7 +58,7 @@ export default class UsersEndpoint {
         let data = {
             'email': email,
         }
-        let response = await this.api._makeApiRequest('/users/reset_password/request', 'POST', data);
+        let response = await this.api._makeApiRequest('/basic/users/reset_password/request', 'POST', data);
         return this.api._prepareApiResponse(response);
     }
 
@@ -73,7 +73,7 @@ export default class UsersEndpoint {
         let data = {
             'token': token,
         }
-        let response = await this.api._makeApiRequest('/users/reset_password/check', 'POST', data);
+        let response = await this.api._makeApiRequest('/basic/users/reset_password/check', 'POST', data);
         return this.api._prepareApiResponse(response);
     }
 
@@ -92,7 +92,7 @@ export default class UsersEndpoint {
             'password': password,
             'password_check': password_check,
         }
-        let response = await this.api._makeApiRequest('/users/reset_password', 'POST', data);
+        let response = await this.api._makeApiRequest('/basic/users/reset_password', 'POST', data);
         return this.api._prepareApiResponse(response);
     }
 
@@ -107,7 +107,7 @@ export default class UsersEndpoint {
         let data = {
             'email': email,
         }
-        let response = await this.api._makeApiRequest('/users/verify_email/resend', 'POST', data);
+        let response = await this.api._makeApiRequest('/basic/users/verify_email/resend', 'POST', data);
         return this.api._prepareApiResponse(response);
     }
 }

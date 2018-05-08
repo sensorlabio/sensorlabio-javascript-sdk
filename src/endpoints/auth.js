@@ -26,7 +26,7 @@ export default class AuthEndpoint {
             'email': email,
             'password': password,
         }
-        let response = await this.api._makeApiRequest('/auth/token', 'POST', data);
+        let response = await this.api._makeApiRequest('/v1/auth/token', 'POST', data);
         let result = this._prepareApiResponse(response);
         this.api.setToken(result.token);
         return result;

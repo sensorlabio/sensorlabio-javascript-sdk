@@ -20,7 +20,7 @@ export default class ProfileEndpoint {
      * @returns {Promise.<ApiResponse>}
      */
     async get() {
-        let response = await this.api._makeApiRequest('/profile', 'GET', null, null, true);
+        let response = await this.api._makeApiRequest('/v1/profile', 'GET', null, null, true);
         let result = null;
         try {
             result = this._prepareApiResponse(response);
@@ -46,7 +46,7 @@ export default class ProfileEndpoint {
             'new_password': new_password,
             'new_password_check': new_password_check,
         };
-        let response = await this.api._makeApiRequest('/profile/change_password', 'POST', data, null, true);
+        let response = await this.api._makeApiRequest('/v1/profile/change_password', 'POST', data, null, true);
         return this.api._prepareApiResponse(response);
     }
 

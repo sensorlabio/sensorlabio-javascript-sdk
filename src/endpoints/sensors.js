@@ -41,7 +41,7 @@ export default class SensorsEndpoint {
             imei: options.imei,
             sort: options.sort,
         }
-        let response = await this.api._makeApiRequest('/sensors', 'GET', {}, params, true);
+        let response = await this.api._makeApiRequest('/v1/sensors', 'GET', {}, params, true);
         return this._prepareSensorListResponse(response);
     }
 
@@ -53,7 +53,7 @@ export default class SensorsEndpoint {
      * @returns {Promise.<ApiResponse>}
      */
     async one(sensor_id) {
-        let response = await this.api._makeApiRequest('/sensors/' + sensor_id, 'GET', {}, {}, true);
+        let response = await this.api._makeApiRequest('/v1/sensors/' + sensor_id, 'GET', {}, {}, true);
         return this._prepareSensorResponse(response);
     }
 
