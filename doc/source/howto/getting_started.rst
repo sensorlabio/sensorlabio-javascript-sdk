@@ -24,11 +24,13 @@ You can specify another url to REST API like this:
 
 .. code-block:: javascript
 
-   let api = new SensorlabApi('http://staging.sensorlab.io/api/v1/');
+   let api = new SensorlabApi('http://testing.sensorlab.io/api');
+
+.. note:: There's no need to append `/v1` to the url, endpoint methods will handle it.
 
 You can also provide saved JWT using `setToken` method:
 
 .. code-block:: javascript
 
-    let api = new SensorlabApi('http://staging.sensorlab.io/api/v1/');
+    let api = new SensorlabApi('http://testing.sensorlab.io/api');
     api.setToken(token);
