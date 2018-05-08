@@ -5,7 +5,6 @@ How to use SDK
     :maxdepth: 3
 
     getting_started
-    users/index
     auth/index
     profile/index
     sensors/index
