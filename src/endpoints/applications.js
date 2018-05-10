@@ -65,7 +65,7 @@ export default class ApplicationsEndpoint {
             'description': description,
         }
         let response = await this.api._makeApiRequest('/v1/applications', 'POST', data);
-        return this.api._prepareApiResponse(response);
+        return this._prepareApplicationsCreateResponse(response);
     }
 
     /**
@@ -76,7 +76,7 @@ export default class ApplicationsEndpoint {
      * @param {string} name - application's name
      * @param {string} description - users's description
      */
-    async create(application_id, name, description = null) {
+    async update(application_id, name, description = null) {
         let data = {
             'name': name,
             'description': description,
@@ -132,6 +132,31 @@ export default class ApplicationsEndpoint {
         }
         if (response.status == 200) { //normal response
             return new Application(this.api, response.data);
+        } else if (response.status == 401) { //401 Unauthorized error
+            throw new ApiResponse(false, response.status, 0, response.data);
+        } else {
+            throw new ApiResponse(false, response.status, 0, response.data.message);
+        }
+    }
+
+    /**
+     * Return list of application (or throw error!).
+     *
+     * @param response
+     * @returns {ApiResponse}
+     * @throws {ApiResponse}
+     * @private
+     */
+    _prepareApplicationsCreateResponse(response) {
+        if (!response) {
+            throw new ApiResponse(false, 0, 0, 'Connection refused');
+        }
+        if (response.status == 200) { //normal response
+            if (response.data.success) {
+                return new Application(this.api, response.data.application);
+            } else {
+                throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message);
+            }
         } else if (response.status == 401) { //401 Unauthorized error
             throw new ApiResponse(false, response.status, 0, response.data);
         } else {
