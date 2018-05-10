@@ -48,7 +48,7 @@ export default class ApplicationsEndpoint {
      * @returns {Promise.<ApiResponse>}
      */
     async get(application_id) {
-        let response = await this.api._makeApiRequest('/v1/applications/' + application_id, 'GET', {}, params, true);
+        let response = await this.api._makeApiRequest('/v1/applications/' + application_id, 'GET', {}, {}, true);
         return this._prepareApplicationResponse(response);
     }
 
@@ -93,7 +93,7 @@ export default class ApplicationsEndpoint {
      * @returns {Promise.<ApiResponse>}
      */
     async delete(application_id) {
-        let response = await this.api._makeApiRequest('/v1/applications/' + application_id, 'DELETE', {}, params, true);
+        let response = await this.api._makeApiRequest('/v1/applications/' + application_id, 'DELETE', {}, {}, true);
         return this.api._prepareApiResponse(response);
     }
 
