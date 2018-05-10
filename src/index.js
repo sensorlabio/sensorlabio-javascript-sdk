@@ -2,6 +2,7 @@ let axios = require('axios');
 
 import UsersEndpoint from './endpoints/users';
 import AuthEndpoint from './endpoints/auth';
+import ApplicationsEndpoint from './endpoints/applications';
 import ProfileEndpoint from './endpoints/profile';
 import SensorsEndpoint from './endpoints/sensors';
 import MeasurementsEndpoint from './endpoints/measurements';
@@ -50,6 +51,14 @@ export default class SensorlabApi {
          * @type {ProfileEndpoint}
          */
         this.profile = new ProfileEndpoint(this);
+
+        /**
+         * Applications endpoints.
+         *
+         * @member SensorlabApi#applications
+         * @type {ApplicationsEndpoint}
+         */
+        this.applications = new ApplicationsEndpoint(this);
 
         /**
          * Sensor endpoint.
