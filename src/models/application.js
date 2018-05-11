@@ -29,7 +29,7 @@ export default class Application {
         /**
          * Application name.
          *
-         * @member Application#name
+         * @member Application#description
          * @type {string}
          */
         this.description = data.description;

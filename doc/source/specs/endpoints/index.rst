@@ -6,5 +6,6 @@ Endpoints classes
 
     auth
     profile
+    applications
     sensors
     measurements

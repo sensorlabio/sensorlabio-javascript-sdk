@@ -5,5 +5,6 @@ Response classes
     :maxdepth: 2
 
     api
+    applications
     sensors
     measurements

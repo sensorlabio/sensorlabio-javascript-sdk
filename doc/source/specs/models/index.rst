@@ -6,5 +6,6 @@ Models classes
 
     user
     profile
+    application
     sensor
     measurement

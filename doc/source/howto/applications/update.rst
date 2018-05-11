@@ -1,0 +1,57 @@
+Update application
+~~~~~~~~~~~~~~~~~~
+
+This is how you can update applications:
+
+.. code-block:: javascript
+
+    let api = new SensorlabApi();
+    api.applications.update(application_id, name, description)
+             .then((response) => {
+                console.log(response);
+             })
+             .catch((response) => {
+                console.log(response);
+             });
+
+If success you will get promise with response type ApiResponse with `code=100`, `status=200` and `success=true`
+
+.. code-block:: javascript
+
+    let api = new SensorlabApi();
+    api.applications.update(application_id, name, description)
+             .then((response) => {
+                console.log(response.code);
+                console.log(response.status);
+                console.log(response.success);
+                console.log(response.message);
+             });
+
+Method will throw ApiResponse as exception on any error.
+
+.. code-block:: javascript
+
+    let api = new SensorlabApi();
+    api.applications.update(application_id, name, description)
+             .catch((response) => {
+                console.log(response.code);
+                console.log(response.status);
+                console.log(response.success);
+                console.log(response.message);
+             });
+
+Output::
+
+    1
+    200
+    false
+    Please, provide name field. This cannot be empty.
+
+Messages for codes:
+
+    - `code=1` - `"Please, provide name field. This cannot be empty."`
+
+.. note:: Messages are just text information and can be changed by developers.
+
+ApiResponse will have status `401` with `message`=`Unauthorized` if credentials are wrong.
+ApiResponse will have status `404` with `message`=`Not Found` if application doesn't exist.

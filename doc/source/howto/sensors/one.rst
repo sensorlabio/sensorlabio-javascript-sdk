@@ -27,11 +27,11 @@ On success you will get promise with `Sensor` model object.
                 console.log(sensors_response.name);
              });
 
-Parameters of `Sensors`:
+Parameters of `Sensor`:
 
     - `id` - id in the database.
     - `uniqueid` - uniqueid parameter.
-    - `uniqueid` - sensors imei.
+    - `imei` - sensors imei.
     - `name` - sensors name.
 
 Method will throw ApiResponse as exception on any error.

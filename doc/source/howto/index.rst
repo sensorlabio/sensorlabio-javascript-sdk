@@ -7,5 +7,6 @@ How to use SDK
     getting_started
     auth/index
     profile/index
+    applications/index
     sensors/index
     measurements/index
