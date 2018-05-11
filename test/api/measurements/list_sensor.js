@@ -58,7 +58,6 @@ describe('Measurements endpoint', () => {
         it('should get list of measurements by type', (done) => {
             sensor.measurements.list({ type: first_type })
                 .then((response) => {
-                console.log(first_type);
                     response.measurements.should.be.a('array').lengthOf(50);
                     response.should.have.property('count');
                     response.should.have.property('pages');

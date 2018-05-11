@@ -7,6 +7,7 @@ require('./api/applications/list');
 require('./api/applications/get');
 require('./api/applications/create');
 require('./api/applications/update');
+require('./api/applications/delete');
 require('./api/sensors/list');
 require('./api/sensors/get');
 require('./api/measurements/list');

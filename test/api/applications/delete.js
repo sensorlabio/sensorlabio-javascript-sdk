@@ -12,9 +12,9 @@ let test_passw = 'test';
 let first_app = null;
 
 describe('Applications endpoints', () => {
-    describe('GET /applications/:id', () => {
+    describe('DELETE /applications/:id', () => {
         it('should get an 401 status error without authorization', (done) => {
-            api.applications.get()
+            api.applications.delete()
                 .catch((response) => {
                     response.success.should.eq(false);
                     response.status.should.eq(401);
@@ -41,19 +41,19 @@ describe('Applications endpoints', () => {
                 });
         });
 
-        it('should get app', (done) => {
-            api.applications.get(first_app.id)
+        it('should delete app', (done) => {
+            api.applications.delete(first_app.id)
                 .then((response) => {
-                    response.should.have.property('id').eq(first_app.id);
-                    response.should.have.property('name').eq(first_app.name);
-                    response.should.have.property('description').eq(first_app.description);
-                    response.should.have.property('created');
+                    response.status.should.eq(200);
+                    response.should.have.property('success').eq(true);
+                    response.should.have.property('code').eq(100);
+                    response.should.have.property('message');
                     done();
                 });
         });
 
-        it('should get 404 error on uknown app', (done) => {
-            api.applications.get('someid')
+        it('should get 404 error on deleted app', (done) => {
+            api.applications.get(first_app.id)
                 .catch((response) => {
                     response.status.should.eq(404);
                     done();
