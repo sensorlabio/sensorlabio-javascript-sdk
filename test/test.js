@@ -6,6 +6,7 @@ require('./api/profile/change_password');
 require('./api/applications/list');
 require('./api/applications/get');
 require('./api/applications/create');
+require('./api/applications/update');
 require('./api/sensors/list');
 require('./api/sensors/get');
 require('./api/measurements/list');
