@@ -155,22 +155,28 @@ export default class SensorlabApi {
         if (!response) {
             throw new ApiResponse(false, 0, 0, 'Connection refused');
         }
-        if (response.status == 200) { //normal response
-            if (response.data.token) {
-                return new ApiResponse(true, response.status, 100, null, response.data.token);
-            } else if (response.data.success) {
-                return new ApiResponse(response.data.success, response.status, response.data.code, response.data.message);
-            } else {
-                throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message);
-            }
-        } else if (response.status == 401) { //401 Unauthorized error
-            throw new ApiResponse(false, response.status, 0, response.data);
-        } else {
-            let message = null;
-            if ('message' in response.data) {
-                message = response.data.message;
-            }
-            throw new ApiResponse(false, response.status, 0, message);
+        switch (response.status) {
+            case 200:
+                if (response.data.token) {
+                    return new ApiResponse(true, response.status, 100, null, response.data.token);
+                } else if (response.data.success) {
+                    return new ApiResponse(response.data.success, response.status, response.data.code, response.data.message);
+                } else {
+                    throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message);
+                }
+                break;
+            case 401:
+                throw new ApiResponse(false, response.status, 0, response.data);
+                break;
+            case 422:
+                throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message, response.data.errors);
+                break;
+            default:
+                let message = null;
+                if ('message' in response.data) {
+                    message = response.data.message;
+                }
+                throw new ApiResponse(false, response.status, 0, message);
         }
     }
 }

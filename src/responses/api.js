@@ -11,7 +11,7 @@ export default class ApiResponse {
      * @param {string} message
      * @param {string} token
      */
-    constructor(success, status, code, message = null) {
+    constructor(success, status, code, message = null, errors = []) {
         /**
          * Response was success or returned with errors
          *
@@ -43,5 +43,13 @@ export default class ApiResponse {
          * @type {string}
          */
         this.message = message;
+
+        /**
+         * Validation errors.
+         *
+         * @member ApiResponse#errors
+         * @type {Array}
+         */
+        this.errors = errors;
     }
 }
