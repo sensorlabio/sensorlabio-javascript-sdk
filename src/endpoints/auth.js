@@ -48,8 +48,8 @@ export default class AuthEndpoint {
         if (response.status == 200) { //normal response
             return new User(this.api, response.data);
         } else if (response.status == 401) { //401 Unauthorized error
-            if ('code' in response) {
-                throw new ApiResponse(false, response.status, response.code, response.data.message);
+            if ('code' in response.data) {
+                throw new ApiResponse(false, response.status, response.data.code, response.data.message);
             } else {
                 throw new ApiResponse(false, response.status, 0, response.data);
             }
