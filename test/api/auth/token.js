@@ -17,8 +17,8 @@ describe('Authorization endpoints', () => {
         it('should get an 401 status error with wrong email/password', (done) => {
             api.auth.token('somegibberishemail@someotherlongstring.com', 'someuknownpasswordverylongbutitdoesntexits')
                 .catch(function(response) {
-                    response.success.should.eq(false);
-                    response.status.should.eq(401);
+                    response.should.have.property('success').eq(false);
+                    response.should.have.property('status').eq(401);
                     done();
                 });
         });

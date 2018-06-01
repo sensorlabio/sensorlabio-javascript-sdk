@@ -1,4 +1,5 @@
 let chai = require('chai');
+var chaiSubset = require('chai-subset');
 let should = chai.should();
 let expect = chai.expect;
 import SensorlabApi from '../../../src';
@@ -11,6 +12,8 @@ let test_passw = 'test';
 
 let test_user = null;
 let test_profile = null;
+
+chai.use(chaiSubset);
 
 describe('Profile password change endpoint', () => {
     /**
@@ -40,9 +43,12 @@ describe('Profile password change endpoint', () => {
             test_profile.change_password()
                 .catch(function(response) {
                     response.success.should.eq(false);
-                    response.status.should.eq(200);
-                    response.code.should.eq(1);
-                    expect(response.message).not.empty;
+                    response.status.should.eq(422);
+                    response.code.should.eq(422);
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 1, param: 'old_password'}]);
+                    response.errors.should.containSubset([{code: 2, param: 'new_password'}]);
+                    response.errors.should.containSubset([{code: 3, param: 'new_password_check'}]);
                     done();
                 });
         });
@@ -51,9 +57,12 @@ describe('Profile password change endpoint', () => {
                 test_profile.change_password('verywrongpassword')
                 .catch(function(response) {
                     response.success.should.eq(false);
-                    response.status.should.eq(200);
-                    response.code.should.eq(2);
-                    expect(response.message).not.empty;
+                    response.status.should.eq(422);
+                    response.code.should.eq(422);
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 2, param: 'new_password'}]);
+                    response.errors.should.containSubset([{code: 3, param: 'new_password_check'}]);
+                    response.errors.should.containSubset([{code: 4, param: 'old_password'}]);
                     done();
                 });
         });
@@ -62,9 +71,11 @@ describe('Profile password change endpoint', () => {
             test_profile.change_password(test_passw)
                 .catch(function(response) {
                     response.success.should.eq(false);
-                    response.status.should.eq(200);
-                    response.code.should.eq(3);
-                    expect(response.message).not.empty;
+                    response.status.should.eq(422);
+                    response.code.should.eq(422);
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 2, param: 'new_password'}]);
+                    response.errors.should.containSubset([{code: 3, param: 'new_password_check'}]);
                     done();
                 });
         });
@@ -73,9 +84,10 @@ describe('Profile password change endpoint', () => {
             test_profile.change_password(test_passw, 'newpass')
                 .catch(function(response) {
                     response.success.should.eq(false);
-                    response.status.should.eq(200);
-                    response.code.should.eq(3);
-                    expect(response.message).not.empty;
+                    response.status.should.eq(422);
+                    response.code.should.eq(422);
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 3, param: 'new_password_check'}]);
                     done();
                 });
         });
@@ -84,9 +96,10 @@ describe('Profile password change endpoint', () => {
             test_profile.change_password(test_passw, null, 'newpass')
                 .catch(function(response) {
                     response.success.should.eq(false);
-                    response.status.should.eq(200);
-                    response.code.should.eq(3);
-                    expect(response.message).not.empty;
+                    response.status.should.eq(422);
+                    response.code.should.eq(422);
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 2, param: 'new_password'}]);
                     done();
                 });
         });
@@ -95,9 +108,10 @@ describe('Profile password change endpoint', () => {
             test_profile.change_password(test_passw, 'Newpass', 'newpass')
                 .catch(function(response) {
                     response.success.should.eq(false);
-                    response.status.should.eq(200);
-                    response.code.should.eq(4);
-                    expect(response.message).not.empty;
+                    response.status.should.eq(422);
+                    response.code.should.eq(422);
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 5, param: 'new_password_check'}]);
                     done();
                 });
         });

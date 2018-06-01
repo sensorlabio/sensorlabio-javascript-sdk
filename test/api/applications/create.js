@@ -1,4 +1,5 @@
 let chai = require('chai');
+var chaiSubset = require('chai-subset');
 let should = chai.should();
 let expect = chai.expect;
 import SensorlabApi from '../../../src';
@@ -32,10 +33,12 @@ describe('Applications endpoints', () => {
         it('should return error if there is no `name` field', (done) => {
             api.applications.create()
                 .catch((response) => {
-                    response.status.should.eq(200);
+                    response.status.should.eq(422);
                     response.should.have.property('success').eq(false);
-                    response.should.have.property('code').eq(1);
-                    response.should.have.property('message');
+                    response.should.have.property('code').eq(422);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 1, param: 'name'}]);
                     done();
                 });
         });

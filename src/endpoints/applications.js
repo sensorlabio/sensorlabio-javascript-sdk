@@ -151,16 +151,22 @@ export default class ApplicationsEndpoint {
         if (!response) {
             throw new ApiResponse(false, 0, 0, 'Connection refused');
         }
-        if (response.status == 200) { //normal response
-            if (response.data.success) {
-                return new Application(this.api, response.data.application);
-            } else {
-                throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message);
-            }
-        } else if (response.status == 401) { //401 Unauthorized error
-            throw new ApiResponse(false, response.status, 0, response.data);
-        } else {
-            throw new ApiResponse(false, response.status, 0, response.data.message);
+        switch (response.status) {
+            case 200:
+                if (response.data.success) {
+                    return new Application(this.api, response.data.application);
+                } else {
+                    throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message);
+                }
+                break;
+            case 401:
+                throw new ApiResponse(false, response.status, 0, response.data);
+                break;
+            case 422:
+                throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message, response.data.errors);
+                break;
+            default:
+                throw new ApiResponse(false, response.status, 0, response.data.message);
         }
     }
 }
