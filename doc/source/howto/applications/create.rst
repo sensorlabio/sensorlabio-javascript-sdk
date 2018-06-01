@@ -51,17 +51,18 @@ Method will throw ApiResponse as exception on any error.
                 console.log(response.status);
                 console.log(response.success);
                 console.log(response.message);
+                response.errors.forEach((error) => { //validation errors
+                   console.log(error.code);
+                   console.log(error.message);
+                   console.log(error.param);
+                });
              });
 
-Output::
-
-    1
-    200
-    false
-    Please, provide name field. This cannot be empty.
-
-Messages for codes:
+Codes and messages for validation errors:
 
     - `code=1` - `"Please, provide name field. This cannot be empty."`
 
 .. note:: Messages are just text information and can be changed by developers.
+
+ApiResponse will have status `401` with `message`=`Unauthorized` if credentials are wrong.
+Action will throw `ApiResponse` with status=`422` on validation error.

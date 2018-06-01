@@ -45,21 +45,20 @@ Method will throw `ApiResponse` as exception on any error.
                 console.log(response.status);
                 console.log(response.success);
                 console.log(response.message);
+                response.errors.forEach((error) => { //validation errors
+                   console.log(error.code);
+                   console.log(error.message);
+                   console.log(error.param);
+                });
              });
 
-Output::
+Codes and messages for validation errors:
 
-    1
-    200
-    false
-    Please, provide old password. This cannot be empty.
-
-Messages for codes:
-
-    - `code=100` - `"New password is set for user."`
-    - `code=1` - `"Please, provide old password. This cannot be empty."`
-    - `code=2` - `"Password is incorrect. Please provide you current password."`
-    - `code=3` - `"You must provide both \"new password\" and \"new password check\"."`
-    - `code=4` - `"Both \"new password\" and \"new password check\" values must be equal."`
+    - `code=1` - `Please, provide old password. This cannot be empty.`
+    - `code=2` - `You must provide new password.`
+    - `code=3` - `You must provide new password check.`
+    - `code=4` - `Password is incorrect. Please provide you current password.`
+    - `code=5` - `Both "new password" and "new password check" values must be equal.`
 
 Action will throw `ApiResponse` with status=`401` on authorization error.
+Action will throw `ApiResponse` with status=`422` on validation error.
