@@ -52,5 +52,7 @@ Codes and messages for validation errors:
 .. note:: Messages are just text information and can be changed by developers.
 
 ApiResponse will have status `401` with `message`=`Unauthorized` if credentials are wrong.
+
 ApiResponse will have status `404` with `message`=`Not Found` if application doesn't exist.
+
 Action will throw `ApiResponse` with status=`422` on validation error.
