@@ -1,6 +1,6 @@
 import ApiResponse from '../responses/api';
 import MeasurementsResponse from '../responses/measurements';
-import Measurment from '../models/measurement';
+import Measurement from '../models/measurement';
 
 /**
  * Class for /measurements/* endpoints.
@@ -101,7 +101,7 @@ export default class MeasurementsEndpoint {
             throw new ApiResponse(false, 0, 0, 'Connection refused');
         }
         if (response.status == 200) { //normal response
-            return new Measurment(this.api, response.data);
+            return new Measurement(this.api, response.data);
         } else if (response.status == 401) { //401 Unauthorized error
             throw new ApiResponse(false, response.status, 0, response.data);
         } else {

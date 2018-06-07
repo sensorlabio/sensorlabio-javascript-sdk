@@ -30,6 +30,22 @@ export default class MeasurementsResponse {
         this.count = data.count;
 
         /**
+         * Next measurement id for pagination.
+         *
+         * @member MeasurementsResponse#next
+         * @type {string}
+         */
+        this.next = data.next;
+
+        /**
+         * Previous measurement id for pagination.
+         *
+         * @member MeasurementsResponse#prev
+         * @type {string}
+         */
+        this.prev = data.prev;
+
+        /**
          * List of measurements.
          *
          * @member MeasurementsResponse#measurements
