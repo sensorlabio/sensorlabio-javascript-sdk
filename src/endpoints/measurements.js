@@ -29,14 +29,12 @@ export default class MeasurementsEndpoint {
         if (options === undefined) options = {};
         if (options.sensor_id === undefined) options.sensor_id = null;
         if (options.type === undefined) options.type = null;
-        if (options.page === undefined) options.page = 1;
-        if (options.sort === undefined) options.sort = null;
+        if (options.next === undefined) options.next = null;
 
         let params = {
-            page: options.page,
+            next: options.next,
             type: options.type,
             sensor_id: options.sensor_id,
-            sort: options.sort,
         }
         let response = await this.api._makeApiRequest('/v1/measurements', 'GET', {}, params, true);
         return this._prepareMeasurementsListResponse(response);
