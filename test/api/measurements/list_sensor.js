@@ -26,14 +26,12 @@ describe('Measurements endpoint', () => {
             api.sensors.list()
                 .then((response) => {
                     response.sensors.should.be.a('array').lengthOf(50);
-                    response.should.have.property('count');
-                    response.should.have.property('pages');
                     sensor = response.sensors[0];
                     done();
                 });
         });
 
-        it('should get list of measurements default page=1', (done) => {
+        it('should get list of measurements', (done) => {
             sensor.measurements.list()
                 .then((response) => {
                     response.measurements.should.be.a('array').lengthOf(50);
@@ -72,6 +70,23 @@ describe('Measurements endpoint', () => {
                         measurement.should.have.property('created');
                         measurement.should.have.property('measurementgroup');
                         first_type = measurement.type;
+                    });
+                    done();
+                });
+        });
+
+        it('should get 422 error for bad `next` parameter', (done) => {
+            sensor.measurements.list({ next: 123 })
+                .catch((response) => {
+                    response.should.have.property('status').eq(422);
+                    response.should.have.property('success').eq(false);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
+                    response.errors.forEach((error) => {
+                        error.should.be.a('object');
+                        error.should.have.property('message');
+                        error.should.have.property('code').eq(2);
+                        error.should.have.property('param').eq('next');
                     });
                     done();
                 });

@@ -77,12 +77,20 @@ export default class MeasurementsEndpoint {
         if (!response) {
             throw new ApiResponse(false, 0, 0, 'Connection refused');
         }
-        if (response.status == 200) { //normal response
-            return new MeasurementsResponse(this.api, response.data);
-        } else if (response.status == 401) { //401 Unauthorized error
-            throw new ApiResponse(false, response.status, 0, response.data);
-        } else {
-            throw new ApiResponse(false, response.status, 0, response.data.message);
+        switch (response.status) {
+            case 200:
+                return new MeasurementsResponse(this.api, response.data);
+                break;
+            case 401:
+                throw new ApiResponse(false, response.status, 0, response.data);
+                break;
+            case 422:
+                console.log('422 test');
+                throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message, response.data.errors);
+                break;
+            default:
+                console.log('400 test');
+                throw new ApiResponse(false, response.status, 0, response.data.message);
         }
     }
 

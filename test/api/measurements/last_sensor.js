@@ -26,8 +26,6 @@ describe('Measurements endpoint', () => {
             api.sensors.list()
                 .then((response) => {
                     response.sensors.should.be.a('array').lengthOf(50);
-                    response.should.have.property('count');
-                    response.should.have.property('pages');
                     sensor = response.sensors[0];
                     done();
                 });
@@ -44,7 +42,6 @@ describe('Measurements endpoint', () => {
                     measurement.value.should.be.a('array');
                     measurement.should.have.property('received');
                     measurement.should.have.property('created');
-                    measurement.should.have.property('measurementgroup');
                     first_type = measurement.type;
                     done();
                 });
@@ -59,9 +56,7 @@ describe('Measurements endpoint', () => {
                     measurement.should.have.property('type');
                     measurement.should.have.property('value');
                     measurement.value.should.be.a('array');
-                    measurement.should.have.property('received');
                     measurement.should.have.property('created');
-                    measurement.should.have.property('measurementgroup');
                     first_type = measurement.type;
                     done();
                 });
