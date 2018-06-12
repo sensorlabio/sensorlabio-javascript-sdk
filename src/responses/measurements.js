@@ -14,22 +14,6 @@ export default class MeasurementsResponse {
         this.api = api;
 
         /**
-         * Total amount of pages available.
-         *
-         * @member MeasurementsResponse#pages
-         * @type {number}
-         */
-        this.pages = data.pages;
-
-        /**
-         * Total amount of measurements available.
-         *
-         * @member MeasurementsResponse#count
-         * @type {number}
-         */
-        this.count = data.count;
-
-        /**
          * Next measurement id for pagination.
          *
          * @member MeasurementsResponse#next

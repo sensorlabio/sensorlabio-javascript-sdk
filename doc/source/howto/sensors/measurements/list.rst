@@ -26,34 +26,41 @@ On success you will get promise with `MeasurementsResponse` object.
 
 Parameters of `MeasurementsResponse`:
 
-    - `page` - amount of pages available.
-    - `count` - amount of measurements total.
+    - `next` - next measurement id for pagination.
+    - `prev` - previous measurement id for pagination.
     - `measurements` - an array of measurements on this page. This is an array of `Measurements` models objects.
 
 You can provide `options` as an object with this parameters:
 
-    - `page` - by default will 1.
+    - `next` - by default will null.
     - `type` - filter by measurement type.
-    - `sort` - sorting parameter, looks like "`fieldname,order`". Example: "`name,asc`"
-        Possible sort fields:
-            - `created`
-            - `type`
-            - `value`
-        Possible order types:
-            - `asc`
-            - `desc`
+    - `sensor_id` - filter by sensor id.
 
 Method will throw ApiResponse as exception on any error.
 
 .. code-block:: javascript
 
-    sensor.measurements.list(options)
+    let api = new SensorlabApi();
+    api.measurements.list()
              .catch((response) => {
+                console.log(response.code);
                 console.log(response.status);
+                console.log(response.success);
+                console.log(response.message);
+                response.errors.forEach((error) => { //validation errors
+                   console.log(error.code);
+                   console.log(error.message);
+                   console.log(error.param);
+                });
              });
 
-Output::
+Codes and messages for validation errors:
 
-    401
+    - `code=1` - `field=sensor_id` - `This is not correct id format.`.
+    - `code=2` - `field=next` - `This is not correct id format.`.
 
-There are no codes or special error for this action. ApiResponse will have status `401` with message `Unauthorized` if credentials are wrong.
+.. note:: Messages are just text information and can be changed by developers.
+
+ApiResponse will have status `401` with `message`=`Unauthorized` if credentials are wrong.
+
+Action will throw `ApiResponse` with status=`422` on validation error.

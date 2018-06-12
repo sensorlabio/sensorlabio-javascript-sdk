@@ -43,28 +43,12 @@ export default class Measurement {
         this.value = data.value;
 
         /**
-         * Received date.
-         *
-         * @member Measurement#received
-         * @type {Date}
-         */
-        this.received = data.received;
-
-        /**
          * Created date.
          *
          * @member Measurement#created
          * @type {Date}
          */
         this.created = data.created;
-
-        /**
-         * Measurement group.
-         *
-         * @member Measurement#measurementgroup
-         * @type {string}
-         */
-        this.measurementgroup = data.measurementgroup;
     }
 
     /**

@@ -85,11 +85,9 @@ export default class MeasurementsEndpoint {
                 throw new ApiResponse(false, response.status, 0, response.data);
                 break;
             case 422:
-                console.log('422 test');
                 throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message, response.data.errors);
                 break;
             default:
-                console.log('400 test');
                 throw new ApiResponse(false, response.status, 0, response.data.message);
         }
     }

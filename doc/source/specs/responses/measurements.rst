@@ -2,4 +2,4 @@ MeasurementsResponse class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. js:autoclass:: MeasurementsResponse
-    :members: pages, count, measurements
+    :members: next, prev, measurements

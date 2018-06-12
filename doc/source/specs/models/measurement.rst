@@ -2,5 +2,5 @@ Measurement class
 ~~~~~~~~~~~~~~~~~
 
 .. js:autoclass:: Measurement
-    :members: id, sensor_id, type, value, received, created, measurementgroup, sensor
+    :members: id, sensor_id, type, value, created
     :private-members:
