@@ -58,6 +58,14 @@ export default class Sensor {
          */
         this.batteryCharge = data.batteryCharge;
 
+        /**
+         * Is battery charging?
+         *
+         * @member Sensor#isBatteryCharging
+         * @type {Number}
+         */
+        this.isBatteryCharging = data.isBatteryCharging;
+
         let self = this;
 
         /**
