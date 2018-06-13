@@ -62,9 +62,17 @@ export default class Sensor {
          * Is battery charging?
          *
          * @member Sensor#isBatteryCharging
-         * @type {Number}
+         * @type {Boolean}
          */
         this.isBatteryCharging = data.isBatteryCharging;
+
+        /**
+         * Is sensor connected and online?
+         *
+         * @member Sensor#isOnline
+         * @type {Boolean}
+         */
+        this.isOnline = data.isOnline;
 
         let self = this;
 
