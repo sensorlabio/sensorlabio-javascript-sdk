@@ -50,6 +50,14 @@ export default class Sensor {
          */
         this.created = data.created;
 
+        /**
+         * Battery charge.
+         *
+         * @member Sensor#batteryCharge
+         * @type {Number}
+         */
+        this.batteryCharge = data.batteryCharge;
+
         let self = this;
 
         /**
