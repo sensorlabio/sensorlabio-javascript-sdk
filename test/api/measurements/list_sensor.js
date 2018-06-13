@@ -35,8 +35,7 @@ describe('Measurements endpoint', () => {
             sensor.measurements.list()
                 .then((response) => {
                     response.measurements.should.be.a('array').lengthOf(50);
-                    response.should.have.property('count');
-                    response.should.have.property('pages');
+                    response.should.have.property('next');
                     response.measurements.forEach((measurement) => {
                         measurement.should.be.a('object');
                         measurement.should.have.property('id');
@@ -44,9 +43,7 @@ describe('Measurements endpoint', () => {
                         measurement.should.have.property('type');
                         measurement.should.have.property('value');
                         measurement.value.should.be.a('array');
-                        measurement.should.have.property('received');
                         measurement.should.have.property('created');
-                        measurement.should.have.property('measurementgroup');
                         first_type = measurement.type;
                     });
                     done();
@@ -57,8 +54,7 @@ describe('Measurements endpoint', () => {
             sensor.measurements.list({ type: first_type })
                 .then((response) => {
                     response.measurements.should.be.a('array').lengthOf(50);
-                    response.should.have.property('count');
-                    response.should.have.property('pages');
+                    response.should.have.property('next');
                     response.measurements.forEach((measurement) => {
                         measurement.should.be.a('object');
                         measurement.should.have.property('id');
@@ -66,9 +62,7 @@ describe('Measurements endpoint', () => {
                         measurement.should.have.property('type').eq(first_type);
                         measurement.should.have.property('value');
                         measurement.value.should.be.a('array');
-                        measurement.should.have.property('received');
                         measurement.should.have.property('created');
-                        measurement.should.have.property('measurementgroup');
                         first_type = measurement.type;
                     });
                     done();
