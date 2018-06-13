@@ -55,6 +55,7 @@ describe('Sensors endpoint', () => {
                         sensor.should.have.property('uniqueid');
                         sensor.should.have.property('imei');
                         sensor.should.have.property('name').eq(first_sensor_name);
+                        sensor.should.have.property('batteryCharge');
                     });
                     response.should.have.property('count');
                     response.should.have.property('pages');
@@ -73,6 +74,7 @@ describe('Sensors endpoint', () => {
                         sensor.should.have.property('uniqueid');
                         sensor.should.have.property('imei').eq(first_sensor_imei);
                         sensor.should.have.property('name');
+                        sensor.should.have.property('batteryCharge');
                     });
                     response.should.have.property('count');
                     response.should.have.property('pages');
@@ -91,6 +93,7 @@ describe('Sensors endpoint', () => {
                         sensor.should.have.property('uniqueid').eq(first_sensor_uniqueid);
                         sensor.should.have.property('imei');
                         sensor.should.have.property('name');
+                        sensor.should.have.property('batteryCharge');
                     });
                     response.should.have.property('count');
                     response.should.have.property('pages');
@@ -112,6 +115,7 @@ describe('Sensors endpoint', () => {
                         sensor.should.have.property('uniqueid').eq(first_sensor_uniqueid);
                         sensor.should.have.property('imei').eq(first_sensor_imei);
                         sensor.should.have.property('name').eq(first_sensor_name);
+                        sensor.should.have.property('batteryCharge');
                     });
                     response.should.have.property('count');
                     response.should.have.property('pages');

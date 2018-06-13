@@ -43,11 +43,12 @@ describe('Sensors endpoint', () => {
 
         it('should get sensor', (done) => {
             api.sensors.one(first_sensor_id)
-                .then((response) => {
-                    response.should.have.property('id').eq(first_sensor_id);
-                    response.should.have.property('uniqueid');
-                    response.should.have.property('imei');
-                    response.should.have.property('name');
+                .then((measurement) => {
+                    measurement.should.have.property('id').eq(first_sensor_id);
+                    measurement.should.have.property('uniqueid');
+                    measurement.should.have.property('imei');
+                    measurement.should.have.property('name');
+                    measurement.should.have.property('batteryCharge');
                     done();
                 });
         });
