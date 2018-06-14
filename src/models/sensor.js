@@ -74,6 +74,8 @@ export default class Sensor {
          */
         this.isOnline = data.isOnline;
 
+        this.token = data.token;
+
         let self = this;
 
         /**
