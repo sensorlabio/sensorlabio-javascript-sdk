@@ -33,6 +33,9 @@ export default class SensorsEndpoint {
         if (options.uniqueid === undefined) options.uniqueid = null;
         if (options.imei === undefined) options.imei = null;
         if (options.sort === undefined) options.sort = null;
+        if (options.online_status === undefined) options.online_status = null;
+        if (options.battery_charge_min === undefined) options.battery_charge_min = null;
+        if (options.battery_charge_max === undefined) options.battery_charge_max = null;
 
         let params = {
             page: options.page,
@@ -40,6 +43,7 @@ export default class SensorsEndpoint {
             uniqueid: options.uniqueid,
             imei: options.imei,
             sort: options.sort,
+            online_status: options.online_status,
         }
         let response = await this.api._makeApiRequest('/v1/sensors', 'GET', {}, params, true);
         return this._prepareSensorListResponse(response);
