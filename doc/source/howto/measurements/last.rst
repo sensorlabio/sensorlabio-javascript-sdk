@@ -21,9 +21,7 @@ On success you will get promise with `Measurement` model object.
                 console.log(measurement.sensor_id);
                 console.log(measurement.type);
                 console.log(measurement.value);
-                console.log(measurement.received);
                 console.log(measurement.created);
-                console.log(measurement.measurementgroup);
              });
 
 Parameters of `Measurement` model object:
@@ -32,9 +30,7 @@ Parameters of `Measurement` model object:
     - `sensor_id` - id of `Sensor`
     - `type` - measurement type
     - `value` - value array
-    - `received` - datetime measurement was received
     - `created` - datetime measurement was created
-    - `measurementgroup` - measurement group
 
 You can provide `options` as an object with this parameters:
 

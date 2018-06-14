@@ -31,8 +31,11 @@ Parameters of `Sensor`:
 
     - `id` - id in the database.
     - `uniqueid` - uniqueid parameter.
-    - `imei` - sensors imei.
-    - `name` - sensors name.
+    - `imei` - Sensor's imei.
+    - `name` - Sensor's name.
+    - `batteryCharge` - Sensor's battery charge in percent.
+    - `isBatteryCharging` - Indicates if battery is charging or not.
+    - `isOnline` - Indicates if sensor is online and sending data or not.
 
 Method will throw ApiResponse as exception on any error.
 

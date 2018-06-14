@@ -32,6 +32,16 @@ Parameters of `SensorsResponse`:
     - `count` - amount of sensors
     - `sensors` - an array of sensors on this page. This is an array of `Sensor` models objects.
 
+Parameters of `Sensor`:
+
+    - `id` - id in the database.
+    - `uniqueid` - uniqueid parameter.
+    - `imei` - Sensor's imei.
+    - `name` - Sensor's name.
+    - `batteryCharge` - Sensor's battery charge in percent.
+    - `isBatteryCharging` - Indicates if battery is charging or not.
+    - `isOnline` - Indicates if sensor is online and sending data or not.
+
 You can provide `options` as an object with this parameters:
 
     - `page` - by default will 1.
