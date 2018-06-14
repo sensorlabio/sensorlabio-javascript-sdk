@@ -44,6 +44,8 @@ export default class SensorsEndpoint {
             imei: options.imei,
             sort: options.sort,
             online_status: options.online_status,
+            battery_charge_min: options.battery_charge_min,
+            battery_charge_max: options.battery_charge_max
         }
         let response = await this.api._makeApiRequest('/v1/sensors', 'GET', {}, params, true);
         return this._prepareSensorListResponse(response);
