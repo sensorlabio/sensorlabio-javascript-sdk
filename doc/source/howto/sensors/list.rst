@@ -48,6 +48,9 @@ You can provide `options` as an object with this parameters:
     - `name` - filter sensors by name.
     - `uniqueid` - filter by uniqueid.
     - `imei` - filter by imei.
+    - `online_status` - pass "online" to search for online sensors or "offline" for offline sensors.
+    - `battery_charge_min` - filter sensors by battery charge.
+    - `battery_charge_max` - filter sensors by battery charge.
     - `sort` - sorting parameter, looks like "`fieldname,order`". Example: "`name,asc`"
         Possible sort fields:
             - `name`

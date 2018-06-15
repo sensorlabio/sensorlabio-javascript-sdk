@@ -24,6 +24,9 @@ export default class SensorsEndpoint {
      * @param {string} options.uniqueid - filter by uniqueid.
      * @param {string} options.imei - filter by imei.
      * @param {string} options.sort - sorting parameter
+     * @param {string} options.online_status - pass "online" to search for online sensors or "offline" for offline sensors.
+     * @param {string} options.battery_charge_min - filter sensors by battery charge
+     * @param {string} options.battery_charge_max - filter sensors by battery charge
      * @returns {Promise.<ApiResponse>}
      */
     async list(options) {
