@@ -194,3 +194,6 @@ js_source_path = dir_path + '/../../src/'
 jsdoc_config_path = dir_path + '/../../jsdoc.conf'
 
 primary_domain = 'js'
+
+def setup(app):
+    app.add_stylesheet('css/custom.css')
