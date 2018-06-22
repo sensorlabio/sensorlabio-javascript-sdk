@@ -187,8 +187,6 @@ epub_exclude_files = ['search.html']
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
 
-print(dir_path);
-
 js_source_path = dir_path + '/../../src/'
 
 jsdoc_config_path = dir_path + '/../../jsdoc.conf'
