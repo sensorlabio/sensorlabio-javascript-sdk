@@ -48,7 +48,7 @@ export default class Measurement {
          * @member Measurement#created
          * @type {Date}
          */
-        this.created = data.created;
+        this.timestamp = data.timestamp;
     }
 
     /**
