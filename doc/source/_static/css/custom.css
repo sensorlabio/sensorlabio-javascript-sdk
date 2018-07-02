@@ -91,7 +91,7 @@ h6 a, .h6 a {
 a {
 	text-decoration: none;
 	color: #121228;
-	-webkit-transition: all 0.15s linear;
+	-webkit-transition: all 0.15s;
 	transition: all 0.15s linear;
 }
 
@@ -203,9 +203,6 @@ b, strong {
 }
 
 .wy-nav-content {
-	background: -webkit-gradient(linear, left top, right top, from(#fff), to(#e7f0fc));
-	background: -webkit-linear-gradient(left, #fff, #e7f0fc);
-	background: linear-gradient(to right, #fff, #e7f0fc);
 	max-width: 100%;
 }
 
