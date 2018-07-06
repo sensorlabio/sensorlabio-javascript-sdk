@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 module.exports = {
     target: 'web',
-    entry: ['babel-polyfill', './src/index.js'],
+    entry: ['./src/index.js'],
     devtool: 'source-map',
     output: {
         path: path.resolve(__dirname, 'build'),
