@@ -53,8 +53,5 @@ export default class Application {
         } else {
             this.token = null;
         }
-
-
-        let self = this;
     }
 }

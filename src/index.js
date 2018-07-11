@@ -1,23 +1,23 @@
-let axios = require('axios');
-
+import React from 'react';
 import UsersEndpoint from './endpoints/users';
 import AuthEndpoint from './endpoints/auth';
 import ApplicationsEndpoint from './endpoints/applications';
 import ProfileEndpoint from './endpoints/profile';
 import SensorsEndpoint from './endpoints/sensors';
 import MeasurementsEndpoint from './endpoints/measurements';
-
 import ApiResponse from './responses/api';
+import ThermometerWidget from './widgets/thermometer';
+let axios = require('axios');
 
 /**
  * @classdesc Main class that connects all the endpoints.
  */
-export default class SensorlabApi {
+export class SensorlabApi {
     /**
      * @constructor SensorlabApi
      * @param {string} api_url - API's url.
      */
-    constructor(api_url = 'http://staging.sensorlab.io/api') {
+    constructor(api_url = 'https://staging.sensorlab.io/api') {
         /**
          * REST API url.
          *
@@ -83,6 +83,9 @@ export default class SensorlabApi {
          * @type {string}
          */
         this.jwt_token = null;
+
+
+        this.widget = new ThermometerWidget(this);
     }
 
     /**

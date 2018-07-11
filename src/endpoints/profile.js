@@ -61,9 +61,9 @@ export default class ProfileEndpoint {
         if (!response) {
             throw new ApiResponse(false, 0, 0, 'Connection refused');
         }
-        if (response.status == 200) { //normal response
+        if (response.status === 200) { //normal response
             return new Profile(this.api, response.data);
-        } else if (response.status == 401) { //401 Unauthorized error
+        } else if (response.status === 401) { //401 Unauthorized error
             throw new ApiResponse(false, response.status, 0, response.data);
         } else {
             throw new ApiResponse(false, response.status, 0, response.data.message);
