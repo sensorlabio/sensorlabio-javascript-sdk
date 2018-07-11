@@ -7,7 +7,7 @@ export default class ThermometerWidget {
         this.api = api;
     }
 
-    render() {
-        ReactDOM.render(<ThermometerWidgetComponent api={this.api} />, document.getElementById('container'));
+    render(container_id) {
+        ReactDOM.render(<ThermometerWidgetComponent api={this.api} />, document.getElementById(container_id));
     }
 }

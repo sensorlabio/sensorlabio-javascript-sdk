@@ -7,6 +7,7 @@ import SensorsEndpoint from './endpoints/sensors';
 import MeasurementsEndpoint from './endpoints/measurements';
 import ApiResponse from './responses/api';
 import ThermometerWidget from './widgets/thermometer';
+import DemoEndpoint from "./endpoints/demo";
 let axios = require('axios');
 
 /**
@@ -83,7 +84,8 @@ export class SensorlabApi {
          * @type {string}
          */
         this.jwt_token = null;
-
+        
+        this.demo = new DemoEndpoint(this);
 
         this.widget = new ThermometerWidget(this);
     }
