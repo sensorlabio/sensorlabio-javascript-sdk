@@ -21,7 +21,6 @@ export default class DemoEndpoint {
     async temperature_last() {
         let response = await this.api._makeApiRequest('/v1/demo/temperature/last', 'GET');
         return this._prepareMeasurementResponse(response);
-        return this._prepareMeasurementsListResponse(response);
     }
 
     /**
@@ -40,7 +39,6 @@ export default class DemoEndpoint {
     async battery_charge_last() {
         let response = await this.api._makeApiRequest('/v1/demo/battery/charge/last', 'GET');
         return this._prepareMeasurementResponse(response);
-        return this._prepareMeasurementsListResponse(response);
     }
 
     /**
@@ -59,7 +57,6 @@ export default class DemoEndpoint {
     async battery_voltage_last() {
         let response = await this.api._makeApiRequest('/v1/demo/battery/voltage/last', 'GET');
         return this._prepareMeasurementResponse(response);
-        return this._prepareMeasurementsListResponse(response);
     }
 
     /**
@@ -69,6 +66,15 @@ export default class DemoEndpoint {
     async battery_voltage_list() {
         let response = await this.api._makeApiRequest('/v1/demo/battery/voltage/list', 'GET');
         return this._prepareMeasurementsListResponse(response);
+    }
+
+    /**
+     * @method MeasurementsEndpoint#map_last
+     * @returns {Promise.<ApiResponse>}
+     */
+    async map_last() {
+        let response = await this.api._makeApiRequest('/v1/demo/map/last', 'GET');
+        return this._prepareMeasurementResponse(response);
     }
 
     /**

@@ -84,7 +84,7 @@ export class SensorlabApi {
          * @type {string}
          */
         this.jwt_token = null;
-        
+
         this.demo = new DemoEndpoint(this);
 
         this.widget = new ThermometerWidget(this);
