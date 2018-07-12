@@ -16,6 +16,10 @@ export default class ThermometerWidgetComponent extends React.Component {
         this.is_live = false;
     }
 
+    componentWillMount() {
+        this.startWidget();
+    }
+
     componentWillUnmount() {
         this.stopWidget();
     }
@@ -27,14 +31,14 @@ export default class ThermometerWidgetComponent extends React.Component {
 
     updateWidget() {
         let params = {
-            sensor_id: this.props.sensor.id,
+            sensor_id: this.props.sensor_id,
             type: 'TMP',
         }
         this.promise = this.api.measurements.last(params).then((measurement) => {
             if (!this.is_live) return;
             this.setState({'temperature': measurement.value});
             this.timer = setTimeout(() => {
-                this.updateWidget()
+                this.updateWidget();
             }, 1000);
         });
     }

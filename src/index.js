@@ -7,6 +7,7 @@ import MeasurementsEndpoint from './endpoints/measurements';
 import ApiResponse from './responses/api';
 import DemoEndpoint from "./endpoints/demo";
 import DemoWidgets from "./widgets/demo";
+import Widgets from "./widgets/widgets";
 let axios = require('axios');
 
 /**
@@ -83,6 +84,14 @@ export class SensorlabApi {
          * @type {string}
          */
         this.jwt_token = null;
+
+        /**
+         * Widgets.
+         *
+         * @member SensorlabApi#widgets
+         * @type {Widgets}
+         */
+        this.widgets = new Widgets(this);
 
         /**
          * Demo endpoints.
