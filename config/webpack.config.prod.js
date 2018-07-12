@@ -31,7 +31,7 @@ if (env.stringified['process.env'].NODE_ENV !== '"production"') {
 }
 
 // Note: defined here because it will be used more than once.
-const cssFilename = 'css/index.css';
+const cssFilename = 'css/index.min.css';
 
 // ExtractTextPlugin expects the build output to be flat.
 // (See https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/27)
@@ -56,7 +56,7 @@ module.exports = {
   output: {
     // CRL: Updated whole block with library specific info
     path: paths.appBuild,
-    filename: 'index.js',
+    filename: 'index.min.js',
     library: 'SensorlabSDK',
     libraryTarget: 'umd'
   },
