@@ -1,4 +1,3 @@
-import React from 'react';
 import UsersEndpoint from './endpoints/users';
 import AuthEndpoint from './endpoints/auth';
 import ApplicationsEndpoint from './endpoints/applications';
@@ -6,8 +5,8 @@ import ProfileEndpoint from './endpoints/profile';
 import SensorsEndpoint from './endpoints/sensors';
 import MeasurementsEndpoint from './endpoints/measurements';
 import ApiResponse from './responses/api';
-import ThermometerWidget from './widgets/thermometer';
 import DemoEndpoint from "./endpoints/demo";
+import DemoWidgets from "./widgets/demo";
 let axios = require('axios');
 
 /**
@@ -85,9 +84,21 @@ export class SensorlabApi {
          */
         this.jwt_token = null;
 
+        /**
+         * Demo endpoints.
+         *
+         * @member SensorlabApi#demo
+         * @type {DemoEndpoint}
+         */
         this.demo = new DemoEndpoint(this);
 
-        this.widget = new ThermometerWidget(this);
+        /**
+         * Demo widgets.
+         *
+         * @member SensorlabApi#demo_widgets
+         * @type {DemoWidgets}
+         */
+        this.demo_widgets = new DemoWidgets(this);
     }
 
     /**
