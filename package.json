@@ -55,6 +55,7 @@
     "react-dev-utils": "^4.2.1",
     "react-dom": "^16.2.0",
     "react-google-charts": "^1.6.6",
+    "react-google-maps": "^9.4.5",
     "react-thermometer-component": "git+https://github.com/sensorlabio/react-thermometer-component.git",
     "react-vis": "^1.10.3",
     "reactstrap": "^6.3.0",

@@ -4,6 +4,7 @@ import BatteryChargeWidget from "./widgets/battery_charge";
 import BatteryChargeChartWidget from "./widgets/battery_charge_chart";
 import BatteryVoltageWidget from "./widgets/battery_voltage";
 import BatteryVoltageChartWidget from "./widgets/battery_charge_chart";
+import MapWidget from './widgets/map';
 
 export default class Widgets {
     constructor(api) {
@@ -15,5 +16,6 @@ export default class Widgets {
         this.battery_charge_chart = new BatteryChargeChartWidget(this.api);
         this.battery_voltage = new BatteryVoltageWidget(this.api);
         this.battery_voltage_chart = new BatteryVoltageChartWidget(this.api);
+        this.map = new MapWidget(this.api);
     }
 }
