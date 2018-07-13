@@ -8,6 +8,6 @@ export default class DemoThermometerWidget {
     }
 
     render(container_id, sensor_id) {
-        ReactDOM.render(<ThermometerWidgetComponent api={this.api} sensor={sensor_id} />, document.getElementById(container_id));
+        ReactDOM.render(<ThermometerWidgetComponent api={this.api} sensor_id={sensor_id} />, document.getElementById(container_id));
     }
 }

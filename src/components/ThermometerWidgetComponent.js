@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import Thermometer from 'react-thermometer-component'
 import "react-thermometer-component/build/css/index.css";
 
-export default class ThermometerWidgetComponent extends React.Component {
+export default class ThermometerWidgetComponent extends Component {
     constructor(props) {
         super(props);
 
