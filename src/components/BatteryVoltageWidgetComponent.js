@@ -72,7 +72,7 @@ export default class BatteryVoltageWidgetComponent extends Component {
                         max: 17,
                         width: 400, height: 120,
                     }}
-                    graph_id="gauge"
+                    graph_id={"gauge" + Math.random()}
                     width="130px"
                     height="130px"
                     legend_toggle
