@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import Thermometer from 'react-thermometer-component'
 import "react-thermometer-component/build/css/index.css";
 
