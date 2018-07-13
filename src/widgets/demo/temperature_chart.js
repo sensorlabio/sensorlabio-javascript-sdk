@@ -7,7 +7,7 @@ export default class DemoTemperatureChartWidget {
         this.api = api;
     }
 
-    render(container_id, sensor_id) {
-        ReactDOM.render(<DemoTemperatureChartWidgetComponent api={this.api} sensor_id={sensor_id} />, document.getElementById(container_id));
+    render(container_id) {
+        ReactDOM.render(<DemoTemperatureChartWidgetComponent api={this.api} />, document.getElementById(container_id));
     }
 }
