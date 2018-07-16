@@ -1,5 +1,5 @@
 /**
- * Measurement model
+ * @classdesc Measurement model
  */
 export default class Measurement {
     /**

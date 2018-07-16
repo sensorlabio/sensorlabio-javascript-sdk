@@ -1,7 +1,7 @@
 import Measurement from '../models/measurement';
 
 /**
- * Response with measurements data.
+ * @classdesc Response with measurements data.
  */
 export default class MeasurementsResponse {
     /**

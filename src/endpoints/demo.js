@@ -3,11 +3,13 @@ import MeasurementsResponse from '../responses/measurements';
 import Measurement from '../models/measurement';
 
 /**
- * Demo endpoints.
+ * This endpoints are only available for https://api-demo.sensorlab.io/api
+ *
+ * @classdesc Demo endpoints.
  */
 export default class DemoEndpoint {
     /**
-     * @constructor MeasurementsEndpoint
+     * @constructor DemoEndpoint
      * @param {SensorlabApi} api - parent api
      */
     constructor(api) {
@@ -15,7 +17,9 @@ export default class DemoEndpoint {
     }
 
     /**
-     * @method MeasurementsEndpoint#temperature_last
+     * Get last temperature for demo sensor.
+     *
+     * @method DemoEndpoint#temperature_last
      * @returns {Promise.<ApiResponse>}
      */
     async temperature_last() {
@@ -24,7 +28,9 @@ export default class DemoEndpoint {
     }
 
     /**
-     * @method MeasurementsEndpoint#temperature_list
+     * Get last 50 temperature measurements for demo sensor.
+     *
+     * @method DemoEndpoint#temperature_list
      * @returns {Promise.<ApiResponse>}
      */
     async temperature_list() {
@@ -33,7 +39,9 @@ export default class DemoEndpoint {
     }
 
     /**
-     * @method MeasurementsEndpoint#battery_charge_last
+     * Get last battery charge measurement for demo sensor.
+     *
+     * @method DemoEndpoint#battery_charge_last
      * @returns {Promise.<ApiResponse>}
      */
     async battery_charge_last() {
@@ -42,7 +50,9 @@ export default class DemoEndpoint {
     }
 
     /**
-     * @method MeasurementsEndpoint#battery_charge_list
+     * Get last 50 battery charge measurements for demo sensor.
+     *
+     * @method DemoEndpoint#battery_charge_list
      * @returns {Promise.<ApiResponse>}
      */
     async battery_charge_list() {
@@ -51,7 +61,9 @@ export default class DemoEndpoint {
     }
 
     /**
-     * @method MeasurementsEndpoint#battery_voltage_last
+     * Get last battery voltage measurement for demo sensor.
+     *
+     * @method DemoEndpoint#battery_voltage_last
      * @returns {Promise.<ApiResponse>}
      */
     async battery_voltage_last() {
@@ -60,7 +72,9 @@ export default class DemoEndpoint {
     }
 
     /**
-     * @method MeasurementsEndpoint#battery_voltage_list
+     * Get last 50 battery voltage measurements for demo sensor.
+     *
+     * @method DemoEndpoint#battery_voltage_list
      * @returns {Promise.<ApiResponse>}
      */
     async battery_voltage_list() {
@@ -69,7 +83,9 @@ export default class DemoEndpoint {
     }
 
     /**
-     * @method MeasurementsEndpoint#map_last
+     * Get last GPS coordinates for map widget.
+     *
+     * @method DemoEndpoint#map_last
      * @returns {Promise.<ApiResponse>}
      */
     async map_last() {

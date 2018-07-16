@@ -1,5 +1,5 @@
 /**
- * Default api response for errors
+ * @classdesc Default api response for errors
  */
 export default class ApiResponse {
     /**

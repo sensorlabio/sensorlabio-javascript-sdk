@@ -5,9 +5,9 @@ import ProfileEndpoint from './endpoints/profile';
 import SensorsEndpoint from './endpoints/sensors';
 import MeasurementsEndpoint from './endpoints/measurements';
 import ApiResponse from './responses/api';
-import DemoEndpoint from "./endpoints/demo";
-import DemoWidgets from "./widgets/demo";
-import Widgets from "./widgets/widgets";
+import DemoEndpoint from './endpoints/demo';
+import DemoWidgets from './widgets/demo';
+import Widgets from './widgets/widgets';
 let axios = require('axios');
 
 /**
@@ -15,7 +15,6 @@ let axios = require('axios');
  */
 export class SensorlabApi {
     /**
-     * @constructor SensorlabApi
      * @param {string} api_url - API's url.
      */
     constructor(api_url = 'https://staging.sensorlab.io/api') {
@@ -86,20 +85,20 @@ export class SensorlabApi {
         this.jwt_token = null;
 
         /**
-         * Widgets.
-         *
-         * @member SensorlabApi#widgets
-         * @type {Widgets}
-         */
-        this.widgets = new Widgets(this);
-
-        /**
          * Demo endpoints.
          *
          * @member SensorlabApi#demo
          * @type {DemoEndpoint}
          */
         this.demo = new DemoEndpoint(this);
+
+        /**
+         * Widgets.
+         *
+         * @member SensorlabApi#widgets
+         * @type {Widgets}
+         */
+        this.widgets = new Widgets(this);
 
         /**
          * Demo widgets.
