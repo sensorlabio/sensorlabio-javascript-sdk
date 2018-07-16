@@ -68,7 +68,7 @@ export default class Widgets {
          * Battery voltagew chart widget.
          *
          * @member Widgets#battery_voltage_chart
-         * @type {BatteryChargeChartWidget}
+         * @type {BatteryVoltageChartWidget}
          */
         this.battery_voltage_chart = new BatteryVoltageChartWidget(this.api);
 
