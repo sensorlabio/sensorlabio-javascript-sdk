@@ -3,7 +3,7 @@ import TemperatureChartWidget from "./widgets/temperature_chart";
 import BatteryChargeWidget from "./widgets/battery_charge";
 import BatteryChargeChartWidget from "./widgets/battery_charge_chart";
 import BatteryVoltageWidget from "./widgets/battery_voltage";
-import BatteryVoltageChartWidget from "./widgets/battery_charge_chart";
+import BatteryVoltageChartWidget from "./widgets/battery_voltage_chart";
 import MapWidget from './widgets/map';
 
 /**
