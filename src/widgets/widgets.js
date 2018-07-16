@@ -13,7 +13,7 @@ export default class Widgets {
     /**
      * @constructor Widgets
      *
-     * @param api
+     * @param api SensorlabApi
      */
     constructor(api) {
         /**
