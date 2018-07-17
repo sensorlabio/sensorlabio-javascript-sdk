@@ -58,6 +58,7 @@ export default class DemoTemperatureChartWidgetComponent extends Component {
     }
 
     _onNearestX(v) {
+        console.log(v);
         this.setState({crosshairValues: [v]});
     }
 
@@ -71,6 +72,7 @@ export default class DemoTemperatureChartWidgetComponent extends Component {
     }
 
     _onMouseLeave() {
+        console.log('mouse leave');
         this.setState({crosshairValues: []});
     }
 
@@ -82,7 +84,6 @@ export default class DemoTemperatureChartWidgetComponent extends Component {
                 yDomain={[-200, 200]}
                 yBaseValue={0}
                 xType="time"
-                onMouseLeave={this._onMouseLeave}
             >
                 <GradientDefs>
                     <linearGradient
@@ -100,7 +101,7 @@ export default class DemoTemperatureChartWidgetComponent extends Component {
                 <VerticalBarSeries
                     data={this.state.temperature_data}
                     color={'url(#TemperatureChartGradient)'}
-                    onNearestX ={(value) => this._onNearestX(value) }
+                    onNearestX={(value) => this._onNearestX(value)}
                 />
                 <XAxis />
                 <YAxis />
