@@ -1,5 +1,4 @@
 let chai = require('chai');
-let chai_string  = require('chai-string');
 let should = chai.should();
 let expect = chai.expect;
 import {SensorlabApi} from '../../../src';
@@ -10,14 +9,12 @@ let api = new SensorlabApi(process.env.TEST_REST_API_URL); //we must test on tes
 let test_email = 'test@sensorlab.io';
 let test_passw = 'test';
 
-let first_application = null;
+let app = null;
 
-chai.use(chai_string);
-
-describe('Applications endpoint', () => {
-    describe('Get /applications', () => {
+describe('Applications endpoints', () => {
+    describe('PATCH /applications', () => {
         it('should get an 401 status error without authorization', (done) => {
-            api.applications.list()
+            api.applications.update()
                 .catch((response) => {
                     response.success.should.eq(false);
                     response.status.should.eq(401);
@@ -33,31 +30,26 @@ describe('Applications endpoint', () => {
                 });
         });
 
-        it('should get list of application default page=1', (done) => {
+        it('should get list of applications', (done) => {
             api.applications.list()
                 .then((response) => {
                     response.applications.should.be.a('array').lengthOf(50);
                     response.should.have.property('count');
                     response.should.have.property('pages');
-                    first_application = response.applications[0];
+                    app = response.applications[0];
                     done();
                 });
         });
 
-        it('should get list of applications by name', (done) => {
-            api.applications.list({ name: first_application.name })
-                .then((response) => {
-                    response.applications.should.be.a('array');
-                    expect(response.applications.length).at.least(1);
-                    response.applications.forEach((application) => {
-                        application.should.have.property('id');
-                        application.should.have.property('name');
-                        application.should.have.property('description');
-                        application.should.have.property('created');
-
-                    });
-                    response.should.have.property('count');
-                    response.should.have.property('pages');
+        it('should generate new api key for application', (done) => {
+            api.applications.generate_private_api_key(app.id)
+                .then((application) => {
+                    application.should.be.a('object');
+                    application.should.have.property('id');
+                    application.should.have.property('name').eq('Test Application');
+                    application.should.have.property('description').eq('Test Description');
+                    application.should.have.property('public_api_key');
+                    application.should.have.property('private_api_key');
                     done();
                 });
         });

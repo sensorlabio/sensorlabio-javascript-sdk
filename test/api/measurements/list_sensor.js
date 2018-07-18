@@ -1,7 +1,7 @@
 let chai = require('chai');
 let should = chai.should();
 let expect = chai.expect;
-import SensorlabApi from '../../../src';
+import {SensorlabApi} from '../../../src';
 
 //@todo change url to real public test server
 let api = new SensorlabApi(process.env.TEST_REST_API_URL); //we must test on test server only
@@ -43,7 +43,7 @@ describe('Measurements endpoint', () => {
                         measurement.should.have.property('type');
                         measurement.should.have.property('value');
                         measurement.value.should.be.a('array');
-                        measurement.should.have.property('created');
+                        measurement.should.have.property('timestamp');
                         first_type = measurement.type;
                     });
                     done();
@@ -62,7 +62,7 @@ describe('Measurements endpoint', () => {
                         measurement.should.have.property('type').eq(first_type);
                         measurement.should.have.property('value');
                         measurement.value.should.be.a('array');
-                        measurement.should.have.property('created');
+                        measurement.should.have.property('timestamp');
                         first_type = measurement.type;
                     });
                     done();

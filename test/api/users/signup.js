@@ -2,7 +2,7 @@ let chai = require('chai');
 let should = chai.should();
 let expect = chai.expect;
 var chaiSubset = require('chai-subset');
-import SensorlabApi from '../../../src';
+import {SensorlabApi} from '../../../src';
 
 let api = new SensorlabApi(process.env.TEST_REST_API_URL); //we must test on test server only
 

@@ -1,7 +1,7 @@
 let chai = require('chai');
 let should = chai.should();
 let expect = chai.expect;
-import SensorlabApi from '../../../src';
+import {SensorlabApi} from '../../../src';
 
 //@todo change url to real public test server
 let api = new SensorlabApi(process.env.TEST_REST_API_URL); //we must test on test server only
@@ -54,7 +54,7 @@ describe('Sensors endpoint', () => {
                         sensor.should.have.property('id');
                         sensor.should.have.property('uniqueid');
                         sensor.should.have.property('imei');
-                        sensor.should.have.property('name').eq(first_sensor_name);
+                        sensor.should.have.property('name').containIgnoreSpaces(first_sensor_name);
                         sensor.should.have.property('batteryCharge');
                     });
                     response.should.have.property('count');
@@ -114,7 +114,7 @@ describe('Sensors endpoint', () => {
                         sensor.should.have.property('id');
                         sensor.should.have.property('uniqueid').eq(first_sensor_uniqueid);
                         sensor.should.have.property('imei').eq(first_sensor_imei);
-                        sensor.should.have.property('name').eq(first_sensor_name);
+                        sensor.should.have.property('name').containIgnoreSpaces(first_sensor_name);
                         sensor.should.have.property('batteryCharge');
                     });
                     response.should.have.property('count');

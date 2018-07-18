@@ -88,13 +88,25 @@ export default class ApplicationsEndpoint {
     /**
      * Delete application by id.
      *
-     * @method MeasurementsEndpoint#delete
+     * @method ApplicationsEndpoint#delete
      * @param {string} application_id - application_id
      * @returns {Promise.<ApiResponse>}
      */
     async delete(application_id) {
         let response = await this.api._makeApiRequest('/v1/applications/' + application_id, 'DELETE', {}, {}, true);
         return this.api._prepareApiResponse(response);
+    }
+
+    /**
+     * Generate new private api key for application.
+     *
+     * @method ApplicationsEndpoint#generate_private_api_key
+     * @param application_id
+     * @returns {Promise<*>}
+     */
+    async generate_private_api_key(application_id) {
+        let response = await this.api._makeApiRequest('/v1/applications/' + application_id + '/private_api_key/generate', 'POST', {}, {}, true);
+        return this._prepareApplicationsCreateResponse(response);
     }
 
     /**

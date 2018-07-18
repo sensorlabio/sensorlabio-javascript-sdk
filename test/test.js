@@ -9,6 +9,7 @@ require('./api/applications/get');
 require('./api/applications/create');
 require('./api/applications/update');
 require('./api/applications/delete');
+require('./api/applications/generate_api_key');
 require('./api/sensors/list');
 require('./api/sensors/get');
 require('./api/measurements/list');

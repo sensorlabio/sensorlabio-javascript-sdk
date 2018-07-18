@@ -2,7 +2,7 @@ let chai = require('chai');
 var chaiSubset = require('chai-subset');
 let should = chai.should();
 let expect = chai.expect;
-import SensorlabApi from '../../../src';
+import {SensorlabApi} from '../../../src';
 
 let api = new SensorlabApi(process.env.TEST_REST_API_URL); //we must test on test server only
 
@@ -54,7 +54,8 @@ describe('Applications endpoints', () => {
                     application.should.have.property('id');
                     application.should.have.property('name').eq('Test Application');
                     application.should.have.property('description').eq('Test Description');
-                    application.should.have.property('token');
+                    application.should.have.property('public_api_key');
+                    application.should.have.property('private_api_key');
                     app = application;
                     done();
                 });
