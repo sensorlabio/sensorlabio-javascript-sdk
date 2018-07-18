@@ -43,15 +43,21 @@ export default class Application {
         this.created = data.created;
 
         /**
-         * Token for created application.
+         * Public api key for application.
          *
-         * @member Application#token
+         * @member Application#public_api_key
          * @type {string}
          */
-        if ('token' in data) {
-            this.token = data.token;
-        } else {
-            this.token = null;
+        this.public_api_key = data.public_api_key;
+
+        /**
+         * Private Api Key for created application.
+         *
+         * @member Application#private_api_key
+         * @type {string}
+         */
+        if ('private_api_key' in data) {
+            this.private_api_key = data.private_api_key;
         }
     }
 }
