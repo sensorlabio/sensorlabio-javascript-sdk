@@ -9,3 +9,4 @@ Applications Actions
     create
     update
     delete
+    generate_api_key

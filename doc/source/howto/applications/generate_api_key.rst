@@ -1,14 +1,14 @@
-Get application by id
-~~~~~~~~~~~~~~~~~~~~~
+Generate new Private Api Key for application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can get application by its id:
+This is how you can generate new Private Api Key for application:
 
 .. code-block:: javascript
 
     let api = new SensorlabApi();
-    api.applications.get(application_id)
+    api.applications.generate_private_api_key(application_id)
              .then((application) => {
-                console.log(application);
+                console.log(response);
              })
              .catch((response) => {
                 console.log(response);
@@ -19,13 +19,14 @@ On success you will get promise with `Application` model object.
 .. code-block:: javascript
 
     let api = new SensorlabApi();
-    api.applications.get(application_id)
+    api.applications.create(name, description)
              .then((application) => {
                 console.log(application.id);
                 console.log(application.name);
                 console.log(application.description);
                 console.log(application.created);
                 console.log(application.public_api_key);
+                console.log(application.private_api_key);
              });
 
 Parameters of `Application`:
@@ -35,21 +36,8 @@ Parameters of `Application`:
     - `description` - application description.
     - `created` - application's creation date.
     - `public_api_key` - Public Api Key
+    - `private_api_key` - Generated private API key.
 
-Method will throw ApiResponse as exception on any error.
-
-.. code-block:: javascript
-
-    let api = new SensorlabApi();
-    api.applications.list(options)
-             .catch((response) => {
-                console.log(response.status);
-             });
-
-Output::
-
-    401
-
-There are no codes or special error for this action.
 ApiResponse will have status `401` with `message`=`Unauthorized` if credentials are wrong.
+
 ApiResponse will have status `404` with `message`=`Not Found` if application doesn't exist.

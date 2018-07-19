@@ -25,7 +25,8 @@ On success you will get promise with `Application` model object.
                 console.log(application.name);
                 console.log(application.description);
                 console.log(application.created);
-                console.log(application.token);
+                console.log(application.public_api_key);
+                console.log(application.private_api_key);
              });
 
 Parameters of `Application`:
@@ -34,11 +35,12 @@ Parameters of `Application`:
     - `name` - application name.
     - `description` - application description.
     - `created` - application's creation date.
-    - `token` - authorization token for application.
+    - `public_api_key` - Public Api Key
+    - `private_api_key` - Generated private API key.
 
 .. note::
-    Token will be displayed only once on creation and you must save it.
-    If token if lost, we can't show you current token again, you will be able only to generate new one.
+    Please note, that Private API Key will appear only once after app creation.
+    You will be able to generate new one though.
 
 Method will throw ApiResponse as exception on any error.
 
