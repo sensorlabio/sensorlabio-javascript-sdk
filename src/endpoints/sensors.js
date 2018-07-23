@@ -67,6 +67,23 @@ export default class SensorsEndpoint {
     }
 
     /**
+     * Update sensors.
+     *
+     * @method SensorsEndpoint#update
+     * @param {string} sensor_id - id of sensor to update
+     * @param {string} name - sensor's name
+     * @param {string} application - application id to assign to
+     */
+    async update(sensor_id, name, application = null) {
+        let data = {
+            'name': name,
+            'application': application,
+        }
+        let response = await this.api._makeApiRequest('/v1/sensors/' + sensor_id, 'PATCH', data);
+        return this.api._prepareApiResponse(response);
+    }
+
+    /**
      * Return list of sensors (or error!)
      *
      * @param response
