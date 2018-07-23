@@ -33,6 +33,7 @@ Parameters of `Sensor`:
     - `uniqueid` - uniqueid parameter.
     - `imei` - Sensor's imei.
     - `name` - Sensor's name.
+    - `application` - Application ID sensor is connected to.
     - `batteryCharge` - Sensor's battery charge in percent.
     - `isBatteryCharging` - Indicates if battery is charging or not.
     - `isOnline` - Indicates if sensor is online and sending data or not.
