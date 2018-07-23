@@ -6,5 +6,6 @@ Sensors Actions
 
     list
     one
+    update
     measurements/list
     measurements/last
