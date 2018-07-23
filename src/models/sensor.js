@@ -43,6 +43,14 @@ export default class Sensor {
         this.name = data.name;
 
         /**
+         * Application ID.
+         *
+         * @member Sensor#application
+         * @type {string}
+         */
+        this.application = data.application;
+
+        /**
          * Date/time created.
          *
          * @member Sensor#created
