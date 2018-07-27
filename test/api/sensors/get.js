@@ -23,7 +23,7 @@ describe('Sensors endpoint', () => {
         });
 
         it('should authorize with correct email/password and get a token', (done) => {
-            api.auth.token(test_email, test_passw)
+            api.auth.user_token(test_email, test_passw)
                 .then(function(user) {
                     user.token.should.not.be.empty;
                     done();
@@ -43,12 +43,12 @@ describe('Sensors endpoint', () => {
 
         it('should get sensor', (done) => {
             api.sensors.one(first_sensor_id)
-                .then((measurement) => {
-                    measurement.should.have.property('id').eq(first_sensor_id);
-                    measurement.should.have.property('uniqueid');
-                    measurement.should.have.property('imei');
-                    measurement.should.have.property('name');
-                    measurement.should.have.property('batteryCharge');
+                .then((sensor) => {
+                    sensor.should.have.property('id').eq(first_sensor_id);
+                    sensor.should.have.property('uniqueid');
+                    sensor.should.have.property('imei');
+                    sensor.should.have.property('name');
+                    sensor.should.have.property('batteryCharge');
                     done();
                 });
         });

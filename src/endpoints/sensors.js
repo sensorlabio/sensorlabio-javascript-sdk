@@ -78,7 +78,7 @@ export default class SensorsEndpoint {
         let data = {
             'name': name,
             'application': application,
-        }
+        };
         let response = await this.api._makeApiRequest('/v1/sensors/' + sensor_id, 'PATCH', data);
         return this.api._prepareApiResponse(response);
     }

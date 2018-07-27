@@ -15,7 +15,7 @@ let sensor = null;
 describe('Measurements endpoint', () => {
     describe('Get /sensors/:id/measurements', () => {
         it('should authorize with correct email/password and get a token', (done) => {
-            api.auth.token(test_email, test_passw)
+            api.auth.user_token(test_email, test_passw)
                 .then(function(user) {
                     user.token.should.not.be.empty;
                     done();
@@ -79,7 +79,7 @@ describe('Measurements endpoint', () => {
                     response.errors.forEach((error) => {
                         error.should.be.a('object');
                         error.should.have.property('message');
-                        error.should.have.property('code').eq(2);
+                        error.should.have.property('code').eq(3);
                         error.should.have.property('param').eq('next');
                     });
                     done();

@@ -94,9 +94,17 @@ export default class Sensor {
          */
         this.measurements = {
             'list': function(options) {
+                if (options === undefined) {
+                    options = {};
+                }
+                options['sensor_id'] = self.id;
                 return self.api.measurements.list(options);
             },
             'last': function(options) {
+                if (options === undefined) {
+                    options = {};
+                }
+                options['sensor_id'] = self.id;
                 return self.api.measurements.last(options);
             }
         }

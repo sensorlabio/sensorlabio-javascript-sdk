@@ -30,7 +30,7 @@ describe('Profile password change endpoint', () => {
         });
 
         it('should authorize with correct email/password and get a token', (done) => {
-            api.auth.token(test_email, test_passw)
+            api.auth.user_token(test_email, test_passw)
                 .then(async function(user) {
                     user.token.should.not.be.empty;
                     test_user = user;
@@ -128,7 +128,7 @@ describe('Profile password change endpoint', () => {
         });
 
         it('should NOT authorize with old password', (done) => {
-            api.auth.token(test_email, test_passw)
+            api.auth.user_token(test_email, test_passw)
                 .catch(function(response) {
                     response.success.should.eq(false);
                     response.status.should.eq(401);
@@ -137,7 +137,7 @@ describe('Profile password change endpoint', () => {
         });
 
         it('sshould authorize with new password', (done) => {
-            api.auth.token(test_email, 'newpass')
+            api.auth.user_token(test_email, 'newpass')
                 .then(function(user) {
                     user.token.should.not.be.empty;
                     done();

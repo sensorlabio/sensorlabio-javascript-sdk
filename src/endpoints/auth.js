@@ -21,7 +21,7 @@ export default class AuthEndpoint {
      * @param {string} password user's password
      * @returns {Promise.<ApiResponse>}
      */
-    async token(email, password) {
+    async user_token(email, password) {
         let data = {
             'email': email,
             'password': password,
@@ -31,6 +31,26 @@ export default class AuthEndpoint {
         this.api.setToken(result.token);
         return result;
     }
+
+    /**
+     * Authenticate application by public and private api keys and get JWT token.
+     *
+     * @method AuthEndpoint#token
+     * @param {string} public_api_key Application's public api key
+     * @param {string} private_api_key Application's private api key
+     * @returns {Promise.<ApiResponse>}
+     */
+    async application_token(public_api_key, private_api_key) {
+        let data = {
+            'public_api_key': public_api_key,
+            'private_api_key': private_api_key,
+        }
+        let response = await this.api._makeApiRequest('/v1/auth/application/token', 'POST', data);
+        let result = this._prepareApiResponse(response);
+        this.api.setToken(result.token);
+        return result;
+    }
+
 
     /**
      * Return ApiResponse or throw it

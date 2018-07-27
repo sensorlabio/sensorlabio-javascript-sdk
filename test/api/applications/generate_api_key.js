@@ -23,7 +23,7 @@ describe('Applications endpoints', () => {
         });
 
         it('should authorize with correct email/password and get a token', (done) => {
-            api.auth.token(test_email, test_passw)
+            api.auth.user_token(test_email, test_passw)
                 .then(function(user) {
                     user.token.should.not.be.empty;
                     done();
@@ -46,8 +46,8 @@ describe('Applications endpoints', () => {
                 .then((application) => {
                     application.should.be.a('object');
                     application.should.have.property('id');
-                    application.should.have.property('name').eq('Test Application');
-                    application.should.have.property('description').eq('Test Description');
+                    application.should.have.property('name');
+                    application.should.have.property('description');
                     application.should.have.property('public_api_key');
                     application.should.have.property('private_api_key');
                     done();

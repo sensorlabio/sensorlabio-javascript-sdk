@@ -11,6 +11,8 @@ let test_passw = 'test';
 
 let first_type = null;
 
+let first_sensor = null;
+
 describe('Measurements endpoint', () => {
     describe('Get /measurements', () => {
         it('should get an 401 status error without authorization', (done) => {
@@ -23,15 +25,60 @@ describe('Measurements endpoint', () => {
         });
 
         it('should authorize with correct email/password and get a token', (done) => {
-            api.auth.token(test_email, test_passw)
+            api.auth.user_token(test_email, test_passw)
                 .then(function(user) {
                     user.token.should.not.be.empty;
                     done();
                 });
         });
 
-        it('should get list of measurements default page=1', (done) => {
+        it('should get list of sensors (we need the first one for tests)', (done) => {
+            api.sensors.list()
+                .then((response) => {
+                    response.sensors.should.be.a('array').lengthOf(50);
+                    response.should.have.property('count');
+                    response.should.have.property('pages');
+                    first_sensor = response.sensors[0];
+                    done();
+                });
+        });
+
+        it('should get 422 without sensor_id parameter', (done) => {
             api.measurements.list()
+                .catch((response) => {
+                    response.should.have.property('status').eq(422);
+                    response.should.have.property('success').eq(false);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
+                    response.errors.forEach((error) => {
+                        error.should.be.a('object');
+                        error.should.have.property('message');
+                        error.should.have.property('code').eq(1);
+                        error.should.have.property('param').eq('sensor_id');
+                    });
+                    done();
+                });
+        });
+
+        it('should get 422 with sensor_id in wrong format', (done) => {
+            api.measurements.list({sensor_id: '123'})
+                .catch((response) => {
+                    response.should.have.property('status').eq(422);
+                    response.should.have.property('success').eq(false);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
+                    response.errors.forEach((error) => {
+                        error.should.be.a('object');
+                        error.should.have.property('message');
+                        error.should.have.property('code').eq(2);
+                        error.should.have.property('param').eq('sensor_id');
+                    });
+                    done();
+                });
+        });
+
+        it('should get list of measurements default page=1', (done) => {
+            api.measurements.list({sensor_id: first_sensor.id})
                 .then((response) => {
                     response.measurements.should.be.a('array').lengthOf(50);
                     response.should.have.property('next');
@@ -46,13 +93,11 @@ describe('Measurements endpoint', () => {
                         first_type = measurement.type;
                     });
                     done();
-                }).catch((error) => {
-                    console.log(error);
                 });
         });
 
         it('should get list of measurements by type', (done) => {
-            api.measurements.list({ type: first_type })
+            api.measurements.list({ type: first_type, sensor_id: first_sensor.id })
                 .then((response) => {
                     response.measurements.should.be.a('array').lengthOf(50);
                     response.should.have.property('next');
@@ -71,7 +116,7 @@ describe('Measurements endpoint', () => {
         });
 
         it('should get 422 error for bad `next` parameter', (done) => {
-            api.measurements.list({ next: 123 })
+            api.measurements.list({ next: 123, sensor_id: first_sensor.id })
                 .catch((response) => {
                     response.should.have.property('status').eq(422);
                     response.should.have.property('success').eq(false);
@@ -80,11 +125,10 @@ describe('Measurements endpoint', () => {
                     response.errors.forEach((error) => {
                         error.should.be.a('object');
                         error.should.have.property('message');
-                        error.should.have.property('code').eq(2);
+                        error.should.have.property('code').eq(3);
                         error.should.have.property('param').eq('next');
                     });
                     done();
-                }).then((response) => {
                 });
         });
 

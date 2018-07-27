@@ -23,7 +23,7 @@ describe('Applications endpoints', () => {
         });
 
         it('should authorize with correct email/password and get a token', (done) => {
-            api.auth.token(test_email, test_passw)
+            api.auth.user_token(test_email, test_passw)
                 .then(function(user) {
                     user.token.should.not.be.empty;
                     done();
