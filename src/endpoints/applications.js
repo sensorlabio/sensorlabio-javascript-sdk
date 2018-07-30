@@ -44,7 +44,6 @@ export default class ApplicationsEndpoint {
      *
      * @method MeasurementsEndpoint#last
      * @param {string} application_id - application_id
-     * @param {string} type - get measurement with specified type only.
      * @returns {Promise.<ApiResponse>}
      */
     async get(application_id) {
@@ -107,6 +106,33 @@ export default class ApplicationsEndpoint {
     async generate_private_api_key(application_id) {
         let response = await this.api._makeApiRequest('/v1/applications/' + application_id + '/private_api_key/generate', 'POST', {}, {}, true);
         return this._prepareApplicationsCreateResponse(response);
+    }
+
+    /**
+     * Get application for application token.
+     *
+     * @method MeasurementsEndpoint#self
+     * @returns {Promise.<ApiResponse>}
+     */
+    async get_self() {
+        let response = await this.api._makeApiRequest('/v1/applications/self', 'GET', {}, {}, true);
+        return this._prepareApplicationResponse(response);
+    }
+
+    /**
+     * Update application.
+     *
+     * @method ApplicationsEndpoint#update
+     * @param {string} name - application's name
+     * @param {string} description - users's description
+     */
+    async update_self(name, description = null) {
+        let data = {
+            'name': name,
+            'description': description,
+        }
+        let response = await this.api._makeApiRequest('/v1/applications/self', 'PATCH', data);
+        return this.api._prepareApiResponse(response);
     }
 
     /**

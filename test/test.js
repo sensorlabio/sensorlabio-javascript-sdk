@@ -34,8 +34,6 @@ require('./api/applications/measurements/list');
 require('./api/applications/measurements/last');
 require('./api/applications/measurements/list_sensor');
 require('./api/applications/measurements/last_sensor');
-/*
 require('./api/applications/applications/get');
 require('./api/applications/applications/update');
 require('./api/applications/applications/generate_api_key');
-*/
