@@ -9,26 +9,15 @@ let api = new SensorlabApi(process.env.TEST_REST_API_URL); //we must test on tes
 let test_email = 'test@sensorlab.io';
 let test_passw = 'test';
 
+let first_type = null;
 let sensor = null;
-let app = null;
 
 let last_application = null;
 let public_api_key = null;
 let private_api_key = null;
 
-let additional_application = null;
-
-describe('Sensors update endpoint', () => {
-    describe('GET /sensors/:id', () => {
-        it('should get an 401 status error without authorization', (done) => {
-            api.sensors.update()
-                .catch((response) => {
-                    response.success.should.eq(false);
-                    response.status.should.eq(401);
-                    done();
-                });
-        });
-
+describe('Measurements endpoint', () => {
+    describe('Get /sensors/:id/measurements', () => {
         it('should authorize with correct email/password and get a token', (done) => {
             api.auth.user_token(test_email, test_passw)
                 .then(function(user) {
@@ -44,7 +33,6 @@ describe('Sensors update endpoint', () => {
                     response.should.have.property('count');
                     response.should.have.property('pages');
                     last_application = response.applications[0];
-                    additional_application = response.applications[1];
                     done();
                 });
         });
@@ -72,56 +60,66 @@ describe('Sensors update endpoint', () => {
                 });
         });
 
-        it('should get list of sensors', (done) => {
-            api.sensors.list()
+        it('should get list of sensors default page=1', (done) => {
+            api.sensors.list({sort: 'created,asc'})
                 .then((response) => {
                     response.sensors.should.be.a('array').lengthOf(50);
-                    response.should.have.property('count');
-                    response.should.have.property('pages');
                     sensor = response.sensors[0];
                     done();
                 });
         });
 
-        it('should return error if there is no `name` field', (done) => {
-            api.sensors.update(sensor.id)
+        it('should get list of measurements', (done) => {
+            sensor.measurements.list()
+                .then((response) => {
+                    response.measurements.should.be.a('array').lengthOf(50);
+                    response.should.have.property('next');
+                    response.measurements.forEach((measurement) => {
+                        measurement.should.be.a('object');
+                        measurement.should.have.property('id');
+                        measurement.should.have.property('sensor');
+                        measurement.should.have.property('type');
+                        measurement.should.have.property('value');
+                        measurement.value.should.be.a('array');
+                        measurement.should.have.property('timestamp');
+                        first_type = measurement.type;
+                    });
+                    done();
+                });
+        });
+
+        it('should get list of measurements by type', (done) => {
+            sensor.measurements.list({ type: first_type })
+                .then((response) => {
+                    response.measurements.should.be.a('array').lengthOf(50);
+                    response.should.have.property('next');
+                    response.measurements.forEach((measurement) => {
+                        measurement.should.be.a('object');
+                        measurement.should.have.property('id');
+                        measurement.should.have.property('sensor');
+                        measurement.should.have.property('type').eq(first_type);
+                        measurement.should.have.property('value');
+                        measurement.value.should.be.a('array');
+                        measurement.should.have.property('timestamp');
+                        first_type = measurement.type;
+                    });
+                    done();
+                });
+        });
+
+        it('should get 422 error for bad `next` parameter', (done) => {
+            sensor.measurements.list({ next: 123 })
                 .catch((response) => {
-                    response.status.should.eq(422);
+                    response.should.have.property('status').eq(422);
                     response.should.have.property('success').eq(false);
-                    response.should.have.property('code').eq(422);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
-                    response.errors.should.containSubset([{code: 1, param: 'name'}]);
-                    done();
-                });
-        });
-
-        it('should update sensor', (done) => {
-            let data = {
-                name: 'Updated Test Sensor',
-                application: additional_application.id,
-            };
-            api.sensors.update(sensor.id, data.name, data.application)
-                .then((response) => {
-                    response.status.should.eq(200);
-                    response.should.have.property('success').eq(true);
-                    response.should.have.property('code').eq(100);
-                    response.should.have.property('message');
-                    done();
-                });
-        });
-
-        it('should get updated created sensor', (done) => {
-            api.sensors.one(sensor.id)
-                .then((sensor) => {
-                    sensor.should.have.property('id').eq(sensor.id);
-                    sensor.should.have.property('uniqueid');
-                    sensor.should.have.property('imei');
-                    sensor.should.have.property('name');
-                    sensor.should.have.property('batteryCharge');
-                    sensor.should.have.property('application').not.eq(additional_application.id);
-                    sensor.should.have.property('application').eq(last_application.id);
-
+                    response.errors.forEach((error) => {
+                        error.should.be.a('object');
+                        error.should.have.property('message');
+                        error.should.have.property('code').eq(3);
+                        error.should.have.property('param').eq('next');
+                    });
                     done();
                 });
         });
