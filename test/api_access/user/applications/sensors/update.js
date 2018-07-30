@@ -112,7 +112,7 @@ describe('Sensors update endpoint', () => {
         });
 
         it('should get updated created sensor', (done) => {
-            api.sensors.get(sensor.id)
+            api.sensors.one(sensor.id)
                 .then((sensor) => {
                     sensor.should.have.property('id').eq(sensor.id);
                     sensor.should.have.property('uniqueid');

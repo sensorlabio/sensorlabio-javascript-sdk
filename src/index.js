@@ -190,7 +190,10 @@ export class SensorlabApi {
                 }
                 break;
             case 401:
-                throw new ApiResponse(false, response.status, 0, response.data);
+                throw new ApiResponse(false, response.status, 401, response.data);
+                break;
+            case 404:
+                throw new ApiResponse(false, response.status, 404, response.data);
                 break;
             case 422:
                 throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message, response.data.errors);

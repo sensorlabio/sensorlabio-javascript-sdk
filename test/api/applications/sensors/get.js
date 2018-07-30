@@ -18,7 +18,7 @@ let private_api_key = null;
 describe('Sensors endpoint', () => {
     describe('GET /sensors/:id', () => {
         it('should get an 401 status error without authorization', (done) => {
-            api.sensors.one()
+            api.sensors.get()
                 .catch((response) => {
                     response.success.should.eq(false);
                     response.status.should.eq(401);
@@ -80,7 +80,7 @@ describe('Sensors endpoint', () => {
         });
 
         it('should get sensor', (done) => {
-            api.sensors.one(first_sensor_id)
+            api.sensors.get(first_sensor_id)
                 .then((sensor) => {
                     sensor.should.have.property('id').eq(first_sensor_id);
                     sensor.should.have.property('uniqueid');
@@ -93,7 +93,7 @@ describe('Sensors endpoint', () => {
         });
 
         it('should get 404 error on uknown sensor', (done) => {
-            api.sensors.one('someid')
+            api.sensors.get('someid')
                 .catch((response) => {
                     response.success.should.eq(false);
                     response.status.should.eq(404);

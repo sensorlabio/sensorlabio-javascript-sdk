@@ -61,7 +61,7 @@ export default class SensorsEndpoint {
      * @param {string} sensor_id - sensor's id
      * @returns {Promise.<ApiResponse>}
      */
-    async one(sensor_id) {
+    async get(sensor_id) {
         let response = await this.api._makeApiRequest('/v1/sensors/' + sensor_id, 'GET', {}, {}, true);
         return this._prepareSensorResponse(response);
     }
