@@ -40,45 +40,51 @@ describe('Application authorization endpoint', () => {
                 });
         });
 
-        /*
-        it('should get an 401 status error with wrong email/password', (done) => {
-            api.auth.token('somegibberishemail@someotherlongstring.com', 'someuknownpasswordverylongbutitdoesntexits')
-                .catch(function(response) {
+        it('should get error without data', (done) => {
+            api.auth.application_token()
+                .catch((response) => {
+                    response.status.should.eq(422);
                     response.should.have.property('success').eq(false);
-                    response.should.have.property('status').eq(401);
+                    response.should.have.property('code').eq(422);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
                     done();
                 });
         });
 
-        it('should get an 401 status error with correct email but wrong password', (done) => {
-            api.auth.token(test_email, 'someuknownpasswordverylongbutitdoesntexits')
-                .catch(function(response) {
-                    response.success.should.eq(false);
+        it('should get 401 with wrong public/private keys', (done) => {
+            api.auth.application_token('somepublicapikey', 'someprivateapikey')
+                .catch((response) => {
                     response.status.should.eq(401);
+                    response.should.have.property('success').eq(false);
+                    response.should.have.property('code').eq(401);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
                     done();
                 });
         });
 
-        it('passwords should work correctly', (done) => {
-            api.auth.token(test_email, test_passw.toUpperCase())
-                .catch(function(response) {
-                    response.success.should.eq(false);
+        it('should get an 401 status error with right public but wrong private api key', (done) => {
+            api.auth.application_token(app.public_api_key, 'someprivateapikey')
+                .catch((response) => {
                     response.status.should.eq(401);
+                    response.should.have.property('success').eq(false);
+                    response.should.have.property('code').eq(401);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
                     done();
                 });
         });
 
-        it('should authorize correctly', (done) => {
-            api.auth.token(test_email, test_passw)
-                .then(function(user) {
+        it('should authenticate application and get token', (done) => {
+            api.auth.application_token(app.public_api_key, app.private_api_key)
+                .then((user) => {
                     user.token.should.not.be.empty;
                     done();
-                })
-                .catch((response) => {
+                }).catch((response) => {
                     console.log(response);
                 });
         });
-        */
 
     });
 });

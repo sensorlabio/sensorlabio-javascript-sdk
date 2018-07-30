@@ -27,10 +27,10 @@ require('./api/measurements/last_sensor');
 require('./api/auth/application_token');
 
 //application token access endpoints
-/*
 require('./api/applications/sensors/list');
 require('./api/applications/sensors/get');
 require('./api/applications/sensors/update');
+/*
 require('./api/applications/measurements/list');
 require('./api/applications/measurements/last');
 require('./api/applications/measurements/list_sensor');
