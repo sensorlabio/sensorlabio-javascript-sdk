@@ -1,6 +1,6 @@
 import User from '../models/user';
 import ApiResponse from '../responses/api';
-import Application from "../models/application";
+import ApplicationToken from "../models/application_token";
 
 /**
  * Class for /auth/* endpoints.
@@ -47,7 +47,7 @@ export default class AuthEndpoint {
             'private_api_key': private_api_key,
         }
         let response = await this.api._makeApiRequest('/v1/auth/application/token', 'POST', data);
-        let result = this._prepareApiResponse(response);
+        let result = this._prepareApplicationApiResponse(response);
         this.api.setToken(result.token);
         return result;
     }
@@ -69,6 +69,38 @@ export default class AuthEndpoint {
         switch (response.status) {
             case 200:
                 return new User(this.api, response.data);
+                break;
+            case 401:
+                if (response.data === 'Unauthorized') {
+                    throw new ApiResponse(false, response.status, 401, response.data);
+                } else {
+                    throw new ApiResponse(false, response.status, response.data.code, response.data.message);
+                }
+                break;
+            case 422:
+                throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message, response.data.errors);
+                break;
+            default:
+                throw new ApiResponse(false, response.status, 0, response.data.message);
+        }
+    }
+
+    /**
+     * Return ApiResponse or throw it
+     *
+     * @method AuthEndpoint#_prepareApplicationApiResponse
+     * @param response
+     * @returns {ApplicationToken}
+     * @throws {ApiResponse}
+     * @private
+     */
+    _prepareApplicationApiResponse(response) {
+        if (!response) {
+            throw new ApiResponse(false, 0, 0, 'Connection refused');
+        }
+        switch (response.status) {
+            case 200:
+                return new ApplicationToken(this.api, response.data);
                 break;
             case 401:
                 if (response.data === 'Unauthorized') {
