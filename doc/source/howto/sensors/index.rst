@@ -5,7 +5,7 @@ Sensors Actions
     :maxdepth: 2
 
     list
-    one
+    get
     update
     measurements/list
     measurements/last

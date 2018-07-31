@@ -42,7 +42,7 @@ export default class ApplicationsEndpoint {
     /**
      * Get application by id
      *
-     * @method MeasurementsEndpoint#last
+     * @method ApplicationsEndpoint#get
      * @param {string} application_id - application_id
      * @returns {Promise.<ApiResponse>}
      */
@@ -111,7 +111,7 @@ export default class ApplicationsEndpoint {
     /**
      * Get application for application token.
      *
-     * @method MeasurementsEndpoint#self
+     * @method ApplicationsEndpoint#get_self
      * @returns {Promise.<ApiResponse>}
      */
     async get_self() {
@@ -120,9 +120,9 @@ export default class ApplicationsEndpoint {
     }
 
     /**
-     * Update application.
+     * Update application for application token.
      *
-     * @method ApplicationsEndpoint#update
+     * @method ApplicationsEndpoint#update_self
      * @param {string} name - application's name
      * @param {string} description - users's description
      */

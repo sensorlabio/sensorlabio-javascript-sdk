@@ -4,4 +4,5 @@ Authentication actions
 .. toctree::
     :maxdepth: 2
 
-    token
+    user_token
+    application_token

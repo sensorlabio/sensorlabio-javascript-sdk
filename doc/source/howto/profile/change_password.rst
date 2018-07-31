@@ -60,6 +60,11 @@ Codes and messages for validation errors:
     - `code=4` - `Password is incorrect. Please provide you current password.`
     - `code=5` - `Both "new password" and "new password check" values must be equal.`
 
-Action will throw `ApiResponse` with status=`401` on authorization error.
+Action will throw `ApiResponse` with `status` = `401` on authorization error.
 
-Action will throw `ApiResponse` with status=`422` on validation error.
+Action will throw `ApiResponse` with `status` = `422` on validation error.
+
+.. note::
+    Available for:
+
+    - User token

@@ -2,4 +2,4 @@ SensorsEndpoint class
 ~~~~~~~~~~~~~~~~~~~~~
 
 .. js:autoclass:: SensorsEndpoint
-    :members: list, one, update
+    :members: list, get, update

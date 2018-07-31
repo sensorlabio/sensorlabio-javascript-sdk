@@ -6,7 +6,7 @@ You can get sensor by its id:
 .. code-block:: javascript
 
     let api = new SensorlabApi();
-    api.sensors.one(sensor_id)
+    api.sensors.get(sensor_id)
              .then((sensor) => {
                 console.log(sensor);
              })
@@ -19,7 +19,7 @@ On success you will get promise with `Sensor` model object.
 .. code-block:: javascript
 
     let api = new SensorlabApi();
-    api.sensors.one(sensor_id)
+    api.sensors.get(sensor_id)
              .then((sensor) => {
                 console.log(sensors_response.id);
                 console.log(sensors_response.uniqueid);
@@ -53,3 +53,11 @@ Output::
     401
 
 There are no codes or special error for this action. ApiResponse will have status `401` with message `Unauthorized` if credentials are wrong.
+
+.. note::
+    Available for:
+
+    - User token
+    - Application token
+
+    Application token will have access only to sensors assigned to this application.

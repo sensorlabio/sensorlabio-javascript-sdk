@@ -34,8 +34,8 @@ Parameters of `Measurement` model object:
 
 You can provide `options` as an object with this parameters:
 
-    - `type` - filter by measurement type.
     - `sensor_id` - filter by sensor.
+    - `type` - filter by measurement type.
 
 Method will throw ApiResponse as exception on any error.
 
@@ -50,4 +50,19 @@ Output::
 
     401
 
-There are no codes or special error for this action. ApiResponse will have status `401` with message `Unauthorized` if credentials are wrong.
+Codes and messages for validation errors:
+
+    - `code=1` - `field=sensor_id` - `Please, provide sensor field. This cannot be empty.`.
+    - `code=2` - `field=sensor_id` - `This is not correct id format.`.
+
+ApiResponse will have status `401` with message `Unauthorized` if credentials are wrong.
+
+ApiResponse will have status `404` with `message` = `Not Found` if there's no measurement.
+
+.. note::
+    Available for:
+
+    - User token
+    - Application token
+
+    Application token will have access only to measurements of sensors assigned to this application.

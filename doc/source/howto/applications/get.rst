@@ -51,5 +51,10 @@ Output::
     401
 
 There are no codes or special error for this action.
-ApiResponse will have status `401` with `message`=`Unauthorized` if credentials are wrong.
-ApiResponse will have status `404` with `message`=`Not Found` if application doesn't exist.
+ApiResponse will have status `401` with `message` = `Unauthorized` if credentials are wrong.
+ApiResponse will have status `404` with `message` = `Not Found` if application doesn't exist.
+
+.. note::
+    Available for:
+
+    - User token

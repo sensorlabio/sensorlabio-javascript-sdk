@@ -48,11 +48,20 @@ Method will throw ApiResponse as exception on any error.
 Codes and messages for validation errors:
 
     - `code=1` - `"Please, provide name field. This cannot be empty."`
+    - `code=2` - `"Application ID is incorrect."`
 
 .. note:: Messages are just text information and can be changed by developers.
 
-ApiResponse will have status `401` with `message`=`Unauthorized` if credentials are wrong.
+ApiResponse will have status `401` with `message` = `Unauthorized` if credentials are wrong.
 
-ApiResponse will have status `404` with `message`=`Not Found` if sensor doesn't exist.
+ApiResponse will have status `404` with `message` = `Not Found` if sensor doesn't exist.
 
-Action will throw `ApiResponse` with status=`422` on validation error.
+Action will throw `ApiResponse` with `status` = `422` on validation error.
+
+.. note::
+    Available for:
+
+    - User token
+    - Application token
+
+    Application token will have access only to sensors assigned to this application.

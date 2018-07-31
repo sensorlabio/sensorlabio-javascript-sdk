@@ -56,11 +56,19 @@ Method will throw ApiResponse as exception on any error.
 
 Codes and messages for validation errors:
 
-    - `code=1` - `field=sensor_id` - `This is not correct id format.`.
-    - `code=2` - `field=next` - `This is not correct id format.`.
+    - `code=2` - `field=sensor_id` - `This is not correct id format.`.
+    - `code=3` - `field=next` - `This is not correct id format.`.
 
 .. note:: Messages are just text information and can be changed by developers.
 
-ApiResponse will have status `401` with `message`=`Unauthorized` if credentials are wrong.
+ApiResponse will have status `401` with `message` = `Unauthorized` if credentials are wrong.
 
-Action will throw `ApiResponse` with status=`422` on validation error.
+Action will throw `ApiResponse` with `status` = `422` on validation error.
+
+.. note::
+    Available for:
+
+    - User token
+    - Application token
+
+    Application token will have access only to measurements of sensors assigned to this application.

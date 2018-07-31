@@ -58,3 +58,8 @@ Output::
 
 There are no codes or special error for this action.
 ApiResponse will have status `401` with message `Unauthorized` if credentials are wrong.
+
+.. note::
+    Available for:
+
+    - User token
