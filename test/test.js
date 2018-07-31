@@ -56,7 +56,7 @@ require('./api_access/user/measurements/list_sensor');
 require('./api_access/user/measurements/last_sensor');
 require('./api_access/user/applications/applications/get');
 require('./api_access/user/applications/applications/update');
-/*
+
 //check access to endpoint for application token
 require('./api_access/application/profile/get');
 require('./api_access/application/profile/change_password');
@@ -74,4 +74,3 @@ require('./api_access/application/measurements/list_sensor');
 require('./api_access/application/measurements/last_sensor');
 require('./api_access/application/applications/applications/get');
 require('./api_access/application/applications/applications/update');
-*/
