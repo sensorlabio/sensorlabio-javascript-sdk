@@ -8,7 +8,12 @@ import ApiResponse from './responses/api';
 import DemoEndpoint from './endpoints/demo';
 import DemoWidgets from './widgets/demo';
 import Widgets from './widgets/widgets';
-import ApiErrorResponseException from "./responses/error";
+import ApiErrorBasicException from "./responses/errors/basic";
+import ApiErrorUnauthorizedException from "./responses/errors/auth";
+import ApiErrorNotFoundException from "./responses/errors/notfound";
+import ApiErrorValidationException from "./responses/errors/validation";
+import ApiErrorConnectionRefusedException from "./responses/errors/connection_refused";
+import ApiErrorInteralException from "./responses/errors/internal";
 let axios = require('axios');
 
 /**
@@ -179,7 +184,7 @@ export class SensorlabApi {
      */
     _prepareApiResponse(response, success_cb = null) {
         if (!response) {
-            throw new ApiErrorResponseException(0, 'Connection refused');
+            throw new ApiErrorConnectionRefusedException(0, 'Connection refused');
         }
         switch (response.status) {
             case 200:
@@ -189,17 +194,19 @@ export class SensorlabApi {
                     return new ApiResponse(response.data.success, response.status, response.data.code, response.data.message);
                 }
             case 401:
-                throw new ApiErrorResponseException(response.status, response.data.message);
+                throw new ApiErrorUnauthorizedException(response.status, response.data.message);
             case 404:
-                throw new ApiErrorResponseException(response.status, response.data);
+                throw new ApiErrorNotFoundException(response.status, response.data);
             case 422:
-                throw new ApiErrorResponseException(response.status, response.data.message, response.data.errors);
+                throw new ApiErrorValidationException(response.status, response.data.message, response.data.errors);
+            case 500:
+                throw new ApiErrorInteralException(response.status, 'Internal Error');
             default:
                 let message = null;
                 if ('message' in response.data) {
                     message = response.data.message;
                 }
-                throw new ApiErrorResponseException(response.status, message);
+                throw new ApiErrorBasicException(response.status, message);
         }
     }
 }
