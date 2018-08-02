@@ -17,7 +17,6 @@ describe('Applications endpoints', () => {
         it('should get an 401 status error without authorization', (done) => {
             api.applications.generate_private_api_key()
                 .catch((response) => {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });
@@ -69,7 +68,6 @@ describe('Applications endpoints', () => {
         it('should not generate new api key for application', (done) => {
             api.applications.generate_private_api_key(last_application.id)
                 .catch((response) => {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });
@@ -78,7 +76,6 @@ describe('Applications endpoints', () => {
         it('should not generate new api key for other application', (done) => {
             api.applications.generate_private_api_key(other_application.id)
                 .catch((response) => {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });

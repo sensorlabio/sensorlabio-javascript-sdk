@@ -18,7 +18,6 @@ describe('Applications endpoints', () => {
         it('should get an 401 status error without authorization', (done) => {
             api.applications.get_self()
                 .catch((response) => {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });
@@ -82,7 +81,6 @@ describe('Applications endpoints', () => {
         it('application should have 401 on unknown application', (done) => {
             api.applications.get()
                 .catch((response) => {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });
@@ -91,7 +89,6 @@ describe('Applications endpoints', () => {
         it('application should have 401 on other application', (done) => {
             api.applications.get(other_application.id)
                 .catch((response) => {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });

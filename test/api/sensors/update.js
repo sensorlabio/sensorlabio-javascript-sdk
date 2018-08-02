@@ -1,6 +1,4 @@
 let chai = require('chai');
-let should = chai.should();
-let expect = chai.expect;
 import {SensorlabApi} from '../../../src';
 
 //@todo change url to real public test server
@@ -17,7 +15,6 @@ describe('Sensors update endpoint', () => {
         it('should get an 401 status error without authorization', (done) => {
             api.sensors.update()
                 .catch((response) => {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });
@@ -64,8 +61,6 @@ describe('Sensors update endpoint', () => {
             api.sensors.update(sensor.id)
                 .catch((response) => {
                     response.status.should.eq(422);
-                    response.should.have.property('success').eq(false);
-                    response.should.have.property('code').eq(422);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
                     response.errors.should.containSubset([{code: 1, param: 'name'}]);
@@ -77,8 +72,6 @@ describe('Sensors update endpoint', () => {
             api.sensors.update(sensor.id, 'Updated sensor information', '123')
                 .catch((response) => {
                     response.status.should.eq(422);
-                    response.should.have.property('success').eq(false);
-                    response.should.have.property('code').eq(422);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
                     response.errors.should.containSubset([{code: 2, param: 'application'}]);

@@ -16,7 +16,6 @@ describe('Applications endpoints', () => {
         it('should get an 401 status error without authorization', (done) => {
             api.applications.delete()
                 .catch((response) => {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });

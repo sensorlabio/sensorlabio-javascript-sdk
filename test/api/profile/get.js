@@ -19,7 +19,6 @@ describe('Get profile endpoint', () => {
         it('should get 401 error without token', (done) => {
             api.profile.get()
                 .catch(function(response) {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });

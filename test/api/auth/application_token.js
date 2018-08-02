@@ -44,8 +44,6 @@ describe('Application authorization endpoint', () => {
             api.auth.application_token()
                 .catch((response) => {
                     response.status.should.eq(422);
-                    response.should.have.property('success').eq(false);
-                    response.should.have.property('code').eq(422);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
                     done();
@@ -56,8 +54,6 @@ describe('Application authorization endpoint', () => {
             api.auth.application_token('somepublicapikey', 'someprivateapikey')
                 .catch((response) => {
                     response.status.should.eq(401);
-                    response.should.have.property('success').eq(false);
-                    response.should.have.property('code').eq(401);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
                     done();
@@ -68,8 +64,6 @@ describe('Application authorization endpoint', () => {
             api.auth.application_token(app.public_api_key, 'someprivateapikey')
                 .catch((response) => {
                     response.status.should.eq(401);
-                    response.should.have.property('success').eq(false);
-                    response.should.have.property('code').eq(401);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
                     done();
@@ -81,8 +75,6 @@ describe('Application authorization endpoint', () => {
                 .then((user) => {
                     user.token.should.not.be.empty;
                     done();
-                }).catch((response) => {
-                    console.log(response);
                 });
         });
 

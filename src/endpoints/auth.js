@@ -1,5 +1,4 @@
 import User from '../models/user';
-import ApiResponse from '../responses/api';
 import ApplicationToken from "../models/application_token";
 
 /**
@@ -11,6 +10,10 @@ export default class AuthEndpoint {
      * @param {SensorlabApi} api - parent api
      */
     constructor(api) {
+        /**
+         * @member AuthEndpoint#api
+         * @type {SensorlabApi}
+         */
         this.api = api;
     }
 
@@ -28,7 +31,7 @@ export default class AuthEndpoint {
             'password': password,
         }
         let response = await this.api._makeApiRequest('/v1/auth/user/token', 'POST', data);
-        let result = this._prepareApiResponse(response);
+        let result = this.api._prepareApiResponse(response, this._successUserResponse);
         this.api.setToken(result.token);
         return result;
     }
@@ -47,73 +50,32 @@ export default class AuthEndpoint {
             'private_api_key': private_api_key,
         }
         let response = await this.api._makeApiRequest('/v1/auth/application/token', 'POST', data);
-        let result = this._prepareApplicationApiResponse(response);
+        let result = this.api._prepareApiResponse(response, this._successApplicationResponse);
         this.api.setToken(result.token);
         return result;
     }
 
-
     /**
-     * Return ApiResponse or throw it
+     * Return success result.
      *
-     * @method AuthEndpoint#_prepareApiResponse
-     * @param response
+     * @param {SensorlabApi} api
+     * @param {object} response
      * @returns {User}
-     * @throws {ApiResponse}
      * @private
      */
-    _prepareApiResponse(response) {
-        if (!response) {
-            throw new ApiResponse(false, 0, 0, 'Connection refused');
-        }
-        switch (response.status) {
-            case 200:
-                return new User(this.api, response.data);
-                break;
-            case 401:
-                if (response.data === 'Unauthorized') {
-                    throw new ApiResponse(false, response.status, 401, response.data);
-                } else {
-                    throw new ApiResponse(false, response.status, response.data.code, response.data.message);
-                }
-                break;
-            case 422:
-                throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message, response.data.errors);
-                break;
-            default:
-                throw new ApiResponse(false, response.status, 0, response.data.message);
-        }
+    _successUserResponse(api, response) {
+        return new User(api, response.data);
     }
 
     /**
-     * Return ApiResponse or throw it
+     * Return success result.
      *
-     * @method AuthEndpoint#_prepareApplicationApiResponse
-     * @param response
+     * @param {SensorlabApi} api
+     * @param {object} response
      * @returns {ApplicationToken}
-     * @throws {ApiResponse}
      * @private
      */
-    _prepareApplicationApiResponse(response) {
-        if (!response) {
-            throw new ApiResponse(false, 0, 0, 'Connection refused');
-        }
-        switch (response.status) {
-            case 200:
-                return new ApplicationToken(this.api, response.data);
-                break;
-            case 401:
-                if (response.data === 'Unauthorized') {
-                    throw new ApiResponse(false, response.status, 401, response.data);
-                } else {
-                    throw new ApiResponse(false, response.status, response.data.code, response.data.message);
-                }
-                break;
-            case 422:
-                throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message, response.data.errors);
-                break;
-            default:
-                throw new ApiResponse(false, response.status, 0, response.data.message);
-        }
+    _successApplicationResponse(api, response) {
+        return new ApplicationToken(api, response.data);
     }
 }

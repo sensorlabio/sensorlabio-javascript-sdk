@@ -16,7 +16,6 @@ describe('Applications endpoints', () => {
         it('should get an 401 status error without authorization', (done) => {
             api.applications.create()
                 .catch((response) => {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });
@@ -34,8 +33,6 @@ describe('Applications endpoints', () => {
             api.applications.create()
                 .catch((response) => {
                     response.status.should.eq(422);
-                    response.should.have.property('success').eq(false);
-                    response.should.have.property('code').eq(422);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
                     response.errors.should.containSubset([{code: 1, param: 'name'}]);

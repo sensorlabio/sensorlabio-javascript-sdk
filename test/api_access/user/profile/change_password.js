@@ -25,7 +25,6 @@ describe('User: profile/change_password endpoint user token access check', () =>
             api.profile.change_password()
                 .catch(function(response) {
                     response.status.should.not.eq(401);
-                    response.code.should.not.eq(401);
                     done();
                 });
         });
@@ -34,7 +33,6 @@ describe('User: profile/change_password endpoint user token access check', () =>
             test_profile.change_password()
                 .catch(function(response) {
                     response.status.should.not.eq(401);
-                    response.code.should.not.eq(401);
                     done();
                 });
         });

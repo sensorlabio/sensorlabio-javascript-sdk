@@ -1,4 +1,3 @@
-import ApiResponse from '../responses/api';
 import Profile from '../models/profile';
 
 /**
@@ -10,6 +9,10 @@ export default class ProfileEndpoint {
      * @param {SensorlabApi} api - parent api
      */
     constructor(api) {
+        /**
+         * @member ProfileEndpoint#api
+         * @type {SensorlabApi}
+         */
         this.api = api;
     }
 
@@ -21,13 +24,7 @@ export default class ProfileEndpoint {
      */
     async get() {
         let response = await this.api._makeApiRequest('/v1/profile', 'GET', null, null, true);
-        let result = null;
-        try {
-            result = this._prepareApiResponse(response);
-        } catch (e) {
-            throw e;
-        }
-        return result;
+        return this.api._prepareApiResponse(response, this._successProfileResult);
 
     }
 
@@ -51,22 +48,14 @@ export default class ProfileEndpoint {
     }
 
     /**
-     * Create User response from axios result.
+     * Return success result.
      *
-     * @param response
-     * @returns {ApiResponse}
+     * @param {SensorlabApi} api
+     * @param {object} response
+     * @returns {Profile}
      * @private
      */
-    _prepareApiResponse(response) {
-        if (!response) {
-            throw new ApiResponse(false, 0, 0, 'Connection refused');
-        }
-        if (response.status === 200) { //normal response
-            return new Profile(this.api, response.data);
-        } else if (response.status === 401) { //401 Unauthorized error
-            throw new ApiResponse(false, response.status, 0, response.data);
-        } else {
-            throw new ApiResponse(false, response.status, 0, response.data.message);
-        }
+    _successProfileResult(api, response) {
+        return new Profile(api, response.data);
     }
 }

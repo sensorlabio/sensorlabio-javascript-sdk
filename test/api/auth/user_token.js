@@ -1,6 +1,4 @@
 let chai = require('chai');
-let should = chai.should();
-let expect = chai.expect;
 import {SensorlabApi} from '../../../src';
 
 //@todo change url to real public test server
@@ -17,7 +15,6 @@ describe('Authorization endpoints', () => {
         it('should get an 401 status error with wrong email/password', (done) => {
             api.auth.user_token('somegibberishemail@someotherlongstring.com', 'someuknownpasswordverylongbutitdoesntexits')
                 .catch(function(response) {
-                    response.should.have.property('success').eq(false);
                     response.should.have.property('status').eq(401);
                     done();
                 });
@@ -26,7 +23,6 @@ describe('Authorization endpoints', () => {
         it('should get an 401 status error with correct email but wrong password', (done) => {
             api.auth.user_token(test_email, 'someuknownpasswordverylongbutitdoesntexits')
                 .catch(function(response) {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });
@@ -35,7 +31,6 @@ describe('Authorization endpoints', () => {
         it('passwords should work correctly', (done) => {
             api.auth.user_token(test_email, test_passw.toUpperCase())
                 .catch(function(response) {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });
@@ -46,9 +41,8 @@ describe('Authorization endpoints', () => {
                 .then(function(user) {
                     user.token.should.not.be.empty;
                     done();
-                })
-                .catch((response) => {
-                    console.log(response);
+                }).catch((_e) => {
+                    console.log(_e);
                 });
         });
 

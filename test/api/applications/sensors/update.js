@@ -23,7 +23,6 @@ describe('Sensors update endpoint', () => {
         it('should get an 401 status error without authorization', (done) => {
             api.sensors.update()
                 .catch((response) => {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });
@@ -87,8 +86,6 @@ describe('Sensors update endpoint', () => {
             api.sensors.update(sensor.id)
                 .catch((response) => {
                     response.status.should.eq(422);
-                    response.should.have.property('success').eq(false);
-                    response.should.have.property('code').eq(422);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
                     response.errors.should.containSubset([{code: 1, param: 'name'}]);
@@ -104,8 +101,6 @@ describe('Sensors update endpoint', () => {
             api.sensors.update(sensor.id, data.name, data.application)
                 .then((response) => {
                     response.status.should.eq(200);
-                    response.should.have.property('success').eq(true);
-                    response.should.have.property('code').eq(100);
                     response.should.have.property('message');
                     done();
                 });

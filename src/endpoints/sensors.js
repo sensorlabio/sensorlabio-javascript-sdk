@@ -1,4 +1,3 @@
-import ApiResponse from '../responses/api';
 import SensorsResponse from '../responses/sensors';
 import Sensor from '../models/sensor';
 
@@ -11,6 +10,10 @@ export default class SensorsEndpoint {
      * @param {SensorlabApi} api - parent api
      */
     constructor(api) {
+        /**
+         * @member SensorsEndpoint#api
+         * @type {SensorlabApi}
+         */
         this.api = api;
     }
 
@@ -51,7 +54,7 @@ export default class SensorsEndpoint {
             battery_charge_max: options.battery_charge_max
         }
         let response = await this.api._makeApiRequest('/v1/sensors', 'GET', {}, params, true);
-        return this._prepareSensorListResponse(response);
+        return this.api._prepareApiResponse(response, this._successSensorsListResponse);
     }
 
     /**
@@ -63,7 +66,7 @@ export default class SensorsEndpoint {
      */
     async get(sensor_id) {
         let response = await this.api._makeApiRequest('/v1/sensors/' + sensor_id, 'GET', {}, {}, true);
-        return this._prepareSensorResponse(response);
+        return this.api._prepareApiResponse(response, this._successSensorResponse);
     }
 
     /**
@@ -84,42 +87,26 @@ export default class SensorsEndpoint {
     }
 
     /**
-     * Return list of sensors (or error!)
+     * Return success result.
      *
-     * @param response
-     * @returns {ApiResponse}
+     * @param {SensorlabApi} api
+     * @param {object} response
+     * @returns {SensorsResponse}
      * @private
      */
-    _prepareSensorListResponse(response) {
-        if (!response) {
-            throw new ApiResponse(false, 0, 0, 'Connection refused');
-        }
-        if (response.status === 200) { //normal response
-            return new SensorsResponse(this.api, response.data);
-        } else if (response.status === 401) { //401 Unauthorized error
-            throw new ApiResponse(false, response.status, 0, response.data);
-        } else {
-            throw new ApiResponse(false, response.status, 0, response.data.message);
-        }
+    _successSensorsListResponse(api, response) {
+        return new SensorsResponse(api, response.data);
     }
 
     /**
-     * Return list of sensors (or error!)
+     * Return success result.
      *
-     * @param response
-     * @returns {ApiResponse}
+     * @param {SensorlabApi} api
+     * @param {object} response
+     * @returns {Sensor}
      * @private
      */
-    _prepareSensorResponse(response) {
-        if (!response) {
-            throw new ApiResponse(false, 0, 0, 'Connection refused');
-        }
-        if (response.status === 200) { //normal response
-            return new Sensor(this.api, response.data);
-        } else if (response.status === 401) { //401 Unauthorized error
-            throw new ApiResponse(false, response.status, 0, response.data);
-        } else {
-            throw new ApiResponse(false, response.status, 0, response.data.message);
-        }
+    _successSensorResponse(api, response) {
+        return new Sensor(api, response.data);
     }
 }

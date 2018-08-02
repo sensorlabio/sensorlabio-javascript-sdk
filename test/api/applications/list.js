@@ -19,7 +19,6 @@ describe('Applications endpoint', () => {
         it('should get an 401 status error without authorization', (done) => {
             api.applications.list()
                 .catch((response) => {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });

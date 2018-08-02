@@ -22,7 +22,6 @@ describe('Measurements endpoint', () => {
         it('should get an 401 status error without authorization', (done) => {
             api.measurements.list()
                 .catch((response) => {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });
@@ -85,7 +84,6 @@ describe('Measurements endpoint', () => {
             api.measurements.list()
                 .catch((response) => {
                     response.should.have.property('status').eq(422);
-                    response.should.have.property('success').eq(false);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
                     response.errors.forEach((error) => {
@@ -102,7 +100,6 @@ describe('Measurements endpoint', () => {
             api.measurements.list({sensor_id: '123'})
                 .catch((response) => {
                     response.should.have.property('status').eq(422);
-                    response.should.have.property('success').eq(false);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
                     response.errors.forEach((error) => {
@@ -157,7 +154,6 @@ describe('Measurements endpoint', () => {
             api.measurements.list({ next: 123, sensor_id: first_sensor.id })
                 .catch((response) => {
                     response.should.have.property('status').eq(422);
-                    response.should.have.property('success').eq(false);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
                     response.errors.forEach((error) => {

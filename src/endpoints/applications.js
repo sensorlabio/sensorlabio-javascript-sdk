@@ -1,4 +1,3 @@
-import ApiResponse from '../responses/api';
 import ApplicationsResponse from '../responses/applications';
 import Application from '../models/application';
 
@@ -11,6 +10,10 @@ export default class ApplicationsEndpoint {
      * @param {SensorlabApi} api - parent api
      */
     constructor(api) {
+        /**
+         * @member ApplicationsEndpoint#api
+         * @type {SensorlabApi}
+         */
         this.api = api;
     }
 
@@ -36,7 +39,7 @@ export default class ApplicationsEndpoint {
             sort: options.sort,
         }
         let response = await this.api._makeApiRequest('/v1/applications', 'GET', {}, params, true);
-        return this._prepareApplicationsListResponse(response);
+        return this.api._prepareApiResponse(response, this._successApplicationsListResponse);
     }
 
     /**
@@ -48,7 +51,7 @@ export default class ApplicationsEndpoint {
      */
     async get(application_id) {
         let response = await this.api._makeApiRequest('/v1/applications/' + application_id, 'GET', {}, {}, true);
-        return this._prepareApplicationResponse(response);
+        return this.api._prepareApiResponse(response, this._successApplicationResponse);
     }
 
     /**
@@ -64,7 +67,7 @@ export default class ApplicationsEndpoint {
             'description': description,
         }
         let response = await this.api._makeApiRequest('/v1/applications', 'POST', data);
-        return this._prepareApplicationsCreateResponse(response);
+        return this.api._prepareApiResponse(response, this._successCreateApplicationResponse);
     }
 
     /**
@@ -104,8 +107,9 @@ export default class ApplicationsEndpoint {
      * @returns {Promise<*>}
      */
     async generate_private_api_key(application_id) {
-        let response = await this.api._makeApiRequest('/v1/applications/' + application_id + '/private_api_key/generate', 'POST', {}, {}, true);
-        return this._prepareApplicationsCreateResponse(response);
+        let response = await this.api._makeApiRequest(
+            '/v1/applications/' + application_id + '/private_api_key/generate', 'POST', {}, {}, true);
+        return this.api._prepareApiResponse(response, this._successCreateApplicationResponse);
     }
 
     /**
@@ -116,7 +120,7 @@ export default class ApplicationsEndpoint {
      */
     async get_self() {
         let response = await this.api._makeApiRequest('/v1/applications/self', 'GET', {}, {}, true);
-        return this._prepareApplicationResponse(response);
+        return this.api._prepareApiResponse(response, this._successApplicationResponse);
     }
 
     /**
@@ -136,75 +140,38 @@ export default class ApplicationsEndpoint {
     }
 
     /**
-     * Return list of application (or throw error!).
+     * Return success result.
      *
-     * @param response
-     * @returns {ApiResponse}
-     * @throws {ApiResponse}
+     * @param {SensorlabApi} api
+     * @param {object} response
+     * @returns {ApplicationsResponse}
      * @private
      */
-    _prepareApplicationsListResponse(response) {
-        if (!response) {
-            throw new ApiResponse(false, 0, 0, 'Connection refused');
-        }
-        if (response.status === 200) { //normal response
-            return new ApplicationsResponse(this.api, response.data);
-        } else if (response.status === 401) { //401 Unauthorized error
-            throw new ApiResponse(false, response.status, 0, response.data);
-        } else {
-            throw new ApiResponse(false, response.status, 0, response.data.message);
-        }
+    _successApplicationsListResponse(api, response) {
+        return new ApplicationsResponse(api, response.data);
     }
 
     /**
-     * Return application response.
+     * Return success result.
      *
-     * @param response
+     * @param {SensorlabApi} api
+     * @param {object} response
      * @returns {Application}
-     * @throws ApiResponse
      * @private
      */
-    _prepareApplicationResponse(response) {
-        if (!response) {
-            throw new ApiResponse(false, 0, 0, 'Connection refused');
-        }
-        if (response.status === 200) { //normal response
-            return new Application(this.api, response.data);
-        } else if (response.status === 401) { //401 Unauthorized error
-            throw new ApiResponse(false, response.status, 0, response.data);
-        } else {
-            throw new ApiResponse(false, response.status, 0, response.data.message);
-        }
+    _successApplicationResponse(api, response) {
+        return new Application(api, response.data);
     }
 
     /**
-     * Return list of application (or throw error!).
+     * Return success result.
      *
-     * @param response
-     * @returns {ApiResponse}
-     * @throws {ApiResponse}
+     * @param {SensorlabApi} api
+     * @param {object} response
+     * @returns {Application}
      * @private
      */
-    _prepareApplicationsCreateResponse(response) {
-        if (!response) {
-            throw new ApiResponse(false, 0, 0, 'Connection refused');
-        }
-        switch (response.status) {
-            case 200:
-                if (response.data.success) {
-                    return new Application(this.api, response.data.application);
-                } else {
-                    throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message);
-                }
-                break;
-            case 401:
-                throw new ApiResponse(false, response.status, 0, response.data);
-                break;
-            case 422:
-                throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message, response.data.errors);
-                break;
-            default:
-                throw new ApiResponse(false, response.status, 0, response.data.message);
-        }
+    _successCreateApplicationResponse(api, response) {
+        return new Application(api, response.data.application);
     }
 }

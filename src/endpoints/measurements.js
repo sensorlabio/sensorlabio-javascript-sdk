@@ -1,4 +1,3 @@
-import ApiResponse from '../responses/api';
 import MeasurementsResponse from '../responses/measurements';
 import Measurement from '../models/measurement';
 
@@ -11,6 +10,10 @@ export default class MeasurementsEndpoint {
      * @param {SensorlabApi} api - parent api
      */
     constructor(api) {
+        /**
+         * @member MeasurementsEndpoint#api
+         * @type {SensorlabApi}
+         */
         this.api = api;
     }
 
@@ -37,7 +40,7 @@ export default class MeasurementsEndpoint {
             sensor_id: options.sensor_id,
         }
         let response = await this.api._makeApiRequest('/v1/measurements', 'GET', {}, params, true);
-        return this._prepareMeasurementsListResponse(response);
+        return this.api._prepareApiResponse(response, this._successMeasurementsListResponse);
     }
 
     /**
@@ -62,54 +65,30 @@ export default class MeasurementsEndpoint {
             params['sensor_id'] = options.sensor_id;
         }
         let response = await this.api._makeApiRequest('/v1/measurements/last', 'GET', {}, params, true);
-        return this._prepareMeasurementResponse(response);
+        return this.api._prepareApiResponse(response, this._successMeasurementResponse);
     }
 
     /**
-     * Return list of measurements (or error!).
+     * Return success result.
      *
-     * @param response
-     * @returns {ApiResponse}
-     * @throws {ApiResponse}
+     * @param {SensorlabApi} api
+     * @param {object} response
+     * @returns {MeasurementsResponse}
      * @private
      */
-    _prepareMeasurementsListResponse(response) {
-        if (!response) {
-            throw new ApiResponse(false, 0, 0, 'Connection refused');
-        }
-        switch (response.status) {
-            case 200:
-                return new MeasurementsResponse(this.api, response.data);
-                break;
-            case 401:
-                throw new ApiResponse(false, response.status, 0, response.data);
-                break;
-            case 422:
-                throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message, response.data.errors);
-                break;
-            default:
-                throw new ApiResponse(false, response.status, 0, response.data.message);
-        }
+    _successMeasurementsListResponse(api, response) {
+        return new MeasurementsResponse(api, response.data);
     }
 
     /**
-     * Return measurement response
+     * Return success result.
      *
-     * @param response
+     * @param {SensorlabApi} api
+     * @param {object} response
      * @returns {Measurement}
-     * @throws ApiResponse
      * @private
      */
-    _prepareMeasurementResponse(response) {
-        if (!response) {
-            throw new ApiResponse(false, 0, 0, 'Connection refused');
-        }
-        if (response.status === 200) { //normal response
-            return new Measurement(this.api, response.data);
-        } else if (response.status === 401) { //401 Unauthorized error
-            throw new ApiResponse(false, response.status, 0, response.data);
-        } else {
-            throw new ApiResponse(false, response.status, 0, response.data.message);
-        }
+    _successMeasurementResponse(api, response) {
+        return new Measurement(api, response.data);
     }
 }

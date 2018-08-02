@@ -8,6 +8,7 @@ import ApiResponse from './responses/api';
 import DemoEndpoint from './endpoints/demo';
 import DemoWidgets from './widgets/demo';
 import Widgets from './widgets/widgets';
+import ApiErrorResponseException from "./responses/error";
 let axios = require('axios');
 
 /**
@@ -170,40 +171,35 @@ export class SensorlabApi {
      * Create ApiResponse from axios response data.
      *
      * @param {object} response response from axios
+     * @param {function} success callback
      * @returns {ApiResponse}
      * @throws {ApiResponse}
      * @method SensorlabApi#_prepareApiResponse
      * @private
      */
-    _prepareApiResponse(response) {
+    _prepareApiResponse(response, success_cb = null) {
         if (!response) {
-            throw new ApiResponse(false, 0, 0, 'Connection refused');
+            throw new ApiErrorResponseException(0, 'Connection refused');
         }
         switch (response.status) {
             case 200:
-                if (response.data.token) {
-                    return new ApiResponse(true, response.status, 100, null, response.data.token);
-                } else if (response.data.success) {
-                    return new ApiResponse(response.data.success, response.status, response.data.code, response.data.message);
+                if (success_cb) {
+                    return success_cb(this, response);
                 } else {
-                    throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message);
+                    return new ApiResponse(response.data.success, response.status, response.data.code, response.data.message);
                 }
-                break;
             case 401:
-                throw new ApiResponse(false, response.status, 401, response.data);
-                break;
+                throw new ApiErrorResponseException(response.status, response.data.message);
             case 404:
-                throw new ApiResponse(false, response.status, 404, response.data);
-                break;
+                throw new ApiErrorResponseException(response.status, response.data);
             case 422:
-                throw new ApiResponse(response.data.success, response.status, response.data.code, response.data.message, response.data.errors);
-                break;
+                throw new ApiErrorResponseException(response.status, response.data.message, response.data.errors);
             default:
                 let message = null;
                 if ('message' in response.data) {
                     message = response.data.message;
                 }
-                throw new ApiResponse(false, response.status, 0, message);
+                throw new ApiErrorResponseException(response.status, message);
         }
     }
 }

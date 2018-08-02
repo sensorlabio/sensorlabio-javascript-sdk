@@ -111,7 +111,6 @@ describe('Measurements endpoint', () => {
             sensor.measurements.list({ next: 123 })
                 .catch((response) => {
                     response.should.have.property('status').eq(422);
-                    response.should.have.property('success').eq(false);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
                     response.errors.forEach((error) => {

@@ -20,7 +20,6 @@ describe('Sensors endpoint', () => {
         it('should get an 401 status error without authorization', (done) => {
             api.sensors.get()
                 .catch((response) => {
-                    response.success.should.eq(false);
                     response.status.should.eq(401);
                     done();
                 });
@@ -95,7 +94,6 @@ describe('Sensors endpoint', () => {
         it('should get 404 error on uknown sensor', (done) => {
             api.sensors.get('someid')
                 .catch((response) => {
-                    response.success.should.eq(false);
                     response.status.should.eq(404);
                     done();
                 });
