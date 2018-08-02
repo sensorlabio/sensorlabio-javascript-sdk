@@ -3,7 +3,7 @@ import Profile from '../models/profile';
 /**
  * Class for /profile/* endpoints.
  */
-export default class ProfileEndpoint {
+export default class ProfileEndpoints {
     /**
      * @constructor ProfileEndpoint
      * @param {SensorlabApi} api - parent api

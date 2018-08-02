@@ -4,7 +4,7 @@ import Sensor from '../models/sensor';
 /**
  * Class for /sensors/* endpoints.
  */
-export default class SensorsEndpoint {
+export default class SensorsEndpoints {
     /**
      * @constructor SensorsEndpoint
      * @param {SensorlabApi} api - parent api

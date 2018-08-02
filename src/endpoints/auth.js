@@ -4,7 +4,7 @@ import ApplicationToken from "../models/application_token";
 /**
  * Class for /auth/* endpoints.
  */
-export default class AuthEndpoint {
+export default class AuthEndpoints {
     /**
      * @constructor AuthEndpoint
      * @param {SensorlabApi} api - parent api

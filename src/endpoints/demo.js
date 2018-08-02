@@ -6,7 +6,7 @@ import Measurement from '../models/measurement';
  *
  * @classdesc Demo endpoints.
  */
-export default class DemoEndpoint {
+export default class DemoEndpoints {
     /**
      * @constructor DemoEndpoint
      * @param {SensorlabApi} api - parent api

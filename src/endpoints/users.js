@@ -1,7 +1,7 @@
 /**
  * @classdesc Class for /users/* endpoints.
  */
-export default class UsersEndpoint {
+export default class UsersEndpoints {
     /**
      * @constructor UsersEndpoint
      * @param {SensorlabApi} api - parent API class

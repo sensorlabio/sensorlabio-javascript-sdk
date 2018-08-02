@@ -1,19 +1,21 @@
-import UsersEndpoint from './endpoints/users';
-import AuthEndpoint from './endpoints/auth';
-import ApplicationsEndpoint from './endpoints/applications';
-import ProfileEndpoint from './endpoints/profile';
-import SensorsEndpoint from './endpoints/sensors';
-import MeasurementsEndpoint from './endpoints/measurements';
+import UsersEndpoints from './endpoints/users';
+import AuthEndpoints from './endpoints/auth';
+import ApplicationsEndpoints from './endpoints/applications';
+import ProfileEndpoints from './endpoints/profile';
+import SensorsEndpoints from './endpoints/sensors';
+import MeasurementsEndpoints from './endpoints/measurements';
 import ApiResponse from './responses/api';
-import DemoEndpoint from './endpoints/demo';
-import DemoWidgets from './widgets/demo';
-import Widgets from './widgets/widgets';
 import ApiErrorBasicException from "./responses/errors/basic";
 import ApiErrorUnauthorizedException from "./responses/errors/auth";
 import ApiErrorNotFoundException from "./responses/errors/notfound";
 import ApiErrorValidationException from "./responses/errors/validation";
 import ApiErrorConnectionRefusedException from "./responses/errors/connection_refused";
 import ApiErrorInteralException from "./responses/errors/internal";
+
+import DemoEndpoints from './endpoints/demo';
+import DemoWidgets from './widgets/demo';
+import Widgets from './widgets/widgets';
+
 let axios = require('axios');
 
 /**
@@ -40,7 +42,7 @@ export class SensorlabApi {
          * @private
          * @type {UsersEndpoint}
          */
-        this._users = new UsersEndpoint(this);
+        this._users = new UsersEndpoints(this);
 
         /**
          * Auth endpoints.
@@ -48,7 +50,7 @@ export class SensorlabApi {
          * @member SensorlabApi#auth
          * @type {AuthEndpoint}
          */
-        this.auth = new AuthEndpoint(this);
+        this.auth = new AuthEndpoints(this);
 
         /**
          * Profile endpoints.
@@ -56,7 +58,7 @@ export class SensorlabApi {
          * @member SensorlabApi#profile
          * @type {ProfileEndpoint}
          */
-        this.profile = new ProfileEndpoint(this);
+        this.profile = new ProfileEndpoints(this);
 
         /**
          * Applications endpoints.
@@ -64,7 +66,7 @@ export class SensorlabApi {
          * @member SensorlabApi#applications
          * @type {ApplicationsEndpoint}
          */
-        this.applications = new ApplicationsEndpoint(this);
+        this.applications = new ApplicationsEndpoints(this);
 
         /**
          * Sensor endpoint.
@@ -72,7 +74,7 @@ export class SensorlabApi {
          * @member SensorlabApi#sensors
          * @type {SensorsEndpoint}
          */
-        this.sensors = new SensorsEndpoint(this);
+        this.sensors = new SensorsEndpoints(this);
 
         /**
          * Measurements endpoints.
@@ -80,7 +82,7 @@ export class SensorlabApi {
          * @member SensorlabApi#measurements
          * @type {MeasurementsEndpoint}
          */
-        this.measurements = new MeasurementsEndpoint(this);
+        this.measurements = new MeasurementsEndpoints(this);
 
         /**
          * Saved JWT token
@@ -96,7 +98,7 @@ export class SensorlabApi {
          * @member SensorlabApi#demo
          * @type {DemoEndpoint}
          */
-        this.demo = new DemoEndpoint(this);
+        this.demo = new DemoEndpoints(this);
 
         /**
          * Widgets.

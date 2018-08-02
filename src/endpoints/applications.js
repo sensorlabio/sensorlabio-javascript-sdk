@@ -4,7 +4,7 @@ import Application from '../models/application';
 /**
  * Class for /application/* endpoints.
  */
-export default class ApplicationsEndpoint {
+export default class ApplicationsEndpoints {
     /**
      * @constructor ApplicationsEndpoint
      * @param {SensorlabApi} api - parent api
