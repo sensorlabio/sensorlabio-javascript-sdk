@@ -12,10 +12,6 @@ import ApiErrorValidationException from "./responses/errors/validation";
 import ApiErrorConnectionRefusedException from "./responses/errors/connection_refused";
 import ApiErrorInteralException from "./responses/errors/internal";
 
-import DemoEndpoints from './endpoints/demo';
-import DemoWidgets from './widgets/demo';
-import Widgets from './widgets/widgets';
-
 let axios = require('axios');
 
 /**
@@ -91,30 +87,6 @@ export class SensorlabApi {
          * @type {string}
          */
         this.jwt_token = null;
-
-        /**
-         * Demo endpoints.
-         *
-         * @member SensorlabApi#demo
-         * @type {DemoEndpoint}
-         */
-        this.demo = new DemoEndpoints(this);
-
-        /**
-         * Widgets.
-         *
-         * @member SensorlabApi#widgets
-         * @type {Widgets}
-         */
-        this.widgets = new Widgets(this);
-
-        /**
-         * Demo widgets.
-         *
-         * @member SensorlabApi#demo_widgets
-         * @type {DemoWidgets}
-         */
-        this.demo_widgets = new DemoWidgets(this);
     }
 
     /**
