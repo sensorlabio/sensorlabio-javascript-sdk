@@ -49,13 +49,11 @@ Download latest master release:
 Unzip:
 
     - `builds/index.min.js`
-    - `builds/css/index.min.css`
 
 Use them inside your html code:
 
 .. code-block:: html
-
-    <link href="build/css/index.min.css" rel="stylesheet">
+ 
     <script src="build/index.min.js"></script>
 
 And inside your JS code:
