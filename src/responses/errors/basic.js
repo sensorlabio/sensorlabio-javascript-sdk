@@ -4,7 +4,7 @@ export default class ApiErrorBasicException {
      *
      * @param {number} status - HTTP status of response.
      * @param {string} message - error message
-     * @param {[]} errors - validation errors
+     * @param {array} errors - validation errors
      */
     constructor(status, message = null, errors = []) {
         /**

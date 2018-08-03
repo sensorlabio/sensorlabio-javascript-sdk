@@ -8,5 +8,3 @@ Specifications
     endpoints/index
     models/index
     responses/index
-    widgets/index
-    demo_widgets/index

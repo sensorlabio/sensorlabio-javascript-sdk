@@ -9,4 +9,3 @@ Endpoints classes
     applications
     sensors
     measurements
-    demo
