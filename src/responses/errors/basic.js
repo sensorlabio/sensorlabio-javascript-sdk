@@ -1,6 +1,9 @@
+/**
+ * @classdesc SDK will throw this basic exception on other status errors.
+ */
 export default class ApiErrorBasicException {
     /**
-     * @constructor ApiErrorResponseException
+     * @constructor ApiErrorBasicException
      *
      * @param {number} status - HTTP status of response.
      * @param {string} message - error message
@@ -10,7 +13,7 @@ export default class ApiErrorBasicException {
         /**
          * HTTP status of response
          *
-         * @member ApiErrorResponseBasicException#status
+         * @member ApiErrorBasicException#status
          * @type {number}
          */
         this.status = status;
@@ -18,7 +21,7 @@ export default class ApiErrorBasicException {
         /**
          * Response/error message
          *
-         * @member ApiErrorResponseBasicException#message
+         * @member ApiErrorBasicException#message
          * @type {string}
          */
         this.message = message;
@@ -26,7 +29,7 @@ export default class ApiErrorBasicException {
         /**
          * Validation errors.
          *
-         * @member ApiErrorResponseBasicException#errors
+         * @member ApiErrorBasicException#errors
          * @type {Array}
          */
         this.errors = errors;

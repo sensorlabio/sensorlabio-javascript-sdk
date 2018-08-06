@@ -53,7 +53,7 @@ Unzip:
 Use them inside your html code:
 
 .. code-block:: html
- 
+
     <script src="build/index.min.js"></script>
 
 And inside your JS code:

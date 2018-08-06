@@ -8,3 +8,4 @@ Response classes
     applications
     sensors
     measurements
+    errors/index.rst
