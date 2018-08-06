@@ -40,22 +40,6 @@ You can fetch profile with `User` model object that you got from authentication:
                 });
              });
 
-Method will throw ApiResponse as exception on any error.
-
-.. code-block:: javascript
-
-    let api = new SensorlabApi();
-    api.profile.get()
-             .catch((response) => {
-                console.log(response.status);
-             });
-
-Output::
-
-    401
-
-There are no codes or special error for this action. ApiResponse will have status `401` with message `Unauthorized` if credentials are wrong.
-
 .. note::
     Available for:
 

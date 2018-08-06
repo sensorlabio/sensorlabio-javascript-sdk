@@ -42,25 +42,6 @@ You can provide `options` as an object with this parameters:
 
     - `type` - filter by measurement type.
 
-Method will throw ApiResponse as exception on any error.
-
-.. code-block:: javascript
-
-    sensor.measurements.list(options)
-             .catch((response) => {
-                console.log(response.status);
-             });
-
-Output::
-
-    401
-
-ApiResponse will have status `401` with message `Unauthorized` if credentials are wrong.
-
-ApiResponse will have status `404` with `message` = `Not Found` if there's no measurement.
-
-Action will throw `ApiResponse` with `status` = `422` on validation error.
-
 .. note::
     Available for:
 

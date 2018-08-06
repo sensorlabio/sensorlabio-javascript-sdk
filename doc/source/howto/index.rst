@@ -5,6 +5,7 @@ How to use SDK
     :maxdepth: 3
 
     getting_started
+    response_error
     auth/index
     profile/index
     applications/index

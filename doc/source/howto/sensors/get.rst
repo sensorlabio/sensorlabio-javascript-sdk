@@ -38,22 +38,6 @@ Parameters of `Sensor`:
     - `isBatteryCharging` - Indicates if battery is charging or not.
     - `isOnline` - Indicates if sensor is online and sending data or not.
 
-Method will throw ApiResponse as exception on any error.
-
-.. code-block:: javascript
-
-    let api = new SensorlabApi();
-    api.sensors.list(options)
-             .catch((response) => {
-                console.log(response.status);
-             });
-
-Output::
-
-    401
-
-There are no codes or special error for this action. ApiResponse will have status `401` with message `Unauthorized` if credentials are wrong.
-
 .. note::
     Available for:
 

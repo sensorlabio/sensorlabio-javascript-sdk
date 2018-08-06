@@ -36,34 +36,10 @@ You can provide `options` as an object with this parameters:
     - `type` - filter by measurement type.
     - `sensor_id` - filter by sensor id.
 
-Method will throw ApiResponse as exception on any error.
-
-.. code-block:: javascript
-
-    let api = new SensorlabApi();
-    api.measurements.list()
-             .catch((response) => {
-                console.log(response.code);
-                console.log(response.status);
-                console.log(response.success);
-                console.log(response.message);
-                response.errors.forEach((error) => { //validation errors
-                   console.log(error.code);
-                   console.log(error.message);
-                   console.log(error.param);
-                });
-             });
-
 Codes and messages for validation errors:
 
     - `code=2` - `field=sensor_id` - `This is not correct id format.`.
     - `code=3` - `field=next` - `This is not correct id format.`.
-
-.. note:: Messages are just text information and can be changed by developers.
-
-ApiResponse will have status `401` with `message` = `Unauthorized` if credentials are wrong.
-
-Action will throw `ApiResponse` with `status` = `422` on validation error.
 
 .. note::
     Available for:

@@ -27,9 +27,6 @@ If success you will get promise with response type ApiResponse with `code=100`, 
                 console.log(response.message);
              });
 
-ApiResponse will have status `401` with `message` = `Unauthorized` if credentials are wrong.
-ApiResponse will have status `404` with `message` = `Not Found` if application doesn't exist.
-
 .. note::
     Available for:
 

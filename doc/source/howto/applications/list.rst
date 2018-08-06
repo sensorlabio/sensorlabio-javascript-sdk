@@ -42,23 +42,6 @@ You can provide `options` as an object with this parameters:
             - `asc`
             - `desc`
 
-Method will throw ApiResponse as exception on any error.
-
-.. code-block:: javascript
-
-    api.applications.list(options)
-        .catch((response) => {
-            console.log(response.status);
-        });
-    });
-
-Output::
-
-    401
-
-There are no codes or special error for this action.
-ApiResponse will have status `401` with message `Unauthorized` if credentials are wrong.
-
 .. note::
     Available for:
 
