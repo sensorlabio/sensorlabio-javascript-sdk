@@ -21,7 +21,7 @@ describe('Application: /measurements last endpoint', () => {
         });
 
         it('should get list of applications', (done) => {
-            api.applications.list({sort: 'created,asc'})
+            api.applications.list({sort: 'created,desc'})
                 .then((response) => {
                     response.applications.should.be.a('array').lengthOf(50);
                     response.should.have.property('count');

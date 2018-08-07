@@ -1,5 +1,12 @@
 process.env.TEST_REST_API_URL = 'http://localhost:3000/api';
 
+let chai = require('chai');
+let chai_string  = require('chai-string');
+let chai_subset = require('chai-subset');
+
+chai.use(chai_string);
+chai.use(chai_subset);
+
 //public endpoints
 //require('./api/users/signup');
 

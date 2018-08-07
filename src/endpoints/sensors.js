@@ -24,7 +24,7 @@ export default class SensorsEndpoints {
      * @param {object} options - method options
      * @param {number} options.page - page number to display. Default is `1`.
      * @param {string} options.name - filter by name.
-     * @param {string} options.uniqueid - filter by uniqueid.
+     * @param {string} options.id - filter by id.
      * @param {string} options.imei - filter by imei.
      * @param {string} options.sort - sorting parameter
      * @param {string} options.online_status - pass "online" to search for online sensors or "offline" for offline sensors.
@@ -36,7 +36,7 @@ export default class SensorsEndpoints {
         if (options === undefined) options = {};
         if (options.page === undefined) options.page = 1;
         if (options.name === undefined) options.name = null;
-        if (options.uniqueid === undefined) options.uniqueid = null;
+        if (options.id === undefined) options.id = null;
         if (options.imei === undefined) options.imei = null;
         if (options.sort === undefined) options.sort = null;
         if (options.online_status === undefined) options.online_status = null;
@@ -46,7 +46,7 @@ export default class SensorsEndpoints {
         let params = {
             page: options.page,
             name: options.name,
-            uniqueid: options.uniqueid,
+            id: options.id,
             imei: options.imei,
             sort: options.sort,
             online_status: options.online_status,

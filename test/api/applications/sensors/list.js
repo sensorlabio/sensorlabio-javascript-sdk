@@ -88,7 +88,6 @@ describe('Sensors endpoint', () => {
                     expect(response.sensors.length).at.least(1);
                     response.sensors.forEach((sensor) => {
                         sensor.should.have.property('id');
-                        sensor.should.have.property('uniqueid');
                         sensor.should.have.property('imei');
                         sensor.should.have.property('name').containIgnoreSpaces(first_sensor_name);
                         sensor.should.have.property('batteryCharge');
@@ -108,7 +107,6 @@ describe('Sensors endpoint', () => {
                     expect(response.sensors.length).at.least(1);
                     response.sensors.forEach((sensor) => {
                         sensor.should.have.property('id');
-                        sensor.should.have.property('uniqueid');
                         sensor.should.have.property('imei').eq(first_sensor_imei);
                         sensor.should.have.property('name');
                         sensor.should.have.property('batteryCharge');
@@ -128,7 +126,6 @@ describe('Sensors endpoint', () => {
                     expect(response.sensors.length).at.least(1);
                     response.sensors.forEach((sensor) => {
                         sensor.should.have.property('id');
-                        sensor.should.have.property('uniqueid').eq(first_sensor_uniqueid);
                         sensor.should.have.property('imei');
                         sensor.should.have.property('name');
                         sensor.should.have.property('batteryCharge');
@@ -151,7 +148,6 @@ describe('Sensors endpoint', () => {
                     expect(response.sensors.length).at.least(1);
                     response.sensors.forEach((sensor) => {
                         sensor.should.have.property('id');
-                        sensor.should.have.property('uniqueid').eq(first_sensor_uniqueid);
                         sensor.should.have.property('imei').eq(first_sensor_imei);
                         sensor.should.have.property('name').containIgnoreSpaces(first_sensor_name);
                         sensor.should.have.property('batteryCharge');

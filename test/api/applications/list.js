@@ -1,6 +1,4 @@
 let chai = require('chai');
-let chai_string  = require('chai-string');
-let should = chai.should();
 let expect = chai.expect;
 import {SensorlabApi} from '../../../src';
 
@@ -11,8 +9,6 @@ let test_email = 'test@sensorlab.io';
 let test_passw = 'test';
 
 let first_application = null;
-
-chai.use(chai_string);
 
 describe('Applications endpoint', () => {
     describe('Get /applications', () => {

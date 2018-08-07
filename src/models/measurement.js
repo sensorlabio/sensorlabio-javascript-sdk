@@ -19,14 +19,6 @@ export default class Measurement {
         this.id = data.id;
 
         /**
-         * Parent sensor ID.
-         *
-         * @member Measurement#sensor_id
-         * @type {string}
-         */
-        this.sensor_id = data.sensor;
-
-        /**
          * Measurement type.
          *
          * @member Measurement#type

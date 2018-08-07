@@ -1,6 +1,6 @@
 let chai = require('chai');
-let should = chai.should();
-let expect = chai.expect;
+var chaiSubset = require('chai-subset');
+
 import {SensorlabApi} from '../../../src';
 
 //@todo change url to real public test server
@@ -42,47 +42,35 @@ describe('Measurements endpoint', () => {
                 });
         });
 
-        it('should get 422 without sensor_id parameter', (done) => {
+        it('should get 422 without sensor parameter', (done) => {
             api.measurements.list()
                 .catch((response) => {
                     response.should.have.property('status').eq(422);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
-                    response.errors.forEach((error) => {
-                        error.should.be.a('object');
-                        error.should.have.property('message');
-                        error.should.have.property('code').eq(1);
-                        error.should.have.property('param').eq('sensor_id');
-                    });
+                    response.errors.should.containSubset([{code: 1, param: 'sensor'}]);
                     done();
                 });
         });
 
-        it('should get 422 with sensor_id in wrong format', (done) => {
-            api.measurements.list({sensor_id: '123'})
+        it('should get 422 with sensor in wrong format', (done) => {
+            api.measurements.list({sensor: '123'})
                 .catch((response) => {
                     response.should.have.property('status').eq(422);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
-                    response.errors.forEach((error) => {
-                        error.should.be.a('object');
-                        error.should.have.property('message');
-                        error.should.have.property('code').eq(2);
-                        error.should.have.property('param').eq('sensor_id');
-                    });
+                    response.errors.should.containSubset([{code: 2, param: 'sensor'}]);
                     done();
                 });
         });
 
         it('should get list of measurements default page=1', (done) => {
-            api.measurements.list({sensor_id: first_sensor.id})
+            api.measurements.list({sensor: first_sensor.id})
                 .then((response) => {
                     response.measurements.should.be.a('array').lengthOf(50);
                     response.should.have.property('next');
                     response.measurements.forEach((measurement) => {
                         measurement.should.be.a('object');
-                        measurement.should.have.property('id');
-                        measurement.should.have.property('sensor');
                         measurement.should.have.property('type');
                         measurement.should.have.property('value');
                         measurement.value.should.be.a('array');
@@ -94,14 +82,12 @@ describe('Measurements endpoint', () => {
         });
 
         it('should get list of measurements by type', (done) => {
-            api.measurements.list({ type: first_type, sensor_id: first_sensor.id })
+            api.measurements.list({ type: first_type, sensor: first_sensor.id })
                 .then((response) => {
                     response.measurements.should.be.a('array').lengthOf(50);
                     response.should.have.property('next');
                     response.measurements.forEach((measurement) => {
                         measurement.should.be.a('object');
-                        measurement.should.have.property('id');
-                        measurement.should.have.property('sensor');
                         measurement.should.have.property('type').eq(first_type);
                         measurement.should.have.property('value');
                         measurement.value.should.be.a('array');
@@ -113,7 +99,7 @@ describe('Measurements endpoint', () => {
         });
 
         it('should get 422 error for bad `next` parameter', (done) => {
-            api.measurements.list({ next: 123, sensor_id: first_sensor.id })
+            api.measurements.list({ next: 123, sensor: first_sensor.id })
                 .catch((response) => {
                     response.should.have.property('status').eq(422);
                     response.should.have.property('errors');

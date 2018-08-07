@@ -1,6 +1,6 @@
 let chai = require('chai');
-let should = chai.should();
 let expect = chai.expect;
+
 import {SensorlabApi} from '../../../../src';
 
 //@todo change url to real public test server
@@ -27,12 +27,12 @@ describe('Measurements endpoint', () => {
         });
 
         it('should get list of applications', (done) => {
-            api.applications.list({sort: 'created,asc'})
+            api.applications.list({sort: 'created,desc'})
                 .then((response) => {
                     response.applications.should.be.a('array').lengthOf(50);
                     response.should.have.property('count');
                     response.should.have.property('pages');
-                    last_application = response.applications[0];
+                    last_application = response.applications[1];
                     done();
                 });
         });
@@ -63,7 +63,8 @@ describe('Measurements endpoint', () => {
         it('should get list of sensors default page=1', (done) => {
             api.sensors.list({sort: 'created,asc'})
                 .then((response) => {
-                    response.sensors.should.be.a('array').lengthOf(50);
+                    expect(response.sensors.length).at.least(1);
+                    response.sensors.should.be.a('array');
                     sensor = response.sensors[0];
                     done();
                 });
@@ -73,8 +74,6 @@ describe('Measurements endpoint', () => {
             sensor.measurements.last()
                 .then((measurement) => {
                     measurement.should.be.a('object');
-                    measurement.should.have.property('id');
-                    measurement.should.have.property('sensor');
                     measurement.should.have.property('type');
                     measurement.should.have.property('value');
                     measurement.value.should.be.a('array');
@@ -88,8 +87,6 @@ describe('Measurements endpoint', () => {
             sensor.measurements.last({type: first_type})
                 .then((measurement) => {
                     measurement.should.be.a('object');
-                    measurement.should.have.property('id');
-                    measurement.should.have.property('sensor');
                     measurement.should.have.property('type');
                     measurement.should.have.property('value');
                     measurement.value.should.be.a('array');

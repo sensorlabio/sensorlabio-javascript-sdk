@@ -23,21 +23,21 @@ export default class MeasurementsEndpoints {
      * @method MeasurementsEndpoint#list
      * @param {object} options - method options
      * @param {number} options.page - page number to display. Default is `1`.
-     * @param {string} options.sensor_id - show measurements for sensor with specified id.
+     * @param {string} options.sensor - show measurements for sensor with specified id.
      * @param {string} options.type - get measurements with specified type only.
      * @param {string} options.sort - sorting parameter
      * @returns {Promise.<ApiResponse>}
      */
     async list(options) {
         if (options === undefined) options = {};
-        if (options.sensor_id === undefined) options.sensor_id = null;
+        if (options.sensor === undefined) options.sensor = null;
         if (options.type === undefined) options.type = null;
         if (options.next === undefined) options.next = null;
 
         let params = {
             next: options.next,
             type: options.type,
-            sensor_id: options.sensor_id,
+            sensor: options.sensor,
         }
         let response = await this.api._makeApiRequest('/v1/measurements', 'GET', {}, params, true);
         return this.api._prepareApiResponse(response, this._successMeasurementsListResponse);
@@ -54,15 +54,15 @@ export default class MeasurementsEndpoints {
      */
     async last(options) {
         if (options === undefined) options = {};
-        if (options.sensor_id === undefined) options.sensor_id = null;
+        if (options.sensor === undefined) options.sensor = null;
         if (options.type === undefined) options.type = null;
 
         let params = {};
         if (options.type) {
             params['type'] = options.type;
         }
-        if (options.sensor_id) {
-            params['sensor_id'] = options.sensor_id;
+        if (options.sensor) {
+            params['sensor'] = options.sensor;
         }
         let response = await this.api._makeApiRequest('/v1/measurements/last', 'GET', {}, params, true);
         return this.api._prepareApiResponse(response, this._successMeasurementResponse);

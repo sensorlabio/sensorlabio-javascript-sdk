@@ -1,6 +1,4 @@
 let chai = require('chai');
-let should = chai.should();
-let expect = chai.expect;
 import {SensorlabApi} from '../../../../src';
 
 //@todo change url to real public test server
@@ -82,7 +80,6 @@ describe('Sensors endpoint', () => {
             api.sensors.get(first_sensor_id)
                 .then((sensor) => {
                     sensor.should.have.property('id').eq(first_sensor_id);
-                    sensor.should.have.property('uniqueid');
                     sensor.should.have.property('imei');
                     sensor.should.have.property('name');
                     sensor.should.have.property('batteryCharge');

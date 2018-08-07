@@ -23,12 +23,12 @@ describe('Application: /measurements last endpoint for sensor', () => {
         });
 
         it('should get list of applications', (done) => {
-            api.applications.list({sort: 'created,asc'})
+            api.applications.list({sort: 'created,desc'})
                 .then((response) => {
                     response.applications.should.be.a('array').lengthOf(50);
                     response.should.have.property('count');
                     response.should.have.property('pages');
-                    last_application = response.applications[0];
+                    last_application = response.applications[1];
                     done();
                 });
         });
@@ -60,7 +60,7 @@ describe('Application: /measurements last endpoint for sensor', () => {
         it('should get list of sensors default page=1', (done) => {
             api.sensors.list({sort: 'created,asc'})
                 .then((response) => {
-                    response.sensors.should.be.a('array').lengthOf(50);
+                    response.sensors.should.be.a('array');
                     sensor = response.sensors[0];
                     done();
                 });

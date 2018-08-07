@@ -19,14 +19,6 @@ export default class Sensor {
         this.id = data.id;
 
         /**
-         * Sensor unique id.
-         *
-         * @member Sensor#uniqueid
-         * @type {string}
-         */
-        this.uniqueid = data.uniqueid;
-
-        /**
          * Sensor IMEI.
          *
          * @member Sensor#imei
@@ -97,14 +89,14 @@ export default class Sensor {
                 if (options === undefined) {
                     options = {};
                 }
-                options['sensor_id'] = self.id;
+                options['sensor'] = self.id;
                 return self.api.measurements.list(options);
             },
             'last': function(options) {
                 if (options === undefined) {
                     options = {};
                 }
-                options['sensor_id'] = self.id;
+                options['sensor'] = self.id;
                 return self.api.measurements.last(options);
             }
         }

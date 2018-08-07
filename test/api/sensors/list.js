@@ -39,7 +39,7 @@ describe('Sensors endpoint', () => {
                     response.should.have.property('pages');
                     first_sensor_name = response.sensors[0].name;
                     first_sensor_imei = response.sensors[0].imei;
-                    first_sensor_uniqueid = response.sensors[0].uniqueid;
+                    first_sensor_uniqueid = response.sensors[0].id;
                     done();
                 });
         });
@@ -51,7 +51,6 @@ describe('Sensors endpoint', () => {
                     expect(response.sensors.length).at.least(1);
                     response.sensors.forEach((sensor) => {
                         sensor.should.have.property('id');
-                        sensor.should.have.property('uniqueid');
                         sensor.should.have.property('imei');
                         sensor.should.have.property('name').containIgnoreSpaces(first_sensor_name);
                         sensor.should.have.property('batteryCharge');
@@ -70,7 +69,6 @@ describe('Sensors endpoint', () => {
                     expect(response.sensors.length).at.least(1);
                     response.sensors.forEach((sensor) => {
                         sensor.should.have.property('id');
-                        sensor.should.have.property('uniqueid');
                         sensor.should.have.property('imei').eq(first_sensor_imei);
                         sensor.should.have.property('name');
                         sensor.should.have.property('batteryCharge');
@@ -82,14 +80,13 @@ describe('Sensors endpoint', () => {
                 });
         });
 
-        it('should get list of sensors by uniqueid', (done) => {
-            api.sensors.list({ uniqueid: first_sensor_uniqueid })
+        it('should get list of sensors by id', (done) => {
+            api.sensors.list({ id: first_sensor_uniqueid })
                 .then((response) => {
                     response.sensors.should.be.a('array');
                     expect(response.sensors.length).at.least(1);
                     response.sensors.forEach((sensor) => {
-                        sensor.should.have.property('id');
-                        sensor.should.have.property('uniqueid').eq(first_sensor_uniqueid);
+                        sensor.should.have.property('id').eq(first_sensor_uniqueid);
                         sensor.should.have.property('imei');
                         sensor.should.have.property('name');
                         sensor.should.have.property('batteryCharge');
@@ -104,14 +101,13 @@ describe('Sensors endpoint', () => {
         it('should get list of sensors by all search params', (done) => {
             api.sensors.list({
                     name: first_sensor_name,
-                    uniqueid: first_sensor_uniqueid,
+                    id: first_sensor_uniqueid,
                     imei: first_sensor_imei
                 }).then((response) => {
                     response.sensors.should.be.a('array');
                     expect(response.sensors.length).at.least(1);
                     response.sensors.forEach((sensor) => {
-                        sensor.should.have.property('id');
-                        sensor.should.have.property('uniqueid').eq(first_sensor_uniqueid);
+                        sensor.should.have.property('id').eq(first_sensor_uniqueid);
                         sensor.should.have.property('imei').eq(first_sensor_imei);
                         sensor.should.have.property('name').containIgnoreSpaces(first_sensor_name);
                         sensor.should.have.property('batteryCharge');

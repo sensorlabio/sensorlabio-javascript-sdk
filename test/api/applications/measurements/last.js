@@ -1,5 +1,4 @@
 let chai = require('chai');
-let should = chai.should();
 let expect = chai.expect;
 import {SensorlabApi} from '../../../../src';
 
@@ -36,12 +35,12 @@ describe('Measurements endpoint', () => {
         });
 
         it('should get list of applications', (done) => {
-            api.applications.list({sort: 'created,asc'})
+            api.applications.list({sort: 'created,desc'})
                 .then((response) => {
                     response.applications.should.be.a('array').lengthOf(50);
                     response.should.have.property('count');
                     response.should.have.property('pages');
-                    last_application = response.applications[0];
+                    last_application = response.applications[1];
                     done();
                 });
         });
@@ -72,7 +71,8 @@ describe('Measurements endpoint', () => {
         it('should get list of sensors (we need the first one for tests)', (done) => {
             api.sensors.list({sort: 'created,asc'})
                 .then((response) => {
-                    response.sensors.should.be.a('array').lengthOf(50);
+                    response.sensors.should.be.a('array');
+                    expect(response.sensors.length).at.least(1);
                     response.should.have.property('count');
                     response.should.have.property('pages');
                     first_sensor = response.sensors[0];
@@ -80,44 +80,32 @@ describe('Measurements endpoint', () => {
                 });
         });
 
-        it('should get 422 error without sensor_id', (done) => {
+        it('should get 422 error without sensor', (done) => {
             api.measurements.last()
                 .catch((response) => {
                     response.should.have.property('status').eq(422);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
-                    response.errors.forEach((error) => {
-                        error.should.be.a('object');
-                        error.should.have.property('message');
-                        error.should.have.property('code').eq(1);
-                        error.should.have.property('param').eq('sensor_id');
-                    });
+                    response.errors.should.containSubset([{code: 1, param: 'sensor'}]);
                     done();
                 });
         });
 
         it('should get 422 error with gibberish sensor 1', (done) => {
-            api.measurements.last({sensor_id: '123'})
+            api.measurements.last({sensor: '123'})
                 .catch((response) => {
                     response.should.have.property('status').eq(422);
                     response.should.have.property('errors');
                     response.errors.should.be.a('array');
-                    response.errors.forEach((error) => {
-                        error.should.be.a('object');
-                        error.should.have.property('message');
-                        error.should.have.property('code').eq(2);
-                        error.should.have.property('param').eq('sensor_id');
-                    });
+                    response.errors.should.containSubset([{code: 2, param: 'sensor'}]);
                     done();
                 });
         });
 
         it('should get last measurement', (done) => {
-            api.measurements.last({sensor_id: first_sensor.id})
+            api.measurements.last({sensor: first_sensor.id})
                 .then((measurement) => {
                     measurement.should.be.a('object');
-                    measurement.should.have.property('id');
-                    measurement.should.have.property('sensor');
                     measurement.should.have.property('type');
                     measurement.should.have.property('value');
                     measurement.value.should.be.a('array');
@@ -128,11 +116,9 @@ describe('Measurements endpoint', () => {
         });
 
         it('should get last measurement by type', (done) => {
-            api.measurements.last({type: first_type, sensor_id: first_sensor.id})
+            api.measurements.last({type: first_type, sensor: first_sensor.id})
                 .then((measurement) => {
                     measurement.should.be.a('object');
-                    measurement.should.have.property('id');
-                    measurement.should.have.property('sensor');
                     measurement.should.have.property('type');
                     measurement.should.have.property('value');
                     measurement.value.should.be.a('array');
