@@ -34,7 +34,7 @@ You can provide `options` as an object with this parameters:
 
     - `next` - by default will null.
     - `type` - filter by measurement type.
-    - `sensor_id` - filter by sensor id.
+    - `sensor` - filter by sensor id.
 
 Codes and messages for validation errors:
 

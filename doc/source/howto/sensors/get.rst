@@ -22,7 +22,6 @@ On success you will get promise with `Sensor` model object.
     api.sensors.get(sensor_id)
              .then((sensor) => {
                 console.log(sensors_response.id);
-                console.log(sensors_response.uniqueid);
                 console.log(sensors_response.imei);
                 console.log(sensors_response.name);
              });
@@ -30,7 +29,6 @@ On success you will get promise with `Sensor` model object.
 Parameters of `Sensor`:
 
     - `id` - id in the database.
-    - `uniqueid` - uniqueid parameter.
     - `imei` - Sensor's imei.
     - `name` - Sensor's name.
     - `application` - Application ID sensor is connected to.

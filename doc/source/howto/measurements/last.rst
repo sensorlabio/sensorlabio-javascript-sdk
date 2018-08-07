@@ -17,24 +17,20 @@ On success you will get promise with `Measurement` model object.
     let api = new SensorlabApi();
     api.measurements.last(options)
              .then((measurement) => {
-                console.log(measurement.id);
-                console.log(measurement.sensor_id);
                 console.log(measurement.type);
                 console.log(measurement.value);
-                console.log(measurement.created);
+                console.log(measurement.timestamp);
              });
 
 Parameters of `Measurement` model object:
 
-    - `id` - id in the database.
-    - `sensor_id` - id of `Sensor`
     - `type` - measurement type
     - `value` - value array
-    - `created` - datetime measurement was created
+    - `timestamp` - timestamp measurement was created
 
 You can provide `options` as an object with this parameters:
 
-    - `sensor_id` - filter by sensor.
+    - `sensor` - filter by sensor.
     - `type` - filter by measurement type.
 
 Codes and messages for validation errors:

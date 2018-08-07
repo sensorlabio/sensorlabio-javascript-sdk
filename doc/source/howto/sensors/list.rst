@@ -35,7 +35,6 @@ Parameters of `SensorsResponse`:
 Parameters of `Sensor`:
 
     - `id` - id in the database.
-    - `uniqueid` - uniqueid parameter.
     - `imei` - Sensor's imei.
     - `name` - Sensor's name.
     - `application` - Application ID sensor is connected to.
@@ -47,7 +46,7 @@ You can provide `options` as an object with this parameters:
 
     - `page` - by default will 1.
     - `name` - filter sensors by name.
-    - `uniqueid` - filter by uniqueid.
+    - `id` - filter by ID.
     - `imei` - filter by imei.
     - `online_status` - pass "online" to search for online sensors or "offline" for offline sensors.
     - `battery_charge_min` - filter sensors by battery charge.

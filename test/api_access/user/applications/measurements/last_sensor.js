@@ -73,8 +73,6 @@ describe('Measurements endpoint', () => {
             sensor.measurements.last()
                 .then((measurement) => {
                     measurement.should.be.a('object');
-                    measurement.should.have.property('id');
-                    measurement.should.have.property('sensor');
                     measurement.should.have.property('type');
                     measurement.should.have.property('value');
                     measurement.value.should.be.a('array');
@@ -88,8 +86,6 @@ describe('Measurements endpoint', () => {
             sensor.measurements.last({type: first_type})
                 .then((measurement) => {
                     measurement.should.be.a('object');
-                    measurement.should.have.property('id');
-                    measurement.should.have.property('sensor');
                     measurement.should.have.property('type');
                     measurement.should.have.property('value');
                     measurement.value.should.be.a('array');

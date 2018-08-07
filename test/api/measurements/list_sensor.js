@@ -35,8 +35,6 @@ describe('Measurements endpoint', () => {
                     response.should.have.property('next');
                     response.measurements.forEach((measurement) => {
                         measurement.should.be.a('object');
-                        measurement.should.have.property('id');
-                        measurement.should.have.property('sensor');
                         measurement.should.have.property('type');
                         measurement.should.have.property('value');
                         measurement.value.should.be.a('array');

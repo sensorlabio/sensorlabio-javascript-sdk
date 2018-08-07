@@ -70,8 +70,6 @@ describe('Application: /measurements last endpoint for sensor', () => {
             sensor.measurements.last()
                 .then((measurement) => {
                     measurement.should.be.a('object');
-                    measurement.should.have.property('id');
-                    measurement.should.have.property('sensor');
                     measurement.should.have.property('type');
                     measurement.should.have.property('value');
                     measurement.value.should.be.a('array');

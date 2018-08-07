@@ -19,24 +19,16 @@ On success you will get promise with `Measurement` model object.
 
     sensor.measurements.last(options)
              .then((measurement) => {
-                console.log(measurement.id);
-                console.log(measurement.sensor_id);
                 console.log(measurement.type);
                 console.log(measurement.value);
-                console.log(measurement.received);
-                console.log(measurement.created);
-                console.log(measurement.measurementgroup);
+                console.log(measurement.timestamp);
              });
 
 Parameters of `Measurement` model object:
 
-    - `id` - id in the database.
-    - `sensor_id` - id of `Sensor`
     - `type` - measurement type
     - `value` - value array
-    - `received` - datetime measurement was received
-    - `created` - datetime measurement was created
-    - `measurementgroup` - measurement group
+    - `timestamp` - timestamp measurement was created
 
 You can provide `options` as an object with this parameters:
 
