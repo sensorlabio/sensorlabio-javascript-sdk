@@ -11,6 +11,14 @@ export default class Measurement {
         this.api = api;
 
         /**
+         * Measurement ID.
+         *
+         * @member Measurement#id
+         * @type {string}
+         */
+        this.id = data.id;
+
+        /**
          * Measurement type.
          *
          * @member Measurement#type
