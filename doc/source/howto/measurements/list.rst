@@ -29,6 +29,8 @@ Parameters of `MeasurementsResponse`:
     - `next` - next measurement id for pagination.
     - `prev` - previous measurement id for pagination.
     - `measurements` - an array of measurements on this page. This is an array of `Measurements` models objects.
+    - `timestamp_start` - filter by timestamp range.
+    - `timestamp_stop` - filter by timestamp range.
 
 You can provide `options` as an object with this parameters:
 
