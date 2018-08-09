@@ -35,12 +35,17 @@ You can provide `options` as an object with this parameters:
     - `next` - by default will null.
     - `type` - filter by measurement type.
     - `sensor` - filter by sensor id.
+    - `timestamp_start` - filter by timestamp range - range start.
+    - `timestamp_stop` - filter by timestamp range - range stop.
 
 Codes and messages for validation errors:
 
-    - `code=1` - `field=sensor_id` - `Please, provide sensor field. This cannot be empty.`.
-    - `code=2` - `field=sensor_id` - `This is not correct id format.`.
-    - `code=3` - `field=next` - `This is not correct id format.`.
+    - code=1 - field=sensor_id - Please, provide sensor field. This cannot be empty
+    - code=2 - field=sensor_id - This is not correct id format
+    - code=3 - field=next - This is not correct id format
+    - code=4 - field=timestamp_start - `timestamp_start` should be correct unix timestamp format
+    - code=5 - field=timestamp_stop - `timestamp_stop` should be correct unix timestamp format
+    - code=6 - field=timestamp_stop - `timestamp_stop` should be more or equal `timestamp_start`
 
 .. note::
     Available for:

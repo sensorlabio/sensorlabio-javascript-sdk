@@ -33,11 +33,15 @@ export default class MeasurementsEndpoints {
         if (options.sensor === undefined) options.sensor = null;
         if (options.type === undefined) options.type = null;
         if (options.next === undefined) options.next = null;
+        if (options.timestamp_start === undefined) options.timestamp_start = null;
+        if (options.timestamp_stop === undefined) options.timestamp_stop = null;
 
         let params = {
             next: options.next,
             type: options.type,
             sensor: options.sensor,
+            timestamp_start: options.timestamp_start,
+            timestamp_stop: options.timestamp_stop,
         }
         let response = await this.api._makeApiRequest('/v1/measurements', 'GET', {}, params, true);
         return this.api._prepareApiResponse(response, this._successMeasurementsListResponse);
