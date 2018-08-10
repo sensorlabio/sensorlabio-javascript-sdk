@@ -41,6 +41,7 @@ Parameters of `Sensor`:
     - `batteryCharge` - Sensor's battery charge in percent.
     - `isBatteryCharging` - Indicates if battery is charging or not.
     - `isOnline` - Indicates if sensor is online and sending data or not.
+    - `is_public` - Show if sensor is public or not.
 
 You can provide `options` as an object with this parameters:
 

@@ -54,7 +54,7 @@ export default class Sensor {
          * Battery charge.
          *
          * @member Sensor#batteryCharge
-         * @type {Number}
+         * @type {number}
          */
         this.batteryCharge = data.batteryCharge;
 
@@ -62,7 +62,7 @@ export default class Sensor {
          * Is battery charging?
          *
          * @member Sensor#isBatteryCharging
-         * @type {Boolean}
+         * @type {boolean}
          */
         this.isBatteryCharging = data.isBatteryCharging;
 
@@ -70,9 +70,17 @@ export default class Sensor {
          * Is sensor connected and online?
          *
          * @member Sensor#isOnline
-         * @type {Boolean}
+         * @type {boolean}
          */
         this.isOnline = data.isOnline;
+
+        /**
+         * Is sensor public?
+         *
+         * @member Sensor#is_public
+         * @type {boolean}
+         */
+        this.is_public = data.is_public;
 
         this.token = data.token;
 

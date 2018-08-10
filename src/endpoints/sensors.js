@@ -76,12 +76,16 @@ export default class SensorsEndpoints {
      * @param {string} sensor_id - id of sensor to update
      * @param {string} name - sensor's name
      * @param {string} application - application id to assign to
+     * @param {boolean} is_public - set sensor private or public
      */
-    async update(sensor_id, name, application = null) {
+    async update(sensor_id, name, application = null, is_public = null) {
         let data = {
             'name': name,
             'application': application,
         };
+        if (is_public !== null) {
+            data['is_public'] = is_public;
+        }
         let response = await this.api._makeApiRequest('/v1/sensors/' + sensor_id, 'PATCH', data);
         return this.api._prepareApiResponse(response);
     }

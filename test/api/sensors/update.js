@@ -93,7 +93,7 @@ describe('Sensors update endpoint', () => {
                 });
         });
 
-        it('should get updated created sensor', (done) => {
+        it('should get updated sensor', (done) => {
             api.sensors.get(sensor.id)
                 .then((sensor) => {
                     sensor.should.have.property('id').eq(sensor.id);
@@ -101,7 +101,75 @@ describe('Sensors update endpoint', () => {
                     sensor.should.have.property('name');
                     sensor.should.have.property('batteryCharge');
                     sensor.should.have.property('application').eq(app.id)
+                    done();
+                });
+        });
 
+        it('should return error if `is_public` field is incorrect', (done) => {
+            api.sensors.update(sensor.id, 'Updated sensor information', null, 'test')
+                .catch((response) => {
+                    response.status.should.eq(422);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 3, param: 'is_public'}]);
+                    done();
+                });
+        });
+
+        it('should set sensor public', (done) => {
+            let data = {
+                name: 'Updated Test Sensor',
+                application: app.id,
+                is_public: true,
+            };
+            api.sensors.update(sensor.id, data.name, data.application, data.is_public)
+                .then((response) => {
+                    response.status.should.eq(200);
+                    response.should.have.property('success').eq(true);
+                    response.should.have.property('code').eq(100);
+                    response.should.have.property('message');
+                    done();
+                });
+        });
+
+        it('should get updated sensor with is_public=true', (done) => {
+            api.sensors.get(sensor.id)
+                .then((sensor) => {
+                    sensor.should.have.property('id').eq(sensor.id);
+                    sensor.should.have.property('imei');
+                    sensor.should.have.property('name');
+                    sensor.should.have.property('batteryCharge');
+                    sensor.should.have.property('application').eq(app.id);
+                    sensor.should.have.property('is_public').eq(true);
+                    done();
+                });
+        });
+
+        it('should set sensor private', (done) => {
+            let data = {
+                name: 'Updated Test Sensor',
+                application: app.id,
+                is_public: false,
+            };
+            api.sensors.update(sensor.id, data.name, data.application, data.is_public)
+                .then((response) => {
+                    response.status.should.eq(200);
+                    response.should.have.property('success').eq(true);
+                    response.should.have.property('code').eq(100);
+                    response.should.have.property('message');
+                    done();
+                });
+        });
+
+        it('should get updated sensor with is_public=false', (done) => {
+            api.sensors.get(sensor.id)
+                .then((sensor) => {
+                    sensor.should.have.property('id').eq(sensor.id);
+                    sensor.should.have.property('imei');
+                    sensor.should.have.property('name');
+                    sensor.should.have.property('batteryCharge');
+                    sensor.should.have.property('application').eq(app.id);
+                    sensor.should.have.property('is_public').eq(false);
                     done();
                 });
         });

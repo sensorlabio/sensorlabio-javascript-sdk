@@ -29,8 +29,9 @@ If success you will get promise with response type ApiResponse with `code=100`, 
 
 Codes and messages for validation errors:
 
-    - `code=1` - `"Please, provide name field. This cannot be empty."`
-    - `code=2` - `"Application ID is incorrect."`
+    - code=1 - field=name - Please, provide name field. This cannot be empty
+    - code=2 - field=application - `application` must be correct UUID format
+    - code=3 - field=is_public - `is_public` must be correct boolean format
 
 .. note::
     Available for:
