@@ -1,5 +1,5 @@
 ProfileEndpoint class
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. js:autoclass:: ProfileEndpoint
+.. js:autoclass:: ProfileEndpoints
     :members: get, change_password

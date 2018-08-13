@@ -6,12 +6,12 @@ import ApplicationToken from "../models/application_token";
  */
 export default class AuthEndpoints {
     /**
-     * @constructor AuthEndpoint
+     * @constructor AuthEndpoints
      * @param {SensorlabApi} api - parent api
      */
     constructor(api) {
         /**
-         * @member AuthEndpoint#api
+         * @member AuthEndpoints#api
          * @type {SensorlabApi}
          */
         this.api = api;
@@ -20,7 +20,7 @@ export default class AuthEndpoints {
     /**
      * Authorize with email and password and get authentication token.
      *
-     * @method AuthEndpoint#user_token
+     * @method AuthEndpoints#user_token
      * @param {string} email user's email
      * @param {string} password user's password
      * @returns {Promise.<ApiResponse>}
@@ -39,7 +39,7 @@ export default class AuthEndpoints {
     /**
      * Authenticate application by public and private api keys and get JWT token.
      *
-     * @method AuthEndpoint#application_token
+     * @method AuthEndpoints#application_token
      * @param {string} public_api_key Application's public api key
      * @param {string} private_api_key Application's private api key
      * @returns {Promise.<ApiResponse>}

@@ -6,12 +6,12 @@ import Sensor from '../models/sensor';
  */
 export default class SensorsEndpoints {
     /**
-     * @constructor SensorsEndpoint
+     * @constructor SensorsEndpoints
      * @param {SensorlabApi} api - parent api
      */
     constructor(api) {
         /**
-         * @member SensorsEndpoint#api
+         * @member SensorsEndpoints#api
          * @type {SensorlabApi}
          */
         this.api = api;
@@ -20,7 +20,7 @@ export default class SensorsEndpoints {
     /**
      * Get sensors list.
      *
-     * @method SensorsEndpoint#list
+     * @method SensorsEndpoints#list
      * @param {object} options - method options
      * @param {number} options.page - page number to display. Default is `1`.
      * @param {string} options.name - filter by name.
@@ -60,7 +60,7 @@ export default class SensorsEndpoints {
     /**
      * Get sensor by id.
      *
-     * @method SensorsEndpoint#one
+     * @method SensorsEndpoints#one
      * @param {string} sensor_id - sensor's id
      * @returns {Promise.<ApiResponse>}
      */
@@ -72,7 +72,7 @@ export default class SensorsEndpoints {
     /**
      * Update sensors.
      *
-     * @method SensorsEndpoint#update
+     * @method SensorsEndpoints#update
      * @param {string} sensor_id - id of sensor to update
      * @param {string} name - sensor's name
      * @param {string} application - application id to assign to

@@ -1,5 +1,5 @@
 ApplicationsEndpoint class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. js:autoclass:: ApplicationsEndpoint
+.. js:autoclass:: ApplicationsEndpoints
     :members: list, get, create, update, delete, get_self, update_self

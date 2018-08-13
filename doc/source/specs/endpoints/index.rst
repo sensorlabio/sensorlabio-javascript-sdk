@@ -1,5 +1,5 @@
-Endpoints classes
------------------
+PublicEndpoints classes
+-----------------------
 
 .. toctree::
     :maxdepth: 2

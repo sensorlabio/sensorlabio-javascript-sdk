@@ -11,3 +11,4 @@ How to use SDK
     applications/index
     sensors/index
     measurements/index
+    public/index

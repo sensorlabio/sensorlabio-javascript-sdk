@@ -6,12 +6,12 @@ import Application from '../models/application';
  */
 export default class ApplicationsEndpoints {
     /**
-     * @constructor ApplicationsEndpoint
+     * @constructor ApplicationsEndpoints
      * @param {SensorlabApi} api - parent api
      */
     constructor(api) {
         /**
-         * @member ApplicationsEndpoint#api
+         * @member ApplicationsEndpoints#api
          * @type {SensorlabApi}
          */
         this.api = api;
@@ -20,7 +20,7 @@ export default class ApplicationsEndpoints {
     /**
      * Get applications list
      *
-     * @method ApplicationsEndpoint#list
+     * @method ApplicationsEndpoints#list
      * @param {object} options - method options
      * @param {number} options.page - page number to display. Default is `1`.
      * @param {string} options.name - search by name.
@@ -45,7 +45,7 @@ export default class ApplicationsEndpoints {
     /**
      * Get application by id
      *
-     * @method ApplicationsEndpoint#get
+     * @method ApplicationsEndpoints#get
      * @param {string} application_id - application_id
      * @returns {Promise.<ApiResponse>}
      */
@@ -57,7 +57,7 @@ export default class ApplicationsEndpoints {
     /**
      * Create application.
      *
-     * @method ApplicationsEndpoint#create
+     * @method ApplicationsEndpoints#create
      * @param {string} name - application's name
      * @param {string} description - users's description
      */
@@ -73,7 +73,7 @@ export default class ApplicationsEndpoints {
     /**
      * Update application.
      *
-     * @method ApplicationsEndpoint#update
+     * @method ApplicationsEndpoints#update
      * @param {string} application_id - id of application to update
      * @param {string} name - application's name
      * @param {string} description - users's description
@@ -90,7 +90,7 @@ export default class ApplicationsEndpoints {
     /**
      * Delete application by id.
      *
-     * @method ApplicationsEndpoint#delete
+     * @method ApplicationsEndpoints#delete
      * @param {string} application_id - application_id
      * @returns {Promise.<ApiResponse>}
      */
@@ -102,7 +102,7 @@ export default class ApplicationsEndpoints {
     /**
      * Generate new private api key for application.
      *
-     * @method ApplicationsEndpoint#generate_private_api_key
+     * @method ApplicationsEndpoints#generate_private_api_key
      * @param application_id
      * @returns {Promise<*>}
      */
@@ -115,7 +115,7 @@ export default class ApplicationsEndpoints {
     /**
      * Get application for application token.
      *
-     * @method ApplicationsEndpoint#get_self
+     * @method ApplicationsEndpoints#get_self
      * @returns {Promise.<ApiResponse>}
      */
     async get_self() {
@@ -126,7 +126,7 @@ export default class ApplicationsEndpoints {
     /**
      * Update application for application token.
      *
-     * @method ApplicationsEndpoint#update_self
+     * @method ApplicationsEndpoints#update_self
      * @param {string} name - application's name
      * @param {string} description - users's description
      */

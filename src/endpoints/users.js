@@ -3,12 +3,12 @@
  */
 export default class UsersEndpoints {
     /**
-     * @constructor UsersEndpoint
+     * @constructor UsersEndpoints
      * @param {SensorlabApi} api - parent API class
      */
     constructor(api) {
         /**
-         * @member UsersEndpoint#api
+         * @member UsersEndpoints#api
          * @type {SensorlabApi}
          */
         this.api = api;
@@ -17,7 +17,7 @@ export default class UsersEndpoints {
     /**
      * Signup users endpoint.
      *
-     * @method UsersEndpoint#signup
+     * @method UsersEndpoints#signup
      * @param {string} email - users's email
      * @param {string} password - users's password
      * @param {string} password_check - password check field value
@@ -35,7 +35,7 @@ export default class UsersEndpoints {
     /**
      * Email verification endpoint.
      *
-     * @method UsersEndpoint#verify_email
+     * @method UsersEndpoints#verify_email
      * @param {string} verification_token - verification token from email
      * @returns {Promise.<ApiResponse>}
      */
@@ -50,7 +50,7 @@ export default class UsersEndpoints {
     /**
      * Request password reset endpoint.
      *
-     * @method UsersEndpoint#reset_password_request
+     * @method UsersEndpoints#reset_password_request
      * @param {string} email - user's email
      * @returns {Promise.<ApiResponse>}
      */
@@ -65,7 +65,7 @@ export default class UsersEndpoints {
     /**
      * Request password reset check token endpoint.
      *
-     * @method UsersEndpoint#reset_password_check_token
+     * @method UsersEndpoints#reset_password_check_token
      * @param {string} token - verification token to check
      * @returns {Promise.<ApiResponse>}
      */
@@ -80,7 +80,7 @@ export default class UsersEndpoints {
     /**
      * Reset password endpoint.
      *
-     * @method UsersEndpoint#reset_password
+     * @method UsersEndpoints#reset_password
      * @param {string} token - verification token from email.
      * @param {string} password - new user's password
      * @param {string} password_check - password check field value
@@ -99,7 +99,7 @@ export default class UsersEndpoints {
     /**
      * Resend verification email.
      *
-     * @method UsersEndpoint#verify_email_resend
+     * @method UsersEndpoints#verify_email_resend
      * @param {string} email - user's email
      * @returns {Promise.<ApiResponse>}
      */

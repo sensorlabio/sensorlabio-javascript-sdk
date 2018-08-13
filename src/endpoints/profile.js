@@ -5,12 +5,12 @@ import Profile from '../models/profile';
  */
 export default class ProfileEndpoints {
     /**
-     * @constructor ProfileEndpoint
+     * @constructor ProfileEndpoints
      * @param {SensorlabApi} api - parent api
      */
     constructor(api) {
         /**
-         * @member ProfileEndpoint#api
+         * @member ProfileEndpoints#api
          * @type {SensorlabApi}
          */
         this.api = api;
@@ -19,7 +19,7 @@ export default class ProfileEndpoints {
     /**
      * Get user's profile.
      *
-     * @method ProfileEndpoint#get
+     * @method ProfileEndpoints#get
      * @returns {Promise.<ApiResponse>}
      */
     async get() {
@@ -31,7 +31,7 @@ export default class ProfileEndpoints {
     /**
      * Change password.
      *
-     * @method ProfileEndpoint#change_password
+     * @method ProfileEndpoints#change_password
      * @param {string} old_password - current (old) user's password
      * @param {string} new_password - new password to set
      * @param {string} new_password_check - new password check

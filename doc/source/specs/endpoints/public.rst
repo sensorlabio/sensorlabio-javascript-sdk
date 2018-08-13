@@ -1,5 +1,5 @@
 PublicEndpoint class
 ~~~~~~~~~~~~~~~~~~~~
 
-.. js:autoclass:: PublicEndpoint
+.. js:autoclass:: PublicEndpoints
     :members: list, last

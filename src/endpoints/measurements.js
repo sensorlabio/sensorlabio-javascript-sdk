@@ -6,12 +6,12 @@ import Measurement from '../models/measurement';
  */
 export default class MeasurementsEndpoints {
     /**
-     * @constructor MeasurementsEndpoint
+     * @constructor MeasurementsEndpoints
      * @param {SensorlabApi} api - parent api
      */
     constructor(api) {
         /**
-         * @member MeasurementsEndpoint#api
+         * @member MeasurementsEndpoints#api
          * @type {SensorlabApi}
          */
         this.api = api;
@@ -20,7 +20,7 @@ export default class MeasurementsEndpoints {
     /**
      * Get sensors list
      *
-     * @method MeasurementsEndpoint#list
+     * @method MeasurementsEndpoints#list
      * @param {object} options - method options
      * @param {number} options.page - page number to display. Default is `1`.
      * @param {string} options.sensor - show measurements for sensor with specified id.
@@ -50,7 +50,7 @@ export default class MeasurementsEndpoints {
     /**
      * Get sensor by id
      *
-     * @method MeasurementsEndpoint#last
+     * @method MeasurementsEndpoints#last
      * @param {object} options - method options
      * @param {string} options.sensor_id - get measurement for sensor with specified id.
      * @param {string} type - get measurement with specified type only.

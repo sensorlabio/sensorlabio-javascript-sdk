@@ -1,5 +1,5 @@
 MeasurementsEndpoint class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. js:autoclass:: MeasurementsEndpoint
+.. js:autoclass:: MeasurementsEndpoints
     :members: list, last

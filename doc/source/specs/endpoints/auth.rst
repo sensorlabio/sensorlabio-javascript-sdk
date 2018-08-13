@@ -1,5 +1,5 @@
 AuthEndpoint class
 ~~~~~~~~~~~~~~~~~~~
 
-.. js:autoclass:: AuthEndpoint
+.. js:autoclass:: AuthEndpoints
     :members: user_token, application_token
