@@ -9,3 +9,4 @@ Endpoints classes
     applications
     sensors
     measurements
+    public

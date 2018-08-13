@@ -45,6 +45,10 @@ require('./api/applications/applications/get');
 require('./api/applications/applications/update');
 require('./api/applications/applications/generate_api_key');
 
+//public endpoints
+require('./api/public/list');
+require('./api/public/last');
+
 //check access to endpoints for user token
 require('./api_access/user/profile/get');
 require('./api_access/user/profile/change_password');

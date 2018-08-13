@@ -11,6 +11,7 @@ import ApiErrorNotFoundException from "./responses/errors/notfound";
 import ApiErrorValidationException from "./responses/errors/validation";
 import ApiErrorConnectionRefusedException from "./responses/errors/connection_refused";
 import ApiErrorInteralException from "./responses/errors/internal";
+import PublicEndpoints from "./endpoints/public";
 
 let axios = require('axios');
 
@@ -79,6 +80,14 @@ export class SensorlabApi {
          * @type {MeasurementsEndpoint}
          */
         this.measurements = new MeasurementsEndpoints(this);
+
+        /**
+         * Public endpoints.
+         *
+         * @member SensorlabApi#public
+         * @type {PublicEndpoints}
+         */
+        this.public = new PublicEndpoints(this);
 
         /**
          * Saved JWT token

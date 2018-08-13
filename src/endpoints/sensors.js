@@ -81,8 +81,10 @@ export default class SensorsEndpoints {
     async update(sensor_id, name, application = null, is_public = null) {
         let data = {
             'name': name,
-            'application': application,
         };
+        if (application !== null) {
+            data['application'] = application;
+        }
         if (is_public !== null) {
             data['is_public'] = is_public;
         }

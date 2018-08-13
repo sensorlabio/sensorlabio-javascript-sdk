@@ -52,7 +52,7 @@ describe('Sensors endpoint', () => {
                     response.sensors.forEach((sensor) => {
                         sensor.should.have.property('id');
                         sensor.should.have.property('imei');
-                        sensor.should.have.property('name').containIgnoreSpaces(first_sensor_name);
+                        sensor.should.have.property('name').containIgnoreCase(first_sensor_name);
                         sensor.should.have.property('batteryCharge');
                     });
                     response.should.have.property('count');
@@ -109,7 +109,7 @@ describe('Sensors endpoint', () => {
                     response.sensors.forEach((sensor) => {
                         sensor.should.have.property('id').eq(first_sensor_uniqueid);
                         sensor.should.have.property('imei').eq(first_sensor_imei);
-                        sensor.should.have.property('name').containIgnoreSpaces(first_sensor_name);
+                        sensor.should.have.property('name').containIgnoreCase(first_sensor_name);
                         sensor.should.have.property('batteryCharge');
                     });
                     response.should.have.property('count');
