@@ -50,11 +50,11 @@ export default class SensorlabWebsocket {
         });
     }
 
-    onAlert(cb) {
+    onAlerts(cb) {
         if (!this._checkConnection()) {
             return false;
         }
-        this.socket.on('alert', function(message) {
+        this.socket.on('alerts', function(message) {
             cb(message);
         });
     }
