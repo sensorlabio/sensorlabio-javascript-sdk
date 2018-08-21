@@ -32,8 +32,8 @@ export default class ApplicationsResponse {
         /**
          * List of sensors.
          *
-         * @member ApplicationsResponse#measurements
-         * @type {Sensor[]}
+         * @member ApplicationsResponse#applications
+         * @type {Application[]}
          */
         this.applications = [];
 

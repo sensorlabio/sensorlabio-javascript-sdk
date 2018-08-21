@@ -12,6 +12,7 @@ import ApiErrorValidationException from "./responses/errors/validation";
 import ApiErrorConnectionRefusedException from "./responses/errors/connection_refused";
 import ApiErrorInteralException from "./responses/errors/internal";
 import PublicEndpoints from "./endpoints/public";
+import SensorAlertsEndpoints from "./endpoints/sensor_alerts";
 
 let axios = require('axios');
 
@@ -72,6 +73,14 @@ export default class SensorlabApi {
          * @type {SensorsEndpoint}
          */
         this.sensors = new SensorsEndpoints(this);
+
+        /**
+         * Sensor alerts endpoint.
+         *
+         * @member SensorlabApi#sensor_alerts
+         * @type {SensorAlertsEndpoints}
+         */
+        this.sensor_alerts = new SensorAlertsEndpoints(this);
 
         /**
          * Measurements endpoints.
