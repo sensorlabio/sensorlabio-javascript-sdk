@@ -77,7 +77,6 @@ export default class SensorAlertsEndpoints {
             threshold_value: threshold_value
         };
         let response = await this.api._makeApiRequest('/v1/sensors/'+sensor+'/alerts/'+alert, 'PATCH', data);
-        console.log(response);
         return this.api._prepareApiResponse(response);
     }
 
