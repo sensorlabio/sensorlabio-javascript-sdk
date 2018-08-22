@@ -22,7 +22,7 @@ export default class SensorAlertsResponse {
         this.sensor_alerts = [];
 
         let self = this;
-        data.result.forEach(function(alert_data) {
+        data.forEach(function(alert_data) {
             self.sensor_alerts.push(new SensorAlert(self.api, alert_data));
         });
     }
