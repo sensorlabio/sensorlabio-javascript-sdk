@@ -13,6 +13,7 @@ import ApiErrorConnectionRefusedException from "./responses/errors/connection_re
 import ApiErrorInteralException from "./responses/errors/internal";
 import PublicEndpoints from "./endpoints/public";
 import SensorAlertsEndpoints from "./endpoints/sensor_alerts";
+import AlertsEndpoints from "./endpoints/alerts";
 
 let axios = require('axios');
 
@@ -38,7 +39,7 @@ export default class SensorlabApi {
          *
          * @member SensorlabApi#users
          * @private
-         * @type {UsersEndpoint}
+         * @type {UsersEndpoints}
          */
         this._users = new UsersEndpoints(this);
 
@@ -46,7 +47,7 @@ export default class SensorlabApi {
          * Auth endpoints.
          *
          * @member SensorlabApi#auth
-         * @type {AuthEndpoint}
+         * @type {AuthEndpoints}
          */
         this.auth = new AuthEndpoints(this);
 
@@ -54,7 +55,7 @@ export default class SensorlabApi {
          * Profile endpoints.
          *
          * @member SensorlabApi#profile
-         * @type {ProfileEndpoint}
+         * @type {ProfileEndpoints}
          */
         this.profile = new ProfileEndpoints(this);
 
@@ -62,7 +63,7 @@ export default class SensorlabApi {
          * Applications endpoints.
          *
          * @member SensorlabApi#applications
-         * @type {ApplicationsEndpoint}
+         * @type {ApplicationsEndpoints}
          */
         this.applications = new ApplicationsEndpoints(this);
 
@@ -70,7 +71,7 @@ export default class SensorlabApi {
          * Sensor endpoint.
          *
          * @member SensorlabApi#sensors
-         * @type {SensorsEndpoint}
+         * @type {SensorsEndpoints}
          */
         this.sensors = new SensorsEndpoints(this);
 
@@ -83,10 +84,18 @@ export default class SensorlabApi {
         this.sensor_alerts = new SensorAlertsEndpoints(this);
 
         /**
+         * Alerts endpoint.
+         *
+         * @member SensorlabApi#alerts
+         * @type {AlertsEndpoints}
+         */
+        this.alerts = new AlertsEndpoints(this);
+
+        /**
          * Measurements endpoints.
          *
          * @member SensorlabApi#measurements
-         * @type {MeasurementsEndpoint}
+         * @type {MeasurementsEndpoints}
          */
         this.measurements = new MeasurementsEndpoints(this);
 

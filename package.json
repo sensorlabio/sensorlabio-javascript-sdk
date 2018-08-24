@@ -1,6 +1,6 @@
 {
   "name": "sensorlabio-javascript-sdk",
-  "version": "1.3.2",
+  "version": "1.3.2a",
   "description": "Javascript SDK for Sensorlab.io REST API",
   "main": "build/index.min.js",
   "scripts": {
