@@ -25,7 +25,7 @@ export default class AlertsEndpoints {
      */
     async last(sensor) {
         let response = await this.api._makeApiRequest('/v1/sensors/'+sensor+'/alerts/last', 'GET');
-        return this.api._prepareApiResponse(response, this._successAlertsListResponse);
+        return this.api._prepareApiResponse(response, this._successSensorListResponse);
     }
 
     /**
