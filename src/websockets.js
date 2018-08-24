@@ -50,6 +50,16 @@ export default class SensorlabWebsocket {
         });
     }
 
+    onMeasurementsType(type, cb) {
+        if (!this._checkConnection()) {
+            return false;
+        }
+        this.socket.on('measurements.' + type, function(message) {
+            cb(message);
+        });
+    }
+
+
     onAlerts(cb) {
         if (!this._checkConnection()) {
             return false;
