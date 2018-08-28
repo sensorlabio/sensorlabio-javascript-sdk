@@ -1,7 +1,7 @@
 let io = require('socket.io-client');
 
 export default class SensorlabWebsocket {
-    constructor(websocket_url = 'http://staging.sensorlab.io/ws') {
+    constructor(websocket_url = 'http://staging.sensorlab.io') {
         this.url = websocket_url;
         this.socket = null;
 
