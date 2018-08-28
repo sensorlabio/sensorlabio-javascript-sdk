@@ -12,7 +12,7 @@ export default class SensorlabWebsocket {
     async connect(token, sensor) {
         return new Promise((resolve, reject) => {
             //connect
-            this.socket = io.connect(this.url, { path: 'ws/socket.io' });
+            this.socket = io.connect(this.url);
 
             //try to authenticate on connection
             this.socket.on('connect', () => {
