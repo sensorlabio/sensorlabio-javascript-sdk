@@ -13,7 +13,7 @@ export default class SensorlabWebsocket {
         return new Promise((resolve, reject) => {
             //connect
             this.socket = io(this.url, {
-                path: '/ws/socket.io'
+                path: '/ws'
             });
 
             //try to authenticate on connection
