@@ -165,7 +165,7 @@ describe('Sensor alerts configuration endpoints', () => {
                 });
         });
 
-        it('should get first sensor alert config by id', (done) => {
+        it('should not update alert if does not belong to sensor', (done) => {
             api.sensor_alerts.update(sensor_1.id, sensor_alert_2.id, 'loc', 'LOC', '36.1812440939046,-101.84828589116029,999')
                 .catch((response) => {
                     response.status.should.eq(404);

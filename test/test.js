@@ -30,12 +30,14 @@ require('./api/sensor_alerts/create');
 require('./api/sensor_alerts/list');
 require('./api/sensor_alerts/get');
 require('./api/sensor_alerts/update');
-//require('./api/sensor_alerts/delete');
+require('./api/sensor_alerts/delete');
 
 require('./api/measurements/list');
 require('./api/measurements/last');
 require('./api/measurements/list_sensor');
 require('./api/measurements/last_sensor');
+
+require('./api/alerts/last');
 
 //application auth
 require('./api/auth/application_token');
