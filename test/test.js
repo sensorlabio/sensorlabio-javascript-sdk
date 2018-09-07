@@ -86,6 +86,12 @@ require('./api_access/user/measurements/list_sensor');
 require('./api_access/user/measurements/last_sensor');
 require('./api_access/user/applications/applications/get');
 require('./api_access/user/applications/applications/update');
+require('./api_access/user/sensor_alerts/create');
+require('./api_access/user/sensor_alerts/list');
+require('./api_access/user/sensor_alerts/get');
+require('./api_access/user/sensor_alerts/update');
+require('./api_access/user/sensor_alerts/delete');
+require('./api_access/user/alerts/last')
 
 //check access to endpoint for application token
 require('./api_access/application/profile/get');
@@ -104,3 +110,9 @@ require('./api_access/application/measurements/list_sensor');
 require('./api_access/application/measurements/last_sensor');
 require('./api_access/application/applications/applications/get');
 require('./api_access/application/applications/applications/update');
+require('./api_access/application/sensor_alerts/create');
+require('./api_access/application/sensor_alerts/list');
+require('./api_access/application/sensor_alerts/get');
+require('./api_access/application/sensor_alerts/update');
+require('./api_access/application/sensor_alerts/delete');
+require('./api_access/application/alerts/last');
