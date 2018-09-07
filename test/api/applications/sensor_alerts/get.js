@@ -1,4 +1,4 @@
-import {SensorlabApi} from '../../../src';
+import {SensorlabApi} from '../../../../src';
 
 let uuid = require('uuid');
 
@@ -11,6 +11,9 @@ let sensor_1 = null;
 let sensor_2 = null;
 let sensor_alert_1 = null;
 let sensor_alert_2 = null;
+let last_application = null;
+let public_api_key = null;
+let private_api_key = null;
 
 describe('Sensor alerts configuration endpoints', () => {
     describe('Get sensor alert', () => {
@@ -25,6 +28,40 @@ describe('Sensor alerts configuration endpoints', () => {
         it('should authorize with correct email/password and get a token', (done) => {
             api.auth.user_token(test_email, test_passw)
                 .then(function(user) {
+                    user.token.should.not.be.empty;
+                    done();
+                });
+        });
+
+        it('should get list of applications', (done) => {
+            api.applications.list({sort: 'created,asc'})
+                .then((response) => {
+                    response.applications.should.be.a('array').lengthOf(50);
+                    response.should.have.property('count');
+                    response.should.have.property('pages');
+                    last_application = response.applications[0];
+                    done();
+                });
+        });
+
+        it('should generate new api key for application', (done) => {
+            api.applications.generate_private_api_key(last_application.id)
+                .then((application) => {
+                    application.should.be.a('object');
+                    application.should.have.property('id');
+                    application.should.have.property('name');
+                    application.should.have.property('description');
+                    application.should.have.property('public_api_key');
+                    application.should.have.property('private_api_key');
+                    public_api_key = application.public_api_key;
+                    private_api_key = application.private_api_key;
+                    done();
+                });
+        });
+
+        it('should authenticate application and get token', (done) => {
+            api.auth.application_token(public_api_key, private_api_key)
+                .then((user) => {
                     user.token.should.not.be.empty;
                     done();
                 });
@@ -89,11 +126,14 @@ describe('Sensor alerts configuration endpoints', () => {
                 });
         });
 
-        it('should get 404 error on uknown sensor alert', (done) => {
+        it('should get 404 error on unknown sensor alert', (done) => {
             api.sensor_alerts.get(sensor_1.id, uuid.v1())
                 .catch((response) => {
+                    console.log(response);
                     response.status.should.eq(404);
                     done();
+                }).then((response) => {
+                    console.log(response);
                 });
         });
 

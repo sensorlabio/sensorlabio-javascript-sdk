@@ -1,6 +1,4 @@
-import {SensorlabApi} from '../../../src';
-
-let uuid = require('uuid');
+import {SensorlabApi} from '../../../../src';
 
 let api = new SensorlabApi(process.env.TEST_REST_API_URL); //we must test on test server only
 
@@ -9,13 +7,19 @@ let test_passw = 'test';
 
 let sensor_1 = null;
 let sensor_2 = null;
+
 let sensor_alert_1 = null;
 let sensor_alert_2 = null;
 
+let last_application = null;
+let public_api_key = null;
+let private_api_key = null;
+
 describe('Sensor alerts configuration endpoints', () => {
-    describe('Get sensor alert', () => {
+    describe('Delete sensor alerts', () => {
+
         it('should get an 401 status error without authorization', (done) => {
-            api.sensor_alerts.get()
+            api.sensor_alerts.delete()
                 .catch((response) => {
                     response.status.should.eq(401);
                     done();
@@ -25,6 +29,40 @@ describe('Sensor alerts configuration endpoints', () => {
         it('should authorize with correct email/password and get a token', (done) => {
             api.auth.user_token(test_email, test_passw)
                 .then(function(user) {
+                    user.token.should.not.be.empty;
+                    done();
+                });
+        });
+
+        it('should get list of applications', (done) => {
+            api.applications.list({sort: 'created,asc'})
+                .then((response) => {
+                    response.applications.should.be.a('array').lengthOf(50);
+                    response.should.have.property('count');
+                    response.should.have.property('pages');
+                    last_application = response.applications[0];
+                    done();
+                });
+        });
+
+        it('should generate new api key for application', (done) => {
+            api.applications.generate_private_api_key(last_application.id)
+                .then((application) => {
+                    application.should.be.a('object');
+                    application.should.have.property('id');
+                    application.should.have.property('name');
+                    application.should.have.property('description');
+                    application.should.have.property('public_api_key');
+                    application.should.have.property('private_api_key');
+                    public_api_key = application.public_api_key;
+                    private_api_key = application.private_api_key;
+                    done();
+                });
+        });
+
+        it('should authenticate application and get token', (done) => {
+            api.auth.application_token(public_api_key, private_api_key)
+                .then((user) => {
                     user.token.should.not.be.empty;
                     done();
                 });
@@ -65,6 +103,34 @@ describe('Sensor alerts configuration endpoints', () => {
                 });
         });
 
+        it('should return error if `sensor` id and `id` are incorrect', (done) => {
+            api.sensor_alerts.delete('123', '123')
+                .catch((response) => {
+                    response.status.should.eq(422);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 2, param: 'sensor'}]);
+                    response.errors.should.containSubset([{code: 4, param: 'id'}]);
+                    done();
+                });
+        });
+
+        it('should not update alert if does not belong to sensor', (done) => {
+            api.sensor_alerts.delete(sensor_1.id, sensor_alert_2.id)
+                .catch((response) => {
+                    response.status.should.eq(404);
+                    done();
+                });
+        });
+
+        it('should not update alert if does not belong to sensor', (done) => {
+            api.sensor_alerts.delete(sensor_2.id, sensor_alert_1.id)
+                .catch((response) => {
+                    response.status.should.eq(404);
+                    done();
+                });
+        });
+
         it('should get first sensor alert config by id', (done) => {
             api.sensor_alerts.get(sensor_1.id, sensor_alert_1.id)
                 .then((sensor_alert) => {
@@ -89,8 +155,26 @@ describe('Sensor alerts configuration endpoints', () => {
                 });
         });
 
-        it('should get 404 error on uknown sensor alert', (done) => {
-            api.sensor_alerts.get(sensor_1.id, uuid.v1())
+        it('should sensor alert 1', (done) => {
+            api.sensor_alerts.delete(sensor_1.id, sensor_alert_1.id)
+                .then((sensor_alert) => {
+                    sensor_alert.should.be.a('object');
+                    sensor_alert.should.have.property('success').eq(true);
+                    done();
+                });
+        });
+
+        it('should sensor alert 2', (done) => {
+            api.sensor_alerts.delete(sensor_2.id, sensor_alert_2.id)
+                .then((sensor_alert) => {
+                    sensor_alert.should.be.a('object');
+                    sensor_alert.should.have.property('success').eq(true);
+                    done();
+                });
+        });
+
+        it('should return 404 on deelted sensor alert', (done) => {
+            api.sensor_alerts.get(sensor_1.id, sensor_alert_1.id)
                 .catch((response) => {
                     response.status.should.eq(404);
                     done();
@@ -98,19 +182,12 @@ describe('Sensor alerts configuration endpoints', () => {
         });
 
         it('should get first sensor alert config by id', (done) => {
-            api.sensor_alerts.get(sensor_1.id, sensor_alert_2.id)
+            api.sensor_alerts.get(sensor_2.id, sensor_alert_2.id)
                 .catch((response) => {
                     response.status.should.eq(404);
                     done();
                 });
         });
 
-        it('should get first sensor alert config by id', (done) => {
-            api.sensor_alerts.get(sensor_2.id, sensor_alert_1.id)
-                .catch((response) => {
-                    response.status.should.eq(404);
-                    done();
-                });
-        });
     });
 });
