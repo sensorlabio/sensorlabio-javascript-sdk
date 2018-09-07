@@ -27,7 +27,7 @@ require('./api/sensors/get');
 require('./api/sensors/update');
 
 require('./api/sensor_alerts/create');
-//require('./api/sensor_alerts/list');
+require('./api/sensor_alerts/list');
 //require('./api/sensor_alerts/get');
 //require('./api/sensor_alerts/update');
 //require('./api/sensor_alerts/delete');

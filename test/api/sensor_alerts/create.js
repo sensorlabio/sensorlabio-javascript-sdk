@@ -28,12 +28,9 @@ describe('Sensor alerts configuration endpoints', () => {
                 });
         });
 
-        it('should get list of sensors default page=1', (done) => {
+        it('should get list of sensors and save one for testing', (done) => {
             api.sensors.list()
                 .then((response) => {
-                    response.sensors.should.be.a('array').lengthOf(50);
-                    response.should.have.property('count');
-                    response.should.have.property('pages');
                     sensor = response.sensors[0];
                     done();
                 });
