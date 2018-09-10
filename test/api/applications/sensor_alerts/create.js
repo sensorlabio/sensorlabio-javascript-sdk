@@ -8,6 +8,7 @@ let test_email = 'test@sensorlab.io';
 let test_passw = 'test';
 
 let sensor = null;
+let sensor_2 = null;
 let sensor_alert = null;
 let last_application = null;
 let public_api_key = null;
@@ -69,6 +70,7 @@ describe('Sensor alerts configuration endpoints', () => {
             api.sensors.list()
                 .then((response) => {
                     sensor = response.sensors[0];
+                    sensor_2 = response.sensors[1];
                     done();
                 });
         });
@@ -138,6 +140,110 @@ describe('Sensor alerts configuration endpoints', () => {
                     done();
                 });
         });
+
+        /***/
+        it('should return error if `threshold_value` is not float for `threshold_type` "min"', (done) => {
+            api.sensor_alerts.create(sensor_2.id, 'min', 'TMP', 'ashm')
+                .catch((response) => {
+                    response.status.should.eq(422);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 7, param: 'threshold_value'}]);
+                    done();
+                });
+        });
+
+        it('should return error if `threshold_value` is not float for `threshold_type` "max"', (done) => {
+            api.sensor_alerts.create(sensor_2.id, 'max', 'TMP', 'ashm')
+                .catch((response) => {
+                    response.status.should.eq(422);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 8, param: 'threshold_value'}]);
+                    done();
+                });
+        });
+
+        it('should return error if `threshold_value` is not float for `threshold_type` "max"', (done) => {
+            api.sensor_alerts.create(sensor_2.id, 'loc', 'LOC', 'ashm')
+                .catch((response) => {
+                    response.status.should.eq(422);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 9, param: 'threshold_value'}]);
+                    done();
+                });
+        });
+
+        it('should return error if `threshold_value` is incorrect JSON object and lacks required params for `threshold_type` "loc"', (done) => {
+            api.sensor_alerts.create(sensor_2.id, 'loc', 'LOC', {'test': 1, 'test2': 2, 'test3': 3})
+                .catch((response) => {
+                    response.status.should.eq(422);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 9, param: 'threshold_value'}]);
+                    done();
+                });
+        });
+
+        it('should return error if `threshold_value.lat` is not latitude `threshold_type` "loc"', (done) => {
+            api.sensor_alerts.create(sensor_2.id, 'loc', 'LOC', {'lat': 'test', 'lng': -101.84828589116029, 'radius': 1000})
+                .catch((response) => {
+                    response.status.should.eq(422);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 10, param: 'threshold_value'}]);
+                    done();
+                });
+        });
+
+        it('should return error if `threshold_value.lng` is not longitude `threshold_type` "loc"', (done) => {
+            api.sensor_alerts.create(sensor_2.id, 'loc', 'LOC', {'lat': 36.1812440939046, 'lng': 'test', 'radius': 1000})
+                .catch((response) => {
+                    response.status.should.eq(422);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 11, param: 'threshold_value'}]);
+                    done();
+                });
+        });
+
+        it('should return error if `threshold_value.radius` is not correct radius `threshold_type` "loc"', (done) => {
+            api.sensor_alerts.create(sensor_2.id, 'loc', 'LOC', {'lat': 36.1812440939046, 'lng': -101.84828589116029, 'radius': 'radius'})
+                .catch((response) => {
+                    response.status.should.eq(422);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 12, param: 'threshold_value'}]);
+                    done();
+                });
+        });
+
+        it('should return error if `threshold_value.radius` is not correct radius `threshold_type` "loc"', (done) => {
+            api.sensor_alerts.create(sensor_2.id, 'loc', 'LOC', {'lat': 36.1812440939046, 'lng': -101.84828589116029, 'radius': -1})
+                .catch((response) => {
+                    response.status.should.eq(422);
+                    response.should.have.property('errors');
+                    response.errors.should.be.a('array');
+                    response.errors.should.containSubset([{code: 12, param: 'threshold_value'}]);
+                    done();
+                });
+        });
+
+        it('should create new sensor alert configuration without problem', (done) => {
+            api.sensor_alerts.create(sensor_2.id, 'loc', 'LOC', {'lat': 36.1812440939046, 'lng': -101.84828589116029, 'radius': 1000})
+                .then((new_sensor_alert) => {
+                    new_sensor_alert.should.be.a('object');
+                    new_sensor_alert.should.have.property('id');
+                    new_sensor_alert.should.have.property('threshold_type').eq('loc');
+                    new_sensor_alert.should.have.property('measurement_type').eq('LOC');
+                    new_sensor_alert.should.have.property('threshold_value').containSubset({lat: 36.1812440939046, lng: -101.84828589116029,radius: 1000});
+                    sensor_alert = new_sensor_alert;
+                    done();
+                });
+        });
+
+        /***/
 
         it('should return 404 if `sensor` does not exist', (done) => {
             api.sensor_alerts.create(uuid.v1(), 'min', 'TMP', 200)

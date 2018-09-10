@@ -66,7 +66,7 @@ describe('Sensor alerts configuration endpoints', () => {
         });
 
         it('should create new sensor alert configuration without problem', (done) => {
-            api.sensor_alerts.create(sensor_2.id, 'loc', 'LOC', '36.1812440939046,-101.84828589116029,1000')
+            api.sensor_alerts.create(sensor_2.id, 'loc', 'LOC', { lat: 36.1812440939046, lng: -101.84828589116029, radius: 1000})
                 .then((new_sensor_alert) => {
                     new_sensor_alert.should.be.a('object');
                     new_sensor_alert.should.have.property('id');
