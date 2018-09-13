@@ -1,7 +1,7 @@
 import SensorlabApi from './api';
-import SensorlabWebsocket from './websockets';
+import SensorlabWebsockets from './websockets';
 
 module.exports = {
     'SensorlabApi': SensorlabApi,
-    'SensorlabWebsocket': SensorlabWebsocket,
+    'SensorlabWebsockets': SensorlabWebsockets,
 }
