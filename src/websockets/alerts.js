@@ -18,4 +18,14 @@ export default class SensorlabAlertsWebsocket extends BasicWebsocket {
             cb(message);
         });
     }
+
+    onAccessDenied(cb) {
+        if (!this._checkConnection()) {
+            return false;
+        }
+        this.socket.on('sensor/access_denied', function(message) {
+            let params = JSON.parse(message);
+            cb(params.sensor, params.message);
+        });
+    }
 }
