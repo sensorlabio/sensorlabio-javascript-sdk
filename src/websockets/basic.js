@@ -10,7 +10,7 @@ export default class BasicWebsocket {
         this.namespace = '/';
     }
 
-    async connect(token, sensor) {
+    async connect(token) {
         return new Promise((resolve, reject) => {
             //connect
             console.log(this.url + this.namespace + '?token='+token);
