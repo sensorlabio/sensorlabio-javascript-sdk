@@ -10,22 +10,20 @@ export default class SensorlabMeasurementsWebsocket extends BasicWebsocket {
         this.socket.emit('sensor', { sensor: sensor, type: type});
     }
 
-    onMeasurements(cb) {
+    onMeasurements(cb, type = null) {
         if (!this._checkConnection()) {
             return false;
         }
-        this.socket.on('measurements', function(message) {
-            cb(message);
-        });
-    }
+        if (type) {
+            this.socket.on('measurements/' + type, function(message) {
+                cb(message);
+            });
+        } else {
+            this.socket.on('measurements', function(message) {
+                cb(message);
+            });
+        }
 
-    onMeasurementsType(type, cb) {
-        if (!this._checkConnection()) {
-            return false;
-        }
-        this.socket.on('measurements/' + type, function(message) {
-            cb(message);
-        });
     }
 
     onAccessDenied(cb) {
