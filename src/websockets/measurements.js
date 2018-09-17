@@ -10,6 +10,10 @@ export default class SensorlabMeasurementsWebsocket extends BasicWebsocket {
         this.socket.emit('sensor', { sensor: sensor, type: type});
     }
 
+    leaveSensor(sensor, type = null) {
+        this.socket.emit('sensor/disconnect', { sensor: sensor, type: type});
+    }
+
     onMeasurements(cb, type = null) {
         if (!this._checkConnection()) {
             return false;

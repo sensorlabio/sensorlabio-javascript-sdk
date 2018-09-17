@@ -10,6 +10,10 @@ export default class SensorlabAlertsWebsocket extends BasicWebsocket {
         this.socket.emit('sensor', { sensor: sensor});
     }
 
+    leaveSensor(sensor) {
+        this.socket.emit('sensor/disconnect', { sensor: sensor });
+    }
+
     onAlerts(cb) {
         if (!this._checkConnection()) {
             return false;
