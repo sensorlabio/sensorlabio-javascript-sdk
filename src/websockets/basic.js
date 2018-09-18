@@ -36,6 +36,9 @@ export default class BasicWebsocket {
     }
 
     disconnect() {
+        if (!this._checkConnection()) {
+            return false;
+        }
         this.socket.disconnect();
     }
 
