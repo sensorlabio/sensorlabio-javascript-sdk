@@ -4,6 +4,8 @@ export default class SensorlabMeasurementsWebsocket extends BasicWebsocket {
     constructor(websocket_url = 'http://staging.sensorlab.io') {
         super(websocket_url);
         this.namespace = '/measurements';
+
+        this.callbacks = {};
     }
 
     joinSensor(sensor, type = null) {
@@ -18,20 +20,22 @@ export default class SensorlabMeasurementsWebsocket extends BasicWebsocket {
         this.socket.emit('sensor/disconnect/all');
     }
 
-    onMeasurements(cb, type = null) {
+    onMeasurements(sensor, type = null, cb) {
         if (!this._checkConnection()) {
             return false;
         }
+        let room_name = 'measurements/' + sensor;
         if (type) {
-            this.socket.on('measurements/' + type, function(message) {
-                cb(message);
-            });
-        } else {
-            this.socket.on('measurements', function(message) {
-                cb(message);
-            });
+            room_name += '/' + type;
         }
 
+        if (this.callbacks[room_name]) {
+            this.socket.off(this.callbacks[room_name]);
+        }
+
+        this.callbacks[room_name] = cb;
+
+        this.socket.on(room_name, this.callbacks[room_name]);
     }
 
     onAccessDenied(cb) {
