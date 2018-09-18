@@ -6,12 +6,16 @@ export default class SensorlabMeasurementsWebsocket extends BasicWebsocket {
         this.namespace = '/measurements';
     }
 
-    setSensor(sensor, type = null) {
+    joinSensor(sensor, type = null) {
         this.socket.emit('sensor', { sensor: sensor, type: type});
     }
 
     leaveSensor(sensor, type = null) {
         this.socket.emit('sensor/disconnect', { sensor: sensor, type: type});
+    }
+
+    leaveAll() {
+        this.socket.emit('sensor/disconnect/all');
     }
 
     onMeasurements(cb, type = null) {

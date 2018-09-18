@@ -6,12 +6,16 @@ export default class SensorlabAlertsWebsocket extends BasicWebsocket {
         this.namespace = '/alerts';
     }
 
-    setSensor(sensor) {
+    joinSensor(sensor) {
         this.socket.emit('sensor', { sensor: sensor});
     }
 
     leaveSensor(sensor) {
         this.socket.emit('sensor/disconnect', { sensor: sensor });
+    }
+
+    leaveAll() {
+        this.socket.emit('sensor/disconnect/all');
     }
 
     onAlerts(cb) {
