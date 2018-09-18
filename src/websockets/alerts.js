@@ -28,7 +28,7 @@ export default class SensorlabAlertsWebsocket extends BasicWebsocket {
         let room_name = 'alerts/' + sensor;
 
         if (this.callbacks[room_name]) {
-            this.socket.off(this.callbacks[room_name]);
+            this.socket.off(room_name, this.callbacks[room_name]);
         }
 
         this.callbacks[room_name] = cb;

@@ -30,7 +30,7 @@ export default class SensorlabMeasurementsWebsocket extends BasicWebsocket {
         }
 
         if (this.callbacks[room_name]) {
-            this.socket.off(this.callbacks[room_name]);
+            this.socket.off(room_name, this.callbacks[room_name]);
         }
 
         this.callbacks[room_name] = cb;
