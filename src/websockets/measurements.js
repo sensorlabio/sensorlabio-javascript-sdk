@@ -4,8 +4,6 @@ export default class SensorlabMeasurementsWebsocket extends BasicWebsocket {
     constructor(websocket_url = 'http://staging.sensorlab.io') {
         super(websocket_url);
         this.namespace = '/measurements';
-
-        this.callbacks = {};
     }
 
     joinSensor(sensor, type = null) {
@@ -24,18 +22,14 @@ export default class SensorlabMeasurementsWebsocket extends BasicWebsocket {
         if (!this._checkConnection()) {
             return false;
         }
-        let room_name = 'measurements/' + sensor;
-        if (type) {
-            room_name += '/' + type;
+
+        this.socket.on(this._getRoomName(sensor, type), cb);
+    }
+
+    offMeasurements(sensor, type = null, cb) {
+        if (this.socket) {
+            this.socket.off(this._getRoomName(sensor, type), cb);
         }
-
-        if (this.callbacks[room_name]) {
-            this.socket.off(room_name, this.callbacks[room_name]);
-        }
-
-        this.callbacks[room_name] = cb;
-
-        this.socket.on(room_name, this.callbacks[room_name]);
     }
 
     onAccessDenied(cb) {
@@ -46,5 +40,13 @@ export default class SensorlabMeasurementsWebsocket extends BasicWebsocket {
             let params = JSON.parse(message);
             cb(params.sensor, params.message);
         });
+    }
+
+    _getRoomName(sensor, type) {
+        let room_name = 'measurements/' + sensor;
+        if (type) {
+            room_name += '/' + type;
+        }
+        return room_name;
     }
 }

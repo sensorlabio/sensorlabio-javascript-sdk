@@ -25,15 +25,13 @@ export default class SensorlabAlertsWebsocket extends BasicWebsocket {
             return false;
         }
 
-        let room_name = 'alerts/' + sensor;
+        this.socket.on(this._getRoomName(sensor), cb);
+    }
 
-        if (this.callbacks[room_name]) {
-            this.socket.off(room_name, this.callbacks[room_name]);
+    offAlerts(sensor, cb) {
+        if (this.socket) {
+            this.socket.off(this._getRoomName(sensor), cb);
         }
-
-        this.callbacks[room_name] = cb;
-
-        this.socket.on(room_name, this.callbacks[room_name]);
     }
 
     onAccessDenied(cb) {
@@ -44,5 +42,10 @@ export default class SensorlabAlertsWebsocket extends BasicWebsocket {
             let params = JSON.parse(message);
             cb(params.sensor, params.message);
         });
+    }
+
+    _getRoomName(sensor) {
+        let room_name = 'alerts/' + sensor;
+        return room_name;
     }
 }
