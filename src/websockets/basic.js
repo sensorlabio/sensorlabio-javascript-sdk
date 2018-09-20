@@ -8,14 +8,16 @@ export default class BasicWebsocket {
         this.is_connected = false;
         this.is_authenticated = false;
         this.namespace = '/';
+
+        this.force_new = false;
     }
 
     async connect(token) {
         return new Promise((resolve, reject) => {
             //connect
-            console.log(this.url + this.namespace + '?token='+token);
             this.socket = io(this.url + this.namespace + '?token='+token, {
-                path: '/ws'
+                path: '/ws',
+                forceNew: this.force_new
             });
 
             //try to authenticate on connection

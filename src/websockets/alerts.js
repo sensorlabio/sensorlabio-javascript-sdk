@@ -4,8 +4,6 @@ export default class SensorlabAlertsWebsocket extends BasicWebsocket {
     constructor(websocket_url = 'http://staging.sensorlab.io') {
         super(websocket_url);
         this.namespace = '/alerts';
-
-        this.callbacks = {};
     }
 
     joinSensor(sensor) {
