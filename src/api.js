@@ -10,7 +10,7 @@ import ApiErrorUnauthorizedException from "./responses/errors/auth";
 import ApiErrorNotFoundException from "./responses/errors/notfound";
 import ApiErrorValidationException from "./responses/errors/validation";
 import ApiErrorConnectionRefusedException from "./responses/errors/connection_refused";
-import ApiErrorInteralException from "./responses/errors/internal";
+import ApiErrorInternalException from "./responses/errors/internal";
 import PublicEndpoints from "./endpoints/public";
 import SensorAlertsEndpoints from "./endpoints/sensor_alerts";
 import AlertsEndpoints from "./endpoints/alerts";
@@ -201,7 +201,7 @@ export default class SensorlabApi {
             case 422:
                 throw new ApiErrorValidationException(response.status, response.data.message, response.data.errors);
             case 500:
-                throw new ApiErrorInteralException(response.status, 'Internal Error');
+                throw new ApiErrorInternalException(response.status, 'Internal Error');
             default:
                 let message = null;
                 if ('message' in response.data) {

@@ -5,5 +5,5 @@ import ApiErrorBasicException from "./basic";
  * @classdesc SDK will throw this exception on 500 status errors.
  * @extends ApiErrorBasicException
  */
-export default class ApiErrorInteralException extends ApiErrorBasicException {
+export default class ApiErrorInternalException extends ApiErrorBasicException {
 }
