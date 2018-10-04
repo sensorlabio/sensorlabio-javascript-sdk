@@ -19,6 +19,7 @@ import ApiErrorForbiddenException from "./responses/errors/forbidden";
 let axios = require('axios');
 
 /**
+ * @class SensorlabApi
  * @classdesc Main class that connects all the endpoints.
  */
 export default class SensorlabApi {

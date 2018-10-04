@@ -10,3 +10,5 @@ Models classes
     application
     sensor
     measurement
+    alert
+    sensor_alert

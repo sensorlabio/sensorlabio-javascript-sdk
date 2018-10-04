@@ -12,3 +12,4 @@ How to use SDK
     sensors/index
     measurements/index
     public/index
+    sensor_alerts/index

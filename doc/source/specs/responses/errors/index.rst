@@ -6,6 +6,7 @@ Error exceptions
 
   basic
   auth
+  forbidden
   notfound
   validation
   internal

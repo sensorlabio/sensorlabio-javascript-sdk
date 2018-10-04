@@ -1,5 +1,5 @@
-PublicEndpoints classes
------------------------
+Endpoint classes
+----------------
 
 .. toctree::
     :maxdepth: 2
@@ -10,3 +10,5 @@ PublicEndpoints classes
     sensors
     measurements
     public
+    sensor_alerts
+    alerts

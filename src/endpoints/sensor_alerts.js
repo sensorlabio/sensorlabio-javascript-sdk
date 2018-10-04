@@ -48,7 +48,7 @@ export default class SensorAlertsEndpoints {
      * @method SensorAlertsEndpoints#create
      * @param {string} threshold_type - Threshold type
      * @param {string} measurement_type - Measurement type
-     * @param {string|number|Object} threshold_value - Threshold value
+     * @param {mixed} threshold_value - Threshold value
      */
     async create(sensor, threshold_type, measurement_type, threshold_value) {
         let data = {
