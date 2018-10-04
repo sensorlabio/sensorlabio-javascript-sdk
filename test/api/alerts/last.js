@@ -46,12 +46,12 @@ describe('Get last alerts for sensors', () => {
                         alert.measurement.should.be.a('object');
                         alert.measurement.should.have.property('sensor').eq(sensor_1.id);
                         alert.measurement.should.have.property('timestamp');
-                        alert.measurement.should.have.property('uuid');
+                        alert.measurement.should.have.property('id');
                         alert.measurement.should.have.property('type');
                         alert.measurement.should.have.property('value');
 
                         alert.threshold.should.be.a('object');
-                        alert.threshold.should.have.property('uuid');
+                        alert.threshold.should.have.property('id');
                         alert.threshold.should.have.property('threshold_type');
                         alert.threshold.should.have.property('measurement_type');
                         alert.threshold.should.have.property('threshold_value');
@@ -70,12 +70,12 @@ describe('Get last alerts for sensors', () => {
                         alert.measurement.should.be.a('object');
                         alert.measurement.should.have.property('sensor').eq(sensor_1.id);
                         alert.measurement.should.have.property('timestamp');
-                        alert.measurement.should.have.property('uuid');
+                        alert.measurement.should.have.property('id');
                         alert.measurement.should.have.property('type');
                         alert.measurement.should.have.property('value');
 
                         alert.threshold.should.be.a('object');
-                        alert.threshold.should.have.property('uuid');
+                        alert.threshold.should.have.property('id');
                         alert.threshold.should.have.property('threshold_type');
                         alert.threshold.should.have.property('measurement_type');
                         alert.threshold.should.have.property('threshold_value');

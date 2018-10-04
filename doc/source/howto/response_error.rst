@@ -22,9 +22,9 @@ SDK handles few error types and throws these exceptions:
 
 - `404` - `ApiErrorNotFoundException`. SDK throws this exception if there's no object to return. This exception can appear if API's endpoint path is incorrect.
 
-- `500` - `ApiErrorInternalException`. If there are any problems with API this exception will be thrown.
-
 - `422` - `ApiErrorValidationException`. SDK will throw this exception on validation errors. Some fields can be required or require special format. All those error will be available in the `errors` parameter of exception as array.
+
+- `500` - `ApiErrorInternalException`. If there are any problems with API this exception will be thrown.
 
 Example:
 

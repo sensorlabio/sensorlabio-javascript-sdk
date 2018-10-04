@@ -14,6 +14,7 @@ import ApiErrorInternalException from "./responses/errors/internal";
 import PublicEndpoints from "./endpoints/public";
 import SensorAlertsEndpoints from "./endpoints/sensor_alerts";
 import AlertsEndpoints from "./endpoints/alerts";
+import ApiErrorForbiddenException from "./responses/errors/forbidden";
 
 let axios = require('axios');
 
@@ -196,6 +197,8 @@ export default class SensorlabApi {
                 }
             case 401:
                 throw new ApiErrorUnauthorizedException(response.status, response.data.message);
+            case 403:
+                throw new ApiErrorForbiddenException(response.status, response.data.message);
             case 404:
                 throw new ApiErrorNotFoundException(response.status, response.data);
             case 422:
