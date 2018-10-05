@@ -8,3 +8,4 @@ Specifications
     endpoints/index
     models/index
     responses/index
+    websockets/index

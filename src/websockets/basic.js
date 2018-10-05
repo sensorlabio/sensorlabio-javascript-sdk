@@ -1,6 +1,14 @@
 let io = require('socket.io-client');
 
+/**
+ * Basic websockets class
+ */
 export default class BasicWebsocket {
+    /**
+     * @constructor BasicWebsocket
+     *
+     * @param {string} websocket_url websockets url to connect to
+     */
     constructor(websocket_url = 'http://staging.sensorlab.io') {
         this.url = websocket_url;
         this.socket = null;
@@ -12,6 +20,15 @@ export default class BasicWebsocket {
         this.force_new = false;
     }
 
+    /**
+     * Connect to websocket namespace with authentication token.
+     * Promise will resolve if connection is established and reject is there are problems with connection
+     * or authentication
+     *
+     * @member BasicWebsocket#connect
+     * @param {string} token
+     * @returns {Promise}
+     */
     async connect(token) {
         return new Promise((resolve, reject) => {
             //connect
@@ -26,8 +43,13 @@ export default class BasicWebsocket {
                 resolve();
             });
 
-            this.socket.on('error', function (reason){
-                console.error('Unable to connect Socket.IO', reason);
+            this.socket.on('connect_error', () => {
+                reject({code: 0, message: 'Connection error'});
+            });
+
+            this.socket.on('error', function (reason) {
+                reject(JSON.parse(reason));
+                //console.error('Unable to connect Socket.IO', reason);
             });
 
             //catch disconnect
@@ -37,6 +59,11 @@ export default class BasicWebsocket {
         });
     }
 
+    /**
+     * Disconnect from websocket
+     *
+     * @member BasicWebsocket#disconnect
+     */
     disconnect() {
         if (!this._checkConnection()) {
             return false;
