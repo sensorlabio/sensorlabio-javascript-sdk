@@ -87,8 +87,7 @@ export default class SensorlabMeasurementsWebsocket extends BasicWebsocket {
         if (!this._checkConnection()) {
             return false;
         }
-        this.socket.on('sensor/access_denied', function(message) {
-            let params = JSON.parse(message);
+        this.socket.on('sensor/access_denied', function(params) {
             cb(params.sensor, params.message);
         });
     }

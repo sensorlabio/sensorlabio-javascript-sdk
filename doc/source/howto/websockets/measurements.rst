@@ -71,7 +71,7 @@ Connect to sensor/type room:
         measurements_ws.joinSensor(sensor, 'TMP');
     });
 
-If user/application with this token doesn't have rights to the sensor, a sensor/access_denied message will be emitted.
+If user/application with this token doesn't have rights to the sensor, a "sensor/access_denied" message will be emitted.
 
 You can catch this message with listener:
 
