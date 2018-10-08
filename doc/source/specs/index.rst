@@ -3,9 +3,7 @@ Specifications
 
 .. toctree::
     :maxdepth: 3
+    :caption: Contents:
 
-    sensorlab_api
-    endpoints/index
-    models/index
-    responses/index
+    api/index
     websockets/index

@@ -1,11 +1,9 @@
 Getting Started
 ===============
 
-This is documentation on Javascript SDK for http://sensorlab.io/
+This is documentation on Javascript SDK for http://sensorlab.io/ REST API.
 
-This SDK can be easily used in NodeJS or React project.
-
-This SDK utilizes sensorlab.io REST API.
+This SDK can be easily used in NodeJS and as JS library to use in browser.
 
 Installation
 ------------
@@ -14,8 +12,8 @@ Install with npm::
 
    $ npm i --save https://github.com/sensorlabio/sensorlabio-javascript-sdk
 
-Use with nodejs/React
----------------------
+Use with NodeJS
+---------------
 
 Initialize inside your js code
 
