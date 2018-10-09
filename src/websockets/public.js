@@ -1,6 +1,6 @@
 import BasicWebsocket from "./basic";
 
-import io from 'socket.io-client/dist/socket.io';
+import io from 'socket.io-client/dist/socket.io.slim';
 
 /**
  * Work with /public namespace.

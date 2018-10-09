@@ -1,4 +1,4 @@
-import io from 'socket.io-client/dist/socket.io';
+import io from 'socket.io-client/dist/socket.io.slim';
 
 /**
  * Basic websockets class
