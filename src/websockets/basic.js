@@ -34,7 +34,8 @@ export default class BasicWebsocket {
             //connect
             this.socket = io(this.url + this.namespace + '?token='+token, {
                 path: '/ws',
-                forceNew: this.force_new
+                forceNew: this.force_new,
+                jsonp: false,
             });
 
             //try to authenticate on connection
