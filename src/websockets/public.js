@@ -33,8 +33,7 @@ export default class SensorlabPublicWebsocket extends BasicWebsocket {
             //connect
             this.socket = io(this.url + this.namespace + '?public_api_key='+public_api_key, {
                 path: '/ws',
-                forceNew: this.force_new,
-                transports: ['polling', 'websocket']
+                forceNew: this.force_new
             });
 
             //try to authenticate on connection

@@ -34,8 +34,7 @@ export default class BasicWebsocket {
             //connect
             this.socket = io(this.url + this.namespace + '?token='+token, {
                 path: '/ws',
-                forceNew: this.force_new,
-                transports: ['polling', 'websocket']
+                forceNew: this.force_new
             });
 
             //try to authenticate on connection
