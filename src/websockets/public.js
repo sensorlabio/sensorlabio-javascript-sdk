@@ -1,6 +1,6 @@
 import BasicWebsocket from "./basic";
 
-import io from 'socket.io-client/dist/socket.io.slim';
+let io = require('socket.io-client/dist/socket.io');
 
 /**
  * Work with /public namespace.

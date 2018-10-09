@@ -89,7 +89,7 @@ describe('Get last alerts for sensors', () => {
                         alert.measurement.should.have.property('value');
 
                         alert.threshold.should.be.a('object');
-                        alert.threshold.should.have.property('uuid');
+                        alert.threshold.should.have.property('id');
                         alert.threshold.should.have.property('threshold_type');
                         alert.threshold.should.have.property('measurement_type');
                         alert.threshold.should.have.property('threshold_value');

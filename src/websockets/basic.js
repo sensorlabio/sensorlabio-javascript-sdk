@@ -1,4 +1,4 @@
-import io from 'socket.io-client/dist/socket.io.slim';
+let io = require('socket.io-client/dist/socket.io');
 
 /**
  * Basic websockets class
