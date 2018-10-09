@@ -1,4 +1,4 @@
-let io = require('socket.io-client');
+import io from 'socket.io-client'
 
 /**
  * Basic websockets class
@@ -34,8 +34,7 @@ export default class BasicWebsocket {
             //connect
             this.socket = io(this.url + this.namespace + '?token='+token, {
                 path: '/ws',
-                forceNew: this.force_new,
-                jsonp: false,
+                forceNew: this.force_new
             });
 
             //try to authenticate on connection

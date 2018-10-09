@@ -1,6 +1,6 @@
 import BasicWebsocket from "./basic";
 
-let io = require('socket.io-client');
+import io from 'socket.io-client'
 
 /**
  * Work with /public namespace.
@@ -34,7 +34,6 @@ export default class SensorlabPublicWebsocket extends BasicWebsocket {
             this.socket = io(this.url + this.namespace + '?public_api_key='+public_api_key, {
                 path: '/ws',
                 forceNew: this.force_new,
-                jsonp: false,
             });
 
             //try to authenticate on connection
