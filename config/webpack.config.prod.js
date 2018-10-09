@@ -26,13 +26,5 @@ module.exports = {
                 }
             }
         ]
-    },
-    externals: {
-        'axios': 'axios'
-    },
-    plugins: [new UglifyJsPlugin({
-        compressor: {
-            warnings: false
-        }
-    })]
+    }
 };
