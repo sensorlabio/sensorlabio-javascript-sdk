@@ -115,7 +115,7 @@ export default class SensorlabPublicWebsocket extends BasicWebsocket {
      * @param {string} type measurement type
      * @param {callback} connected callback
      */
-    offMeasurements(sensor, type = null, cb) {
+    offMeasurements(sensor, type = null, cb = null) {
         if (this.socket) {
             this.socket.off(this._getRoomName(sensor, type), cb);
         }

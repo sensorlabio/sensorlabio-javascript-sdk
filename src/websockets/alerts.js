@@ -68,7 +68,7 @@ export default class SensorlabAlertsWebsocket extends BasicWebsocket {
      * @param {string} sensor sensor ID
      * @param {callback} connected callback
      */
-    offAlerts(sensor, cb) {
+    offAlerts(sensor, cb = null) {
         if (this.socket) {
             this.socket.off(this._getRoomName(sensor), cb);
         }

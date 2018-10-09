@@ -1,11 +1,15 @@
 process.env.TEST_REST_API_URL = 'http://localhost:3000/api';
+process.env.RECIEVER_MQTT_PORT = 1883;
 
 let chai = require('chai');
+let chai_http = require('chai-http');
 let chai_string  = require('chai-string');
 let chai_subset = require('chai-subset');
+let should = chai.should();
 
 chai.use(chai_string);
 chai.use(chai_subset);
+chai.use(chai_http);
 
 //public endpoints
 //require('./api/users/signup');
