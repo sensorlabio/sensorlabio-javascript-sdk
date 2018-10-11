@@ -1,10 +1,10 @@
 let path = require('path');
-let webpack = require('webpack');
 
-let UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 let webConfig = {
     target: 'web',
+    mode: 'production',
     entry: ['babel-polyfill', './src/index.js'],
     devtool: 'source-map',
     output: {
@@ -14,7 +14,7 @@ let webConfig = {
         library: 'SensorlabSDK'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 exclude: [
@@ -28,15 +28,16 @@ let webConfig = {
             }
         ]
     },
-    plugins: [new UglifyJsPlugin({
-        compressor: {
-            warnings: false
-        }
-    })]
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin()
+        ]
+    }
 }
 
 let nodeConfig = {
-    target: 'web',
+    target: 'node',
+    mode: 'production',
     entry: ['./src/index.js'],
     devtool: 'source-map',
     output: {
@@ -46,7 +47,8 @@ let nodeConfig = {
         library: 'SensorlabSDK'
     },
     module: {
-        loaders: [
+        noParse: [/ws/],
+        rules: [
             {
                 test: /\.js$/,
                 exclude: [
@@ -58,13 +60,16 @@ let nodeConfig = {
                     presets: ['env']
                 }
             }
-        ]
+        ],
     },
-    plugins: [new UglifyJsPlugin({
-        compressor: {
-            warnings: false
-        }
-    })]
+    externals: ['ws'],
+    /*
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin()
+        ]
+    }
+    */
 }
 
 module.exports = [ webConfig, nodeConfig ];
