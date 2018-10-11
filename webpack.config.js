@@ -2,16 +2,15 @@ var path = require('path');
 var webpack = require('webpack');
 
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-
 module.exports = {
-    target: 'node',
-    entry: ['./src/index.js'],
+    target: 'web',
+    entry: ['babel-polyfill', './src/index.js'],
     devtool: 'source-map',
     output: {
-        path: path.resolve(__dirname, '../build'),
+        path: path.resolve(__dirname, 'build'),
         filename: 'index.min.js',
         libraryTarget: 'umd',
-        library: 'SensorlabSDK',
+        library: 'SensorlabSDK'
     },
     module: {
         loaders: [
@@ -27,5 +26,10 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+    plugins: [new UglifyJsPlugin({
+        compressor: {
+            warnings: false
+        }
+    })]
 };
