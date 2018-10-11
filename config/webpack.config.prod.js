@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+
 module.exports = {
     target: 'node',
     entry: ['./src/index.js'],
