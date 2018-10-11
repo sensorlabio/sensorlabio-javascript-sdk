@@ -1,4 +1,4 @@
-let io = require('socket.io-client/dist/socket.io');
+let io = require('socket.io-client');
 
 /**
  * Basic websockets class
