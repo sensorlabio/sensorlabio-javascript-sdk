@@ -68,7 +68,7 @@ describe('Get last alerts for sensors', () => {
                         alert.should.have.property('measurement');
                         alert.should.have.property('threshold');
                         alert.measurement.should.be.a('object');
-                        alert.measurement.should.have.property('sensor').eq(sensor_1.id);
+                        alert.measurement.should.have.property('sensor').eq(sensor_2.id);
                         alert.measurement.should.have.property('timestamp');
                         alert.measurement.should.have.property('id');
                         alert.measurement.should.have.property('type');

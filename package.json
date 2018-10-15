@@ -4,7 +4,7 @@
   "description": "Javascript SDK for Sensorlab.io REST API",
   "main": "build/index.min.js",
   "scripts": {
-    "test": "mocha --require babel-core/register --require ignore-styles --timeout 10000 --exit",
+    "test": "mocha --require babel-core/register --timeout 10000 --exit",
     "build": "webpack"
   },
   "license": "MIT",
