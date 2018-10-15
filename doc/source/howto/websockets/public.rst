@@ -126,3 +126,17 @@ Do disable listener, use `offMeasurements` method:
     }
 
     public_ws.offMeasurements(sensor, null, getMeasurements);
+
+You can leave sensor room like this:
+
+.. code-block:: javascript
+
+    public_ws.leaveSensor(sensor, 'TMP');
+
+To leave all rooms run this code:
+
+.. code-block:: javascript
+
+    public_ws.leaveAll();
+
+.. note:: Leaving rooms will stop data to be emitted, but listeners will still be connected.

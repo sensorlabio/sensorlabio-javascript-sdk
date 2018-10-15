@@ -34,6 +34,10 @@ You can specify another url to websockets:
 
    let measurements_ws = new ws.measurements('http://testing.sensorlab.io:8080/');
 
+For React you must use another build for web:
+
+    import {SensorlabWebsockets} from "sensorlabio-javascript-sdk/build/web.min";
+
 Use with browsers
 -----------------
 
@@ -43,13 +47,13 @@ Download latest master release:
 
 Unzip:
 
-    - `builds/index.min.js`
+    - `builds/web.min.js`
 
 Use them inside your html code:
 
 .. code-block:: html
 
-    <script src="build/index.min.js"></script>
+    <script src="build/web.min.js"></script>
 
 And inside your JS code:
 
