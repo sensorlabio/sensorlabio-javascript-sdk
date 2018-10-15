@@ -10,7 +10,7 @@ let webConfig = {
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'web.min.js',
-        libraryTarget: 'umd',
+        libraryTarget: 'commonjs2',
         library: 'SensorlabSDK'
     },
     module: {
@@ -43,7 +43,7 @@ let nodeConfig = {
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'index.min.js',
-        libraryTarget: 'umd',
+        libraryTarget: 'commonjs2',
         library: 'SensorlabSDK'
     },
     module: {
