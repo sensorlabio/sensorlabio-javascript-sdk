@@ -5,7 +5,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 let webConfig = {
     target: 'web',
     mode: 'production',
-    entry: ['babel-polyfill', './src/index.js'],
+    entry: ['@babel/polyfill', './src/index.js'],
     devtool: 'source-map',
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -23,16 +23,18 @@ let webConfig = {
                 ],
                 loader: 'babel-loader',
                 query: {
-                    presets: ['env']
+                    presets: ['@babel/preset-env']
                 }
             }
         ]
     },
+  /*
     optimization: {
         minimizer: [
             new UglifyJsPlugin()
         ]
     }
+   */
 }
 
 let nodeConfig = {
@@ -57,7 +59,7 @@ let nodeConfig = {
                 ],
                 loader: 'babel-loader',
                 query: {
-                    presets: ['env']
+                    presets: ['@babel/preset-env']
                 }
             }
         ],
