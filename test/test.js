@@ -1,4 +1,4 @@
-require('babel-polyfill');
+require('@babel/polyfill');
 
 process.env.TEST_REST_API_URL = 'http://localhost:3000/api';
 process.env.RECIEVER_MQTT_PORT = 1883;
