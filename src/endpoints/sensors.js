@@ -69,6 +69,30 @@ export default class SensorsEndpoints {
         return this.api._prepareApiResponse(response, this._successSensorResponse);
     }
 
+  /**
+   * Create sensor.
+   *
+   * @method SensorsEndpoints#update
+   * @param {string} imei - IMEI of the device
+   * @param {string} name - sensor's name
+   * @param {string|null} application - application id to assign to
+   * @param {boolean|null} is_public - set sensor private or public
+   */
+  async create(imei, name, application = null, is_public = null) {
+    let data = {
+      'imei': imei,
+      'name': name,
+    };
+    if (application !== null) {
+      data['application'] = application;
+    }
+    if (is_public !== null) {
+      data['is_public'] = is_public;
+    }
+    let response = await this.api._makeApiRequest('/v1/sensors', 'POST', data);
+    return this.api._prepareApiResponse(response);
+  }
+
     /**
      * Update sensors.
      *
