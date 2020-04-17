@@ -89,7 +89,7 @@ export default class SensorsEndpoints {
     if (is_public !== null) {
       data['is_public'] = is_public;
     }
-    let response = await this.api._makeApiRequest('/v1/sensors', 'POST', data);
+    let response = await this.api._makeApiRequest('/v1/sensors/create', 'POST', data);
     return this.api._prepareApiResponse(response);
   }
 
