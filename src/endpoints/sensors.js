@@ -75,16 +75,16 @@ export default class SensorsEndpoints {
    * @method SensorsEndpoints#update
    * @param {string} imei - IMEI of the device
    * @param {string} name - sensor's name
-   * @param {string|null} application - application id to assign to
+   * @param {Array} applications - application id to assign to
    * @param {boolean|null} is_public - set sensor private or public
    */
-  async create(imei, name, application = null, is_public = null) {
+  async create(imei, name, applications = [], is_public = null) {
     let data = {
       'imei': imei,
       'name': name,
     };
-    if (application !== null) {
-      data['application'] = application;
+    if (applications !== null) {
+      data['applications'] = applications;
     }
     if (is_public !== null) {
       data['is_public'] = is_public;
@@ -99,15 +99,15 @@ export default class SensorsEndpoints {
    * @method SensorsEndpoints#update
    * @param {string} sensor_id - id of sensor to update
    * @param {string} name - sensor's name
-   * @param {string} application - application id to assign to
+   * @param {string} applications - application id to assign to
    * @param {boolean} is_public - set sensor private or public
    */
-  async update(sensor_id, name, application = null, is_public = null) {
+  async update(sensor_id, name, applications = [], is_public = null) {
     let data = {
       'name': name,
     };
-    if (application !== null) {
-      data['application'] = application;
+    if (applications !== null) {
+      data['applications'] = applications;
     }
     if (is_public !== null) {
       data['is_public'] = is_public;

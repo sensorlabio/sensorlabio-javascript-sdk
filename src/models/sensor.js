@@ -37,10 +37,10 @@ export default class Sensor {
         /**
          * Application ID.
          *
-         * @member Sensor#application
+         * @member Sensor#applications
          * @type {string}
          */
-        this.application = data.application;
+        this.applications = data.applications;
 
         /**
          * Date/time created.
