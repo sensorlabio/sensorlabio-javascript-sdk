@@ -17,6 +17,14 @@ export default class Profile {
          * @type {string}
          */
         this.email = data.email;
+
+      /**
+       * Is Application Admin or not
+       *
+       * @member Profile#isApplicationAdmin
+       * @type {Boolean}
+       */
+        this.isApplicationAdmin = data.isApplicationAdmin;
     }
 
     /**
