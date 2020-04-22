@@ -30,6 +30,7 @@ export default class SensorsEndpoints {
    * @param {string} options.online_status - pass "online" to search for online sensors or "offline" for offline sensors.
    * @param {string} options.battery_charge_min - filter sensors by battery charge
    * @param {string} options.battery_charge_max - filter sensors by battery charge
+   * @param {string} options.application - filter by application id
    * @returns {Promise.<ApiResponse>}
    */
   async list(options) {
@@ -42,6 +43,7 @@ export default class SensorsEndpoints {
     if (options.online_status === undefined) options.online_status = null;
     if (options.battery_charge_min === undefined) options.battery_charge_min = null;
     if (options.battery_charge_max === undefined) options.battery_charge_max = null;
+    if (options.application === undefined) options.application = null;
 
     let params = {
       page: options.page,
@@ -51,8 +53,9 @@ export default class SensorsEndpoints {
       sort: options.sort,
       online_status: options.online_status,
       battery_charge_min: options.battery_charge_min,
-      battery_charge_max: options.battery_charge_max
-    }
+      battery_charge_max: options.battery_charge_max,
+      application: options.application,
+    };
     let response = await this.api._makeApiRequest('/v1/sensors', 'GET', {}, params, true);
     return this.api._prepareApiResponse(response, this._successSensorsListResponse);
   }
