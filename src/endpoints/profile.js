@@ -60,7 +60,7 @@ export default class ProfileEndpoints {
       'dashboardApplication': dashboardApplication,
       'dashboardMeasurementType': dashboardMeasurementType
     };
-    let response = await this.api._makeApiRequest('/v1/profile/change_password', 'POST', data, null, true);
+    let response = await this.api._makeApiRequest('/v1/profile/dashboard_settings', 'POST', data, null, true);
     return this.api._prepareApiResponse(response);
   }
 
