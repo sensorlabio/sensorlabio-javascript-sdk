@@ -1,4 +1,6 @@
 import Profile from '../models/profile';
+import ApplicationToken from "../models/application_token";
+import Pat from "../models/pat";
 
 /**
  * Class for /profile/* endpoints.
@@ -72,7 +74,7 @@ export default class ProfileEndpoints {
   async pat_generate() {
     let data = {};
     let response = await this.api._makeApiRequest('/v1/profile/pat/generate', 'POST', data, null, true);
-    return this.api._prepareApiResponse(response);
+    return this.api._prepareApiResponse(response, this._successPATResult);
   }
 
   /**
@@ -85,5 +87,17 @@ export default class ProfileEndpoints {
    */
   _successProfileResult(api, response) {
     return new Profile(api, response.data);
+  }
+
+  /**
+   * Return success result with Personal Access Token.
+   *
+   * @param {SensorlabApi} api
+   * @param {object} response
+   * @return {Pat}
+   * @private
+   */
+  _successPATResult(api, response) {
+    return new Pat(api, response.data);
   }
 }
