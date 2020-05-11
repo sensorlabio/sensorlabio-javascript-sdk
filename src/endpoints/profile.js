@@ -65,6 +65,17 @@ export default class ProfileEndpoints {
   }
 
   /**
+   * Generate Personal Access Token
+   *
+   * @return {Promise<ApiResponse>}
+   */
+  async pat_generate() {
+    let data = {};
+    let response = await this.api._makeApiRequest('/v1/profile/pat/generate', 'POST', data, null, true);
+    return this.api._prepareApiResponse(response);
+  }
+
+  /**
    * Return success result.
    *
    * @param {SensorlabApi} api
