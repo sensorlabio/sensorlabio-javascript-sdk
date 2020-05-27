@@ -1,5 +1,6 @@
 import MeasurementsResponse from '../responses/measurements';
 import Measurement from '../models/measurement';
+import MeasurementsAverageHourlyResponse from "../responses/measurements_average_hourly_response";
 
 /**
  * Class for /measurements/* endpoints.
@@ -68,7 +69,7 @@ export default class MeasurementsEndpoints {
       date: options.date,
     }
     let response = await this.api._makeApiRequest('/v1/measurements/average/hourly', 'GET', {}, params, true);
-    return this.api._prepareApiResponse(response);
+    return this.api._prepareApiResponse(response, this._successMeasurementAverageHourlyResponse);
   }
 
     /**
@@ -107,6 +108,18 @@ export default class MeasurementsEndpoints {
     _successMeasurementsListResponse(api, response) {
         return new MeasurementsResponse(api, response.data);
     }
+
+  /**
+   * Return success result.
+   *
+   * @param {SensorlabApi} api
+   * @param {object} response
+   * @returns {MeasurementsAverageHourlyResponse}
+   * @private
+   */
+  _successMeasurementAverageHourlyResponse(api, response) {
+    return new MeasurementsAverageHourlyResponse(api, response.data);
+  }
 
     /**
      * Return success result.
