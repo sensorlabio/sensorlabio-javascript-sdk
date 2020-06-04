@@ -44,12 +44,16 @@ export default class SensorsEndpoints {
     if (options.battery_charge_min === undefined) options.battery_charge_min = null;
     if (options.battery_charge_max === undefined) options.battery_charge_max = null;
     if (options.application === undefined) options.application = null;
+    if (options.macAddress === undefined) options.macAddress = null;
+    if (options.authenticateWithMac === undefined) options.authenticateWithMac = null;
 
     let params = {
       page: options.page,
       name: options.name,
       id: options.id,
       imei: options.imei,
+      macAddress: options.macAddress,
+      authenticateWithMac: options.authenticateWithMac,
       sort: options.sort,
       online_status: options.online_status,
       battery_charge_min: options.battery_charge_min,
