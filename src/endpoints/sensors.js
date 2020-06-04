@@ -44,16 +44,12 @@ export default class SensorsEndpoints {
     if (options.battery_charge_min === undefined) options.battery_charge_min = null;
     if (options.battery_charge_max === undefined) options.battery_charge_max = null;
     if (options.application === undefined) options.application = null;
-    if (options.macAddress === undefined) options.macAddress = null;
-    if (options.authenticateWithMac === undefined) options.authenticateWithMac = null;
 
     let params = {
       page: options.page,
       name: options.name,
       id: options.id,
       imei: options.imei,
-      macAddress: options.macAddress,
-      authenticateWithMac: options.authenticateWithMac,
       sort: options.sort,
       online_status: options.online_status,
       battery_charge_min: options.battery_charge_min,
@@ -85,7 +81,7 @@ export default class SensorsEndpoints {
    * @param {Array} applications - application id to assign to
    * @param {boolean|null} is_public - set sensor private or public
    */
-  async create(imei, name, applications = [], owner = null, is_public = null) {
+  async create(imei, name, macAddress = null, authenticateWithMac = null, applications = [], owner = null, is_public = null) {
     let data = {
       'imei': imei,
       'name': name,
@@ -96,6 +92,12 @@ export default class SensorsEndpoints {
     }
     if (is_public !== null) {
       data['is_public'] = is_public;
+    }
+    if (macAddress !== null) {
+      data['macAddress'] = macAddress;
+    }
+    if (authenticateWithMac !== null) {
+      data['authenticateWithMac'] = authenticateWithMac;
     }
     let response = await this.api._makeApiRequest('/v1/sensors/create', 'POST', data);
     return this.api._prepareApiResponse(response);
@@ -110,7 +112,7 @@ export default class SensorsEndpoints {
    * @param {string} applications - application id to assign to
    * @param {boolean} is_public - set sensor private or public
    */
-  async update(sensor_id, name, applications = [], owner = null, is_public = null) {
+  async update(sensor_id, name, macAddress = null, authenticateWithMac = null, applications = [], owner = null, is_public = null) {
     let data = {
       'name': name,
       'owner': owner,
@@ -120,6 +122,12 @@ export default class SensorsEndpoints {
     }
     if (is_public !== null) {
       data['is_public'] = is_public;
+    }
+    if (macAddress !== null) {
+      data['macAddress'] = macAddress;
+    }
+    if (authenticateWithMac !== null) {
+      data['authenticateWithMac'] = authenticateWithMac;
     }
     let response = await this.api._makeApiRequest('/v1/sensors/' + sensor_id, 'PATCH', data);
     return this.api._prepareApiResponse(response);

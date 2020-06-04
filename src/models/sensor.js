@@ -26,6 +26,9 @@ export default class Sensor {
      */
     this.imei = data.imei;
 
+    this.macAddress = data.macAddress;
+    this.authenticateWithMac = data.authenticateWithMac;
+
     /**
      * Sensor name.
      *
