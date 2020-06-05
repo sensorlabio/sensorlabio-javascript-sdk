@@ -112,7 +112,7 @@ export default class SensorsEndpoints {
    * @param {string} applications - application id to assign to
    * @param {boolean} is_public - set sensor private or public
    */
-  async update(sensor_id, name, macAddress = null, authenticateWithMac = null, applications = [], owner = null, is_public = null) {
+  async update(sensor_id, name, imei = null, macAddress = null, authenticateWithMac = null, applications = [], owner = null, is_public = null) {
     let data = {
       'name': name,
       'owner': owner,
@@ -128,6 +128,9 @@ export default class SensorsEndpoints {
     }
     if (authenticateWithMac !== null) {
       data['authenticateWithMac'] = authenticateWithMac;
+    }
+    if (imei !== null) {
+      data['imei'] = imei;
     }
     let response = await this.api._makeApiRequest('/v1/sensors/' + sensor_id, 'PATCH', data);
     return this.api._prepareApiResponse(response);
