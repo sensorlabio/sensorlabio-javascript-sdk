@@ -55,6 +55,8 @@ export default class MeasurementsEndpoints {
    * @param {object} options - method options
    * @param {string} options.sensor - show measurements for sensor with specified id.
    * @param {string} options.type - get measurements with specified type only.
+   * @param {string} options.date_start
+   * @param {string} options.date_end
    * @returns {Promise.<ApiResponse>}
    */
   async list_average_hourly(options) {
@@ -70,6 +72,7 @@ export default class MeasurementsEndpoints {
       date_start: options.date_start,
       date_end: options.date_end,
     };
+    console.log(params);
     let response = await this.api._makeApiRequest('/v1/measurements/average/hourly', 'GET', {}, params, true);
     return this.api._prepareApiResponse(response, this._successMeasurementAverageHourlyResponse);
   }
