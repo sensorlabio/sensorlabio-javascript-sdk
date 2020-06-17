@@ -61,13 +61,15 @@ export default class MeasurementsEndpoints {
     if (options === undefined) options = {};
     if (options.sensor === undefined) options.sensor = null;
     if (options.type === undefined) options.type = null;
-    if (options.date === undefined) options.date = null;
+    if (options.date_start === undefined) options.date_start = null;
+    if (options.date_end === undefined) options.date_end = null;
 
     let params = {
       sensor: options.sensor,
       type: options.type,
-      date: options.date,
-    }
+      date_start: options.date_start,
+      date_end: options.date_end,
+    };
     let response = await this.api._makeApiRequest('/v1/measurements/average/hourly', 'GET', {}, params, true);
     return this.api._prepareApiResponse(response, this._successMeasurementAverageHourlyResponse);
   }

@@ -10,6 +10,7 @@ export default class MeasurementAverageHourly {
     constructor(api, data) {
         this.api = api;
 
+        this.date = data.date;
         this.hour = data.hour;
         this.average = data.average;
     }
