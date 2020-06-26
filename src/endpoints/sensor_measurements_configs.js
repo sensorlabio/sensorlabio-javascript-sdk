@@ -1,6 +1,5 @@
-import SensorMeasurementsConfigsResponse from '../responses/sensor_measurements_config';
-import SensorMeasurementConfig from '../models/sensor_measurement_config';
-import measurement from "../models/measurement";
+import SensorMeasurementsConfigsResponse from '../responses/sensor_measurements_configs';
+import SensorMeasurementsConfig from '../models/sensor_measurements_config';
 
 /**
  * Sensor measurements configs endpoints.
