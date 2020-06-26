@@ -25,7 +25,7 @@ export default class SensorMeasurementsConfigsEndpoints {
    * @returns {Promise.<ApiResponse>}
    */
   async list(sensor) {
-    let response = await this.api._makeApiRequest('/v1/sensors/' + sensor + '/measuremenets_config', 'GET');
+    let response = await this.api._makeApiRequest('/v1/sensors/' + sensor + '/measurements_config', 'GET');
     return this.api._prepareApiResponse(response, this._successSensorMeasurementsConfigsListResponse);
   }
 
