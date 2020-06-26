@@ -38,7 +38,7 @@ export default class SensorMeasurementsConfig {
      * Measurement min
      *
      * @member SensorAlert#measurementMin
-     * @type {string}
+     * @type {number}
      */
     this.measurementMin = data.measurementMin;
 
@@ -46,9 +46,24 @@ export default class SensorMeasurementsConfig {
      * Measurement max
      *
      * @member SensorAlert#measurementMax
-     * @type {string}
+     * @type {number}
      */
     this.measurementMax = data.measurementMax;
 
+    /**
+     * Measurement name
+     *
+     * @member SensorAlert#measurementName
+     * @type {string}
+     */
+    this.measurementName = data.measurementName;
+
+    /**
+     * Measurement unit
+     *
+     * @member SensorAlert#measurementUnit
+     * @type {string}
+     */
+    this.measurementUnit = data.measurementUnit;
   }
 }
