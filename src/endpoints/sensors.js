@@ -44,6 +44,8 @@ export default class SensorsEndpoints {
     if (options.battery_charge_min === undefined) options.battery_charge_min = null;
     if (options.battery_charge_max === undefined) options.battery_charge_max = null;
     if (options.application === undefined) options.application = null;
+    if (options.getAll === undefined) options.getAll = null;
+    if (options.withMeasurementsConfigs === undefined) options.getAll = null;
 
     let params = {
       page: options.page,
@@ -55,6 +57,8 @@ export default class SensorsEndpoints {
       battery_charge_min: options.battery_charge_min,
       battery_charge_max: options.battery_charge_max,
       application: options.application,
+      getAll: options.getAll,
+      withMeasurementsConfigs: options.withMeasurementsConfigs,
     };
     let response = await this.api._makeApiRequest('/v1/sensors', 'GET', {}, params, true);
     return this.api._prepareApiResponse(response, this._successSensorsListResponse);

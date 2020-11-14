@@ -95,6 +95,8 @@ export default class Sensor {
 
     this.token = data.token;
 
+    this.measurementsConfigs = data.measurementsConfigs;
+
     let self = this;
 
     /**
