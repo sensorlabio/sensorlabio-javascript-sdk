@@ -41,9 +41,17 @@ export default class Sensor {
      * Application ID.
      *
      * @member Sensor#applications
-     * @type {string}
+     * @type {Object.applications}
      */
     this.applications = data.applications;
+
+    /**
+     * Sensor Tags.
+     *
+     * @member Sensor#sensorTags
+     * @type {Object.sensorTags}
+     */
+    this.sensorTags = data.sensorTags;
 
     /**
      * Owner.
