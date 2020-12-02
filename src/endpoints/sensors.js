@@ -85,7 +85,9 @@ export default class SensorsEndpoints {
    * @param {Array} applications - application id to assign to
    * @param {boolean|null} is_public - set sensor private or public
    */
-  async create(imei, name, macAddress = null, authenticateWithMac = null, applications = [], owner = null, is_public = null) {
+  async create(imei, name, macAddress = null, authenticateWithMac = null,
+               applications = [], owner = null, is_public = null,
+               sensorTags = []) {
     let data = {
       'imei': imei,
       'name': name,
@@ -93,6 +95,9 @@ export default class SensorsEndpoints {
     };
     if (applications !== null) {
       data['applications'] = applications;
+    }
+    if (sensorTags !== null) {
+      data['sensorTags'] = sensorTags;
     }
     if (is_public !== null) {
       data['is_public'] = is_public;
@@ -116,13 +121,18 @@ export default class SensorsEndpoints {
    * @param {string} applications - application id to assign to
    * @param {boolean} is_public - set sensor private or public
    */
-  async update(sensor_id, name, imei = null, macAddress = null, authenticateWithMac = null, applications = [], owner = null, is_public = null) {
+  async update(sensor_id, name, imei = null, macAddress = null,
+               authenticateWithMac = null, applications = [], owner = null,
+               is_public = null, sensorTags = []) {
     let data = {
       'name': name,
       'owner': owner,
     };
     if (applications !== null) {
       data['applications'] = applications;
+    }
+    if (sensorTags !== null) {
+      data['sensorTags'] = sensorTags;
     }
     if (is_public !== null) {
       data['is_public'] = is_public;
