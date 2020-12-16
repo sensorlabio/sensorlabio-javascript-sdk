@@ -54,6 +54,14 @@ export default class Sensor {
     this.sensorTags = data.sensorTags;
 
     /**
+     * Compiled tags.
+     *
+     * @member Sensor#compiledTags
+     * @type {Object.compiledTags}
+     */
+    this.compiledTags = data.compiledTags;
+
+    /**
      * Owner.
      *
      * @member Sensor#owner
