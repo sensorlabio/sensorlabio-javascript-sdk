@@ -21,7 +21,7 @@ export default class SensorMeasurementsConfig {
     /**
      * Measurement type
      *
-     * @member SensorAlert#measurementType
+     * @member SensorMeasurementsConfig#measurementType
      * @type {string}
      */
     this.measurementType = data.measurementType;
@@ -29,7 +29,7 @@ export default class SensorMeasurementsConfig {
     /**
      * Widget
      *
-     * @member SensorAlert#widgetType
+     * @member SensorMeasurementsConfig#widgetType
      * @type {string}
      */
     this.widgetType = data.widgetType;
@@ -37,7 +37,7 @@ export default class SensorMeasurementsConfig {
     /**
      * Measurement min
      *
-     * @member SensorAlert#measurementMin
+     * @member SensorMeasurementsConfig#measurementMin
      * @type {number}
      */
     this.measurementMin = data.measurementMin;
@@ -45,7 +45,7 @@ export default class SensorMeasurementsConfig {
     /**
      * Measurement max
      *
-     * @member SensorAlert#measurementMax
+     * @member SensorMeasurementsConfig#measurementMax
      * @type {number}
      */
     this.measurementMax = data.measurementMax;
@@ -53,7 +53,7 @@ export default class SensorMeasurementsConfig {
     /**
      * Measurement name
      *
-     * @member SensorAlert#measurementName
+     * @member SensorMeasurementsConfig#measurementName
      * @type {string}
      */
     this.measurementName = data.measurementName;
@@ -61,9 +61,25 @@ export default class SensorMeasurementsConfig {
     /**
      * Measurement unit
      *
-     * @member SensorAlert#measurementUnit
+     * @member SensorMeasurementsConfig#measurementUnit
      * @type {string}
      */
     this.measurementUnit = data.measurementUnit;
+
+    /**
+     * Is calculated measurement.
+     *
+     * @member SensorMeasurementsConfig#isCalculated
+     * @type {Boolean}
+     */
+    this.isCalculated = data.isCalculated;
+
+    /**
+     * Measurements calculation.
+     *
+     * @member SensorMeasurementsConfig#calculation
+     * @type {String}
+     */
+    this.calculation = data.calculation;
   }
 }

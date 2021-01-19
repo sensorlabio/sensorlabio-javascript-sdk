@@ -53,7 +53,7 @@ export default class SensorMeasurementsConfigsEndpoints {
    * @param {string} measurementName - Measurement name
    * @param {string} measurementUnit - Measurement unit
    */
-  async create(sensor, measurementType, widgetType, measurementMin, measurementMax, measurementName, measurementUnit) {
+  async create(sensor, measurementType, widgetType, measurementMin, measurementMax, measurementName, measurementUnit, isCalculated = false, calculation = null) {
     let data = {
       measurementType: measurementType,
       widgetType: widgetType,
@@ -61,6 +61,8 @@ export default class SensorMeasurementsConfigsEndpoints {
       measurementMax: measurementMax,
       measurementName: measurementName,
       measurementUnit: measurementUnit,
+      isCalculated: isCalculated,
+      calculation: calculation,
     };
     let response = await this.api._makeApiRequest('/v1/sensors/' + sensor + '/measurements_config', 'POST', data);
     return this.api._prepareApiResponse(response, this._successCreateSensorMeasurementsConfigResponse);
@@ -79,7 +81,7 @@ export default class SensorMeasurementsConfigsEndpoints {
    * @param {string} measurementName - Measurement name
    * @param {string} measurementUnit - Measurement unit
    */
-  async update(sensor, measurements_config, measurementType, widgetType, measurementMin, measurementMax, measurementName, measurementUnit) {
+  async update(sensor, measurements_config, measurementType, widgetType, measurementMin, measurementMax, measurementName, measurementUnit, isCalculated = false, calculation = null) {
     let data = {
       measurementType: measurementType,
       widgetType: widgetType,
@@ -87,6 +89,8 @@ export default class SensorMeasurementsConfigsEndpoints {
       measurementMax: measurementMax,
       measurementName: measurementName,
       measurementUnit: measurementUnit,
+      isCalculated: isCalculated,
+      calculation: calculation,
     };
     let response = await this.api._makeApiRequest('/v1/sensors/' + sensor + '/measurements_config/' + measurements_config, 'PATCH', data);
     return this.api._prepareApiResponse(response);
