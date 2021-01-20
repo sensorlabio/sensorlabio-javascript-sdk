@@ -1,9 +1,9 @@
-import SensorCalculatedMeasurement from '../models/sensor_calculated_measurement';
+import SensorCalculatedMeasurements from '../models/sensor_calculated_measurement';
 
 /**
  * Response with sensor calculated measurement data
  */
-export default class SensorCalculatedMeasurementResponse {
+export default class SensorCalculatedMeasurementsResponse {
   /**
    * @constructor SensorCalculatedMeasurementResponse
    *
@@ -23,7 +23,7 @@ export default class SensorCalculatedMeasurementResponse {
 
     let self = this;
     data.forEach(function (calculated_measurement_data) {
-      self.calculatedMeasurements.push(new SensorCalculatedMeasurement(self.api, calculated_measurement_data));
+      self.calculatedMeasurements.push(new SensorCalculatedMeasurements(self.api, calculated_measurement_data));
     });
   }
 }

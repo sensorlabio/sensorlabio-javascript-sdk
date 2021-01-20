@@ -1,10 +1,10 @@
-import SensorCalculatedMeasurementResponse from '../responses/sensor_calculated_measurement';
+import SensorCalculatedMeasurementsResponse from '../responses/sensor_calculated_measurements';
 import SensorCalculatedMeasurement from '../models/sensor_calculated_measurement';
 
 /**
  * Sensor calculated measurement endpoints.
  */
-export default class SensorCalculatedMeasurementEndpoints {
+export default class SensorCalculatedMeasurementsEndpoints {
   /**
    * @constructor SensorCalculatedMeasurementEndpoints
    * @param {SensorlabApi} api - parent api
@@ -94,11 +94,11 @@ export default class SensorCalculatedMeasurementEndpoints {
    *
    * @param {SensorlabApi} api
    * @param {object} response
-   * @returns {SensorCalculatedMeasurementResponse}
+   * @returns {SensorCalculatedMeasurementsResponse}
    * @private
    */
   _successSensorCalculatedMeasurementListResponse(api, response) {
-    return new SensorCalculatedMeasurementResponse(api, response.data);
+    return new SensorCalculatedMeasurementsResponse(api, response.data);
   }
 
   /**
