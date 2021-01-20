@@ -65,21 +65,5 @@ export default class SensorMeasurementsConfig {
      * @type {string}
      */
     this.measurementUnit = data.measurementUnit;
-
-    /**
-     * Is calculated measurement.
-     *
-     * @member SensorMeasurementsConfig#isCalculated
-     * @type {Boolean}
-     */
-    this.isCalculated = data.isCalculated;
-
-    /**
-     * Measurements calculation.
-     *
-     * @member SensorMeasurementsConfig#calculation
-     * @type {String}
-     */
-    this.calculation = data.calculation;
   }
 }

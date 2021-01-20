@@ -17,6 +17,7 @@ import AlertsEndpoints from "./endpoints/alerts";
 import ApiErrorForbiddenException from "./responses/errors/forbidden";
 import SensorMeasurementsConfigsEndpoints from "./endpoints/sensor_measurements_configs";
 import SensorTagsEndpoints from "./endpoints/sensor_tags";
+import SensorCalculatedMeasurementEndpoints from "./endpoints/sensor_calculated_measurement";
 
 let axios = require('axios');
 
@@ -94,6 +95,14 @@ export default class SensorlabApi {
      * @type {SensorMeasurementsConfigsEndpoints}
      */
     this.sensor_measurements_configs = new SensorMeasurementsConfigsEndpoints(this);
+
+    /**
+     * Sensor calculated measurement endpoint.
+     *
+     * @member SensorlabApi#sensor_calcualted_measurement
+     * @type {SensorCalculatedMeasurementEndpoints}
+     */
+    this.sensor_calcualted_measurement = new SensorCalculatedMeasurementEndpoints(this);
 
     /**
      * Alerts endpoint.
