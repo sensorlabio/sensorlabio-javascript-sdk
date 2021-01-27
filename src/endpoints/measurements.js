@@ -72,7 +72,6 @@ export default class MeasurementsEndpoints {
       date_start: options.date_start,
       date_end: options.date_end,
     };
-    console.log(params);
     let response = await this.api._makeApiRequest('/v1/measurements/average/hourly', 'GET', {}, params, true);
     return this.api._prepareApiResponse(response, this._successMeasurementAverageHourlyResponse);
   }
