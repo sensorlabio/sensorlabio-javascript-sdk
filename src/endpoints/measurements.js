@@ -36,6 +36,7 @@ export default class MeasurementsEndpoints {
     if (options.next === undefined) options.next = null;
     if (options.timestamp_start === undefined) options.timestamp_start = null;
     if (options.timestamp_stop === undefined) options.timestamp_stop = null;
+    if (options.top === undefined) options.top = null;
 
     let params = {
       next: options.next,
