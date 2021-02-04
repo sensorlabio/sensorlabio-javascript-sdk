@@ -46,7 +46,7 @@ export default class Measurement {
      * Sensor.
      *
      * @member Measurement#sensor
-     * @type {String}
+     * @type {Object}
      */
     this.sensor = data.sensor;
   }
