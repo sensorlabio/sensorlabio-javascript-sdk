@@ -44,6 +44,9 @@ export default class MeasurementsEndpoints {
       timestamp_start: options.timestamp_start,
       timestamp_stop: options.timestamp_stop,
     }
+    if (options.top) {
+      params['top'] = options.top;
+    }
     let response = await this.api._makeApiRequest('/v1/measurements', 'GET', {}, params, true);
     return this.api._prepareApiResponse(response, this._successMeasurementsListResponse);
   }
@@ -72,9 +75,6 @@ export default class MeasurementsEndpoints {
       date_start: options.date_start,
       date_end: options.date_end,
     };
-    if (options.top) {
-      params['top'] = options.top;
-    }
     let response = await this.api._makeApiRequest('/v1/measurements/average/hourly', 'GET', {}, params, true);
     return this.api._prepareApiResponse(response, this._successMeasurementAverageHourlyResponse);
   }
