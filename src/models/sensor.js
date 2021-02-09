@@ -113,6 +113,14 @@ export default class Sensor {
 
     this.measurementsConfigs = data.measurementsConfigs;
 
+    /**
+     * Measurements color status.
+     *
+     * @type {Boolean}
+     * @member Sensor#measurementStatus
+     */
+    this.measurementStatus = data.measurementStatus;
+
     let self = this;
 
     /**
