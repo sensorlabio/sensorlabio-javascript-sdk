@@ -27,6 +27,14 @@ export default class Profile {
     this.isApplicationAdmin = data.isApplicationAdmin;
 
     /**
+     * Is admin or not
+     *
+     * @member Profile#isAdmin
+     * @type {Boolean}
+     */
+    this.isAdmin = data.isAdmin;
+
+    /**
      * Dashboard default application
      *
      * @member Profile#dashboardApplication
