@@ -106,6 +106,18 @@ export default class MeasurementsEndpoints {
   }
 
   /**
+   * Delete measurement by id.
+   *
+   * @method MeasurementsEndpoints#delete
+   * @param {string} measurement_id - measurement_id
+   * @returns {Promise.<ApiResponse>}
+   */
+  async delete(sensor_id) {
+    let response = await this.api._makeApiRequest('/v1/measurements/' + sensor_id, 'DELETE', {}, {}, true);
+    return this.api._prepareApiResponse(response);
+  }
+
+  /**
    * Return success result.
    *
    * @param {SensorlabApi} api
